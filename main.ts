@@ -271,7 +271,8 @@ let colimg = (img`
 `)
 let startidx = sp1.getTintIdx("dark")
 const buf = Buffer.create(120)
-let variable1 = scene.createRenderable(1, (image1: Image, camera: scene.Camera) => {
+const yValue = 1
+let variable1 = scene.createRenderable(yValue, (image1: Image, camera: scene.Camera) => {
     for (let x = 0; x < 160; ++x) {
         image1.getRows(x, buf)
         for (let y = 0; y < 120; ++y) {
