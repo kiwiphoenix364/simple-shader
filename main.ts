@@ -173,7 +173,7 @@ class Shader {
                 this.bufImg.getRows(x, this.shaderBuf)
                 for (let y = 0; y < 120; ++y) {
                     if (this.bufImg.getPixel(x, y)) {
-                        this.renderBuf[y] = (this.colbuf[this.renderBuf[y] + Math.imul(this.shaderBuf[y], 16)])
+                        this.renderBuf[y] = (this.colbuf[this.renderBuf[y] + this.lkupx16[this.shaderBuf[y]]])
                     }
                 }
                 screenImg.setRows(x, this.renderBuf)
