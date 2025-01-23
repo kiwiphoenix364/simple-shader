@@ -1,4 +1,30 @@
-let colbuf = Buffer.fromArray([0, 1, 3, 1, 5, 1, 7, 5, 6, 1, 11, 13, 11, 1, 2, 14, 0, 13, 14, 2, 2, 7, 8, 6, 12, 6, 12, 12, 15, 14, 15, 15])
+class ShaderPack {
+    colorArrayNames: string[]
+    colorValueArrays: any[]
+    constructor(colorArrayNames: string[], colorValueArrays: any[]) {
+        this.colorArrayNames = colorArrayNames
+        this.colorValueArrays = colorValueArrays
+    }
+    unpack () {
+        let buf = Buffer.fromArray(this.colorValueArrays[0])
+        for (let i = 0; i < this.colorValueArrays.length - 1; i++) {
+            buf = buf.concat(this.colorValueArrays[i + 1])
+        }
+        return buf
+    }
+    getTintIdx (color: string) {
+        return this.colorArrayNames.indexOf(color) * 16
+    }
+}
+let sp1 = new ShaderPack(
+    ["light", "dark"], 
+    [
+        [0, 1, 3, 1, 5, 1, 7, 5, 6, 1, 11, 13, 11, 1, 2, 14],
+        [0, 13, 14, 2, 2, 7, 8, 6, 12, 6, 12, 12, 15, 14, 15, 15]
+    ]
+    )
+let colbuf = sp1.unpack()
+
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -243,8 +269,7 @@ let colimg = (img`
     ................................................................................................................................................................
     ................................................................................................................................................................
 `)
-let palette = 1
-let startidx = palette * 16
+let startidx = sp1.getTintIdx("dark")
 const buf = Buffer.create(120)
 let variable1 = scene.createRenderable(1, (image1: Image, camera: scene.Camera) => {
     for (let x = 0; x < 160; ++x) {
