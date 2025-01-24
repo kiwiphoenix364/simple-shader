@@ -6,9 +6,13 @@ class ShaderPack {
         this.shaderColorSets = shaderColorSets
     }
     unpack () {
-        let buf = Buffer.create(16)
+        //let buf = Buffer.create(16)
+        //for (let i = 0; i < this.shaderColorSets.length; i++) {
+        //    buf = buf.concat(this.shaderColorSets[i])
+        //}
+        let buf = []
         for (let i = 0; i < this.shaderColorSets.length; i++) {
-            buf = buf.concat(this.shaderColorSets[i])
+            buf.push(Buffer.fromArray(this.shaderColorSets[i]))
         }
         return buf
     }
@@ -51,9 +55,9 @@ class Shader {
     //lookup table
     //lkupx16: Buffer
     //Shader pack
-    public currentShader: ShaderPack
+    private currentShader: ShaderPack
     //Decompiled shader pack
-    private colbuf: Buffer
+    private colbuf: Buffer[]
     //Shader augment image
     public mapLayer: Image
     //Render and shader buffers
@@ -84,12 +88,16 @@ class Shader {
                 this.mapLayer.getRows(x, this.shaderBuf)
                 for (let y = 0; y < 120; ++y) {
                     if (this.mapLayer.getPixel(x, y)) {
-                        this.renderBuf[y] = (this.colbuf[this.renderBuf[y] + Math.imul(this.shaderBuf[y], 16)])
+                        this.renderBuf[y] = this.colbuf[this.shaderBuf[y]][this.renderBuf[y]]
+                        //this.renderBuf[y] = (this.colbuf[this.renderBuf[y] + Math.imul(this.shaderBuf[y], 16)])
                         //this.renderBuf[y] = (this.colbuf[this.renderBuf[y] + this.lkupx16[this.shaderBuf[y]]])
                     }
                 }
                 screenImg.setRows(x, this.renderBuf)
             }
         })
+    }
+    setNewShader (shader: ShaderPack) {
+        return shader.unpack()
     }
 }
