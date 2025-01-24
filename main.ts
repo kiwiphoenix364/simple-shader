@@ -1,19 +1,32 @@
 class ShaderPack {
-    private colorArrayNames: string[]
-    private colorValueArrays: any[]
-    constructor(colorArrayNames: string[], colorValueArrays: any[]) {
-        this.colorArrayNames = colorArrayNames
-        this.colorValueArrays = colorValueArrays
+    private colorNames: string[]
+    private shaderColorSets: any[]
+    constructor(colorNames: string[], shaderColorSets: any[]) {
+        this.colorNames = colorNames
+        this.shaderColorSets = shaderColorSets
     }
     unpack () {
         let buf = Buffer.create(16)
-        for (let i = 0; i < this.colorValueArrays.length; i++) {
-            buf = buf.concat(this.colorValueArrays[i])
+        for (let i = 0; i < this.shaderColorSets.length; i++) {
+            buf = buf.concat(this.shaderColorSets[i])
         }
         return buf
     }
     getTintIdx (color: string) {
-        return this.colorArrayNames.indexOf(color) + 1
+        return this.colorNames.indexOf(color) + 1
+    }
+    static get (shader: string) {
+        let packNames = ["default"]
+        let packs = [
+            new ShaderPack(
+                ["light", "dark"],
+                [
+                    [0, 1, 3, 1, 5, 1, 7, 5, 6, 1, 11, 13, 11, 1, 2, 14],
+                    [0, 13, 14, 2, 2, 7, 8, 6, 12, 6, 12, 12, 15, 14, 15, 15]
+                ]
+            )
+        ]
+        return packs[packNames.indexOf(shader)]
     }
 }
 class Shader {
