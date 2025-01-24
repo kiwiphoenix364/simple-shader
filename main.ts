@@ -10,7 +10,7 @@ class ShaderPack {
         //for (let i = 0; i < this.shaderColorSets.length; i++) {
         //    buf = buf.concat(this.shaderColorSets[i])
         //}
-        let buf = []
+        let buf = [Buffer.create(0)]
         for (let i = 0; i < this.shaderColorSets.length; i++) {
             buf.push(Buffer.fromArray(this.shaderColorSets[i]))
         }
@@ -20,13 +20,16 @@ class ShaderPack {
         return this.colorNames.indexOf(color) + 1
     }
     static get (shader: string) {
+        //reference for shader pack format
+        //color sets and color set names are in respective orders in their arrays
+        //shader arrays go in order of colors, so the fifth item in the array ([4]) will be color four
         let packNames = ["default"]
         let packs = [
             new ShaderPack(
                 ["light", "light2", "dark", "dark2", "yellow", "yellow2", "red", "green", "blue", "purple"],
                 [
-                    [0, 1, 3, 1, 5, 1, 7, 5, 6, 1, 11, 13, 11, 1, 2, 14],
-                    [0, 1, 1, 1, 1, 1, 5, 1, 7, 1, 13, 1, 13, 1, 3, 2],
+                    [0, 1, 4, 1, 5, 1, 7, 5, 9, 1, 11, 1, 10, 1, 2, 12],
+                    [0, 1, 5, 1, 1, 1, 5, 1, 1, 1, 1, 1, 11, 1, 4, 10],
                     [0, 13, 14, 2, 2, 7, 8, 6, 12, 6, 12, 12, 15, 14, 15, 15],
                     [0, 14, 15, 14, 14, 6, 12, 8, 15, 8, 15, 15, 15, 15, 15, 15],
                     [0, 13, 4, 4, 5, 5, 7, 5, 6, 13, 11, 13, 11, 5, 13, 14],
@@ -38,15 +41,15 @@ class ShaderPack {
                 ]
             )
         ]
-        /*
+        
         //for generating the "2" varients
         let test = []
-        let sample = [0, 13, 4, 4, 5, 5, 7, 5, 6, 13, 11, 13, 11, 5, 13, 14]
+        let sample = [0, 1, 4, 1, 5, 1, 7, 5, 9, 1, 11, 1, 10, 1, 2, 12]
         for (let i = 0; i < 16; i++) {
             test.push(sample[sample[i]])
         }
         console.log(test)
-        */
+        
         return packs[packNames.indexOf(shader)]
     }
 }
@@ -69,6 +72,7 @@ class Shader {
     private shader: scene.Renderable
     constructor(currentShader: ShaderPack, zValue: number) {
         /*
+        //build lookup table
         this.lkupx16 = Buffer.create(16)
         for (let i = 0; i < 16; i++) {
             this.lkupx16[i] = (i * 16)
@@ -89,7 +93,9 @@ class Shader {
                 for (let y = 0; y < 120; ++y) {
                     if (this.mapLayer.getPixel(x, y)) {
                         this.renderBuf[y] = this.colbuf[this.shaderBuf[y]][this.renderBuf[y]]
+                        //use alternate compilation format
                         //this.renderBuf[y] = (this.colbuf[this.renderBuf[y] + Math.imul(this.shaderBuf[y], 16)])
+                        //alt comp format + lookup table
                         //this.renderBuf[y] = (this.colbuf[this.renderBuf[y] + this.lkupx16[this.shaderBuf[y]]])
                     }
                 }
