@@ -19,15 +19,26 @@ class ShaderPack {
         let packNames = ["default"]
         let packs = [
             new ShaderPack(
-                ["light", "light2", "dark", "dark2"],
+                ["light", "light2", "dark", "dark2", "yellow", "yellow2", "red", "green", "blue", "purple"],
                 [
                     [0, 1, 3, 1, 5, 1, 7, 5, 6, 1, 11, 13, 11, 1, 2, 14],
                     [0, 1, 1, 1, 1, 1, 5, 1, 7, 1, 13, 1, 13, 1, 3, 2],
                     [0, 13, 14, 2, 2, 7, 8, 6, 12, 6, 12, 12, 15, 14, 15, 15],
-                    [0, 14, 15, 14, 14, 6, 12, 8, 15, 8, 15, 15, 15, 15, 15, 15]
+                    [0, 14, 15, 14, 14, 6, 12, 8, 15, 8, 15, 15, 15, 15, 15, 15],
+                    [0, 13, 4, 4, 5, 5, 7, 5, 6, 13, 11, 13, 11, 5, 13, 14],
+                    [0, 5, 5, 5, 5, 5, 5, 5, 7, 5, 13, 5, 13, 5, 5, 13]
                 ]
             )
         ]
+        /*
+        //for generating the "2" varients
+        let test = []
+        let sample = [0, 13, 4, 4, 5, 5, 7, 5, 6, 13, 11, 13, 11, 5, 13, 14]
+        for (let i = 0; i < 16; i++) {
+            test.push(sample[sample[i]])
+        }
+        console.log(test)
+        */
         return packs[packNames.indexOf(shader)]
     }
 }
