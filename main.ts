@@ -1,6 +1,6 @@
 class ShaderPack {
-    colorArrayNames: string[]
-    colorValueArrays: any[]
+    private colorArrayNames: string[]
+    private colorValueArrays: any[]
     constructor(colorArrayNames: string[], colorValueArrays: any[]) {
         this.colorArrayNames = colorArrayNames
         this.colorValueArrays = colorValueArrays
