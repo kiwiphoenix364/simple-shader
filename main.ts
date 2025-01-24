@@ -48,10 +48,8 @@ class ShaderPack {
 }
 class Shader {
     //Declare initial variables
-    /*
-    lookup table
-    lkupx16: Buffer
-    */
+    //lookup table
+    //lkupx16: Buffer
     //Shader pack
     public currentShader: ShaderPack
     //Decompiled shader pack
@@ -87,6 +85,7 @@ class Shader {
                 for (let y = 0; y < 120; ++y) {
                     if (this.mapLayer.getPixel(x, y)) {
                         this.renderBuf[y] = (this.colbuf[this.renderBuf[y] + Math.imul(this.shaderBuf[y], 16)])
+                        //this.renderBuf[y] = (this.colbuf[this.renderBuf[y] + this.lkupx16[this.shaderBuf[y]]])
                     }
                 }
                 screenImg.setRows(x, this.renderBuf)
