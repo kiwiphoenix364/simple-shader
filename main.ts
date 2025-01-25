@@ -104,6 +104,15 @@ class Shader {
         })
     }
     setNewShader (shader: ShaderPack) {
-        return shader.unpack()
+        this.colbuf = shader.unpack()
+    }
+    /*
+    //alt function
+    directSetUnpackedShader(array: Buffer) {
+        this.colbuf = shader
+    }
+    */
+    directSetUnpackedShader (shader: Buffer[]) {
+        this.colbuf = shader
     }
 }

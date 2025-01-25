@@ -123,4 +123,5 @@ scene.setBackgroundImage(img`
     ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 `)
 let shader = new Shader(sp1, 1)
+shader.directSetUnpackedShader(ShaderPack.get("default").unpack())
 shader.mapLayer.fillCircle(60,60,50,sp1.getTintIdx("light"))
