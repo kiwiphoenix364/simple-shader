@@ -1,11 +1,10 @@
-## Use as Extension in MakeCode Arcade!
+Use as Extension in MakeCode Arcade!
 
-## Blocks support not implemented yet!
+Blocks support not implemented yet!
 
 # Docs (WIP)
 
 ## Shader Packs (Class ShaderPack)
-
 1. Define a shader pack (make your own*) or do ShaderPack.get(_string_).
 "default" is the only current shader built-in
 ## Functions
