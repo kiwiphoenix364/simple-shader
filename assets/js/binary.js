@@ -1,4 +1,4 @@
-// meta={"simUrl":"https://trg-arcade.userpxt.io/v1.12.58/---simulator","cdnUrl":"https://cdn.makecode.com","version":"1.1.1","target":"arcade","targetVersion":"1.12.58","repo":"kiwiphoenix364/simple-shader-beta"}
+// meta={"simUrl":"https://trg-arcade.userpxt.io/v1.12.58/---simulator","cdnUrl":"https://cdn.makecode.com","version":"1.1.2","target":"arcade","targetVersion":"1.12.58","repo":"kiwiphoenix364/simple-shader-beta"}
 // total=1300276 new=8.95% cached=85.50% other=5.54%
 (function (ectx) {
 'use strict';
@@ -442,7 +442,7 @@ const pxsim_pxtrt = pxsim.pxtrt;
 const pxsim_numops = pxsim.numops;
 
 
-function _main___P91369(s) {
+function _main___P91895(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -840,7 +840,7 @@ switch (step) {
     s.callLocIdx = 62; s.pc = 36; return s.tmp_0;
   case 36:
     r0 = s.retval;
-    s.tmp_0 = ShaderPack_get__P76979_mk(s);
+    s.tmp_0 = ShaderPack_get__P91617_mk(s);
     s.tmp_0.arg0 = "default";
     s.callLocIdx = 63; s.pc = 37; return s.tmp_0;
   case 37:
@@ -852,9 +852,9 @@ switch (step) {
     s.callLocIdx = 64; s.pc = 38; return s.tmp_0;
   case 38:
     r0 = s.retval;
-    r0 = pxsim_pxtcore_mkClassInstance(Shader__C76980_VT);
+    r0 = pxsim_pxtcore_mkClassInstance(Shader__C91618_VT);
     s.tmp_0 = r0;
-    s.tmp_1 = Shader_constructor__P76982_mk(s);
+    s.tmp_1 = Shader_constructor__P91621_mk(s);
     s.tmp_1.arg0 = s.tmp_0;
     s.tmp_1.arg1 = globals.sp1___76985;
     s.tmp_1.arg2 = 1;
@@ -862,10 +862,10 @@ switch (step) {
   case 39:
     r0 = s.retval;
     globals.shader___76986 = (s.tmp_0);
-    s.tmp_0 = Shader_directSetUnpackedShader__P76984_mk(s);
+    s.tmp_0 = Shader_directSetUnpackedShader__P91620_mk(s);
     s.tmp_0.arg0 = globals.shader___76986;
-    s.tmp_1 = ShaderPack_unpack__P76977_mk(s);
-    s.tmp_2 = ShaderPack_get__P76979_mk(s);
+    s.tmp_1 = ShaderPack_unpack__P91622_mk(s);
+    s.tmp_2 = ShaderPack_get__P91617_mk(s);
     s.tmp_2.arg0 = "default";
     s.callLocIdx = 66; s.pc = 42; return s.tmp_2;
   case 42:
@@ -897,13 +897,13 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-_main___P91369.info = {"start":0,"length":0,"line":0,"column":0,"endLine":0,"endColumn":0,"fileName":"main.ts","functionName":"<main>","argumentNames":[]}
-_main___P91369.continuations = [  ]
+_main___P91895.info = {"start":0,"length":0,"line":0,"column":0,"endLine":0,"endColumn":0,"fileName":"main.ts","functionName":"<main>","argumentNames":[]}
+_main___P91895.continuations = [  ]
 
-function _main___P91369_mk(s) {
+function _main___P91895_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: _main___P91369, depth: s.depth + 1,
+        parent: s, fn: _main___P91895, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -1443,7 +1443,7 @@ function gameOverConfig_inline__P77567_mk(s) {
 
 
 
-function ShaderPack_getTintIdx__P76978(s) {
+function ShaderPack_getTintIdx__P91624(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -1459,7 +1459,7 @@ switch (step) {
       s.lambdaArgs = null;
     }
     r0 = s.arg0;
-    if (!checkSubtype(r0, ShaderPack__C76975_VT)) failedCast(r0);
+    if (!checkSubtype(r0, ShaderPack__C91625_VT)) failedCast(r0);
     r0 = s.arg0.fields["colorNames"];
     s.tmp_1 = r0;
     r0 = pxsim_Array_.indexOf(s.tmp_1, s.arg1, undefined);
@@ -1468,12 +1468,12 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-ShaderPack_getTintIdx__P76978.info = {"start":651,"length":86,"line":18,"column":4,"endLine":20,"endColumn":5,"fileName":"main.ts","functionName":"getTintIdx","argumentNames":["this","color"]}
+ShaderPack_getTintIdx__P91624.info = {"start":651,"length":86,"line":18,"column":4,"endLine":20,"endColumn":5,"fileName":"main.ts","functionName":"getTintIdx","argumentNames":["this","color"]}
 
-function ShaderPack_getTintIdx__P76978_mk(s) {
+function ShaderPack_getTintIdx__P91624_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: ShaderPack_getTintIdx__P76978, depth: s.depth + 1,
+        parent: s, fn: ShaderPack_getTintIdx__P91624, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -1736,7 +1736,7 @@ function Math_max__P72773_mk(s) {
 
 
 
-function ShaderPack_unpack__P76977(s) {
+function ShaderPack_unpack__P91622(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -1746,23 +1746,23 @@ if (yieldSteps-- < 0 && maybeYield(s, step, r0) || runtime !== pxsim.runtime) re
 switch (step) {
   case 0:
 
-    s.buf___79643 = undefined;
-    s.i___79647 = undefined;
+    s.buf___91639 = undefined;
+    s.i___91643 = undefined;
     if (s.lambdaArgs) {
       s.arg0 = (s.lambdaArgs[0]);
       s.lambdaArgs = null;
     }
     r0 = s.arg0;
-    if (!checkSubtype(r0, ShaderPack__C76975_VT)) failedCast(r0);
+    if (!checkSubtype(r0, ShaderPack__C91625_VT)) failedCast(r0);
     r0 = pxsim_Array__mk();
     s.tmp_0 = r0;
     r0 = pxsim.control.createBuffer(0);
     s.tmp_1 = r0;
     r0 = pxsim_Array__push(s.tmp_0, s.tmp_1);
-    s.buf___79643 = (s.tmp_0);
-    s.i___79647 = (0);
+    s.buf___91639 = (s.tmp_0);
+    s.i___91643 = (0);
   case 1:
-    s.tmp_1 = r0 = s.i___79647;
+    s.tmp_1 = r0 = s.i___91643;
     r0 = s.arg0.fields["shaderColorSets"];
     s.tmp_3 = r0;
     r0 = pxsim_Array__length(s.tmp_3);
@@ -1771,31 +1771,31 @@ switch (step) {
     s.tmp_0 = r0;
     r0 = pxsim_numops_toBoolDecr(s.tmp_0);
     if (!r0) { step = 2; continue; }
-    s.tmp_4 = r0 = s.buf___79643;
+    s.tmp_4 = r0 = s.buf___91639;
     s.tmp_6 = Buffer_fromArray__P72853_mk(s);
     r0 = s.arg0.fields["shaderColorSets"];
     s.tmp_7 = r0;
-    r0 = pxsim_Array__getAt(s.tmp_7, s.i___79647);
+    r0 = pxsim_Array__getAt(s.tmp_7, s.i___91643);
     s.tmp_6.arg0 = r0;
     s.callLocIdx = 71; s.pc = 3; return s.tmp_6;
   case 3:
     r0 = s.retval;
     s.tmp_5 = r0;
     r0 = pxsim_Array__push(s.tmp_4, s.tmp_5);
-    r0 = (s.i___79647 + 1);
-    s.i___79647 = (r0);
+    r0 = (s.i___91643 + 1);
+    s.i___91643 = (r0);
     { step = 1; continue; }
   case 2:
-    r0 = s.buf___79643;
+    r0 = s.buf___91639;
     return leave(s, r0)
   default: oops()
 } } }
-ShaderPack_unpack__P76977.info = {"start":252,"length":393,"line":7,"column":4,"endLine":17,"endColumn":5,"fileName":"main.ts","functionName":"unpack","argumentNames":["this"]}
+ShaderPack_unpack__P91622.info = {"start":252,"length":393,"line":7,"column":4,"endLine":17,"endColumn":5,"fileName":"main.ts","functionName":"unpack","argumentNames":["this"]}
 
-function ShaderPack_unpack__P76977_mk(s) {
+function ShaderPack_unpack__P91622_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: ShaderPack_unpack__P76977, depth: s.depth + 1,
+        parent: s, fn: ShaderPack_unpack__P91622, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -1805,8 +1805,8 @@ function ShaderPack_unpack__P76977_mk(s) {
   tmp_5: undefined,
   tmp_6: undefined,
   tmp_7: undefined,
-  buf___79643: undefined,
-  i___79647: undefined,
+  buf___91639: undefined,
+  i___91643: undefined,
   arg0: undefined,
 } }
 
@@ -1878,7 +1878,7 @@ function Buffer_fromArray__P72853_mk(s) {
 
 
 
-function Shader_directSetUnpackedShader__P76984(s) {
+function Shader_directSetUnpackedShader__P91620(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -1894,18 +1894,18 @@ switch (step) {
       s.lambdaArgs = null;
     }
     r0 = s.arg0;
-    if (!checkSubtype(r0, Shader__C76980_VT)) failedCast(r0);
+    if (!checkSubtype(r0, Shader__C91618_VT)) failedCast(r0);
     r0 = (s.arg0).fields["colbuf"] = (s.arg1);
     r0 = undefined;
     return leave(s, r0)
   default: oops()
 } } }
-Shader_directSetUnpackedShader__P76984.info = {"start":4570,"length":81,"line":114,"column":4,"endLine":116,"endColumn":5,"fileName":"main.ts","functionName":"directSetUnpackedShader","argumentNames":["this","shader"]}
+Shader_directSetUnpackedShader__P91620.info = {"start":4584,"length":81,"line":114,"column":4,"endLine":116,"endColumn":5,"fileName":"main.ts","functionName":"directSetUnpackedShader","argumentNames":["this","shader"]}
 
-function Shader_directSetUnpackedShader__P76984_mk(s) {
+function Shader_directSetUnpackedShader__P91620_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: Shader_directSetUnpackedShader__P76984, depth: s.depth + 1,
+        parent: s, fn: Shader_directSetUnpackedShader__P91620, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   arg0: undefined,
   arg1: undefined,
@@ -1915,7 +1915,7 @@ function Shader_directSetUnpackedShader__P76984_mk(s) {
 
 
 
-function Shader_constructor__P76982(s) {
+function Shader_constructor__P91621(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -1932,11 +1932,11 @@ switch (step) {
       s.lambdaArgs = null;
     }
     r0 = s.arg0;
-    if (!checkSubtype(r0, Shader__C76980_VT)) failedCast(r0);
+    if (!checkSubtype(r0, Shader__C91618_VT)) failedCast(r0);
     r0 = (s.arg0).fields["zValue"] = (s.arg2);
     r0 = (s.arg0).fields["currentShader"] = (s.arg1);
     s.tmp_0 = r0 = s.arg0;
-    s.tmp_2 = ShaderPack_unpack__P76977_mk(s);
+    s.tmp_2 = ShaderPack_unpack__P91622_mk(s);
     r0 = s.arg0.fields["currentShader"];
     s.tmp_2.arg0 = r0;
     s.callLocIdx = 74; s.pc = 1; return s.tmp_2;
@@ -1956,7 +1956,7 @@ switch (step) {
     r0 = pxsim.control.createBuffer(120);
     s.tmp_1 = r0;
     r0 = (s.tmp_0).fields["shaderBuf"] = (s.tmp_1);
-    r0 = pxsim_pxtcore_mkAction(1, Shader_inline__P79756);
+    r0 = pxsim_pxtcore_mkAction(1, Shader_inline__P91752);
     s.tmp_0 = r0;
     r0 = pxsim_pxtrt_stclo(s.tmp_0, 0, s.arg0);
     s.tmp_1 = r0 = s.arg0;
@@ -1974,12 +1974,12 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-Shader_constructor__P76982.info = {"start":2852,"length":1506,"line":72,"column":4,"endLine":104,"endColumn":5,"fileName":"main.ts","functionName":"inline","argumentNames":["this","currentShader","zValue"]}
+Shader_constructor__P91621.info = {"start":2866,"length":1506,"line":72,"column":4,"endLine":104,"endColumn":5,"fileName":"main.ts","functionName":"inline","argumentNames":["this","currentShader","zValue"]}
 
-function Shader_constructor__P76982_mk(s) {
+function Shader_constructor__P91621_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: Shader_constructor__P76982, depth: s.depth + 1,
+        parent: s, fn: Shader_constructor__P91621, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -1994,7 +1994,7 @@ function Shader_constructor__P76982_mk(s) {
 
 
 
-function Shader_inline__P79756(s) {
+function Shader_inline__P91752(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -2004,80 +2004,80 @@ if (yieldSteps-- < 0 && maybeYield(s, step, r0) || runtime !== pxsim.runtime) re
 switch (step) {
   case 0:
 
-    s.x___79759 = undefined;
-    s.y___79776 = undefined;
+    s.x___91755 = undefined;
+    s.y___91772 = undefined;
     if (s.lambdaArgs) {
       s.arg0 = (s.lambdaArgs[0]);
       s.arg1 = (s.lambdaArgs[1]);
       s.lambdaArgs = null;
     }
-    s.x___79759 = (0);
+    s.x___91755 = (0);
   case 1:
-    r0 = (s.x___79759 < 160);
+    r0 = (s.x___91755 < 160);
     s.tmp_0 = r0;
     r0 = pxsim_numops_toBoolDecr(s.tmp_0);
     if (!r0) { step = 6; continue; }
     r0 = s.caps[0].fields["renderBuf"];
     s.tmp_1 = r0;
-    r0 = pxsim_ImageMethods.getRows(s.arg0, s.x___79759, s.tmp_1);
+    r0 = pxsim_ImageMethods.getRows(s.arg0, s.x___91755, s.tmp_1);
     r0 = s.caps[0].fields["mapLayer"];
     s.tmp_0 = r0;
     r0 = s.caps[0].fields["shaderBuf"];
     s.tmp_1 = r0;
-    r0 = pxsim_ImageMethods.getRows(s.tmp_0, s.x___79759, s.tmp_1);
-    s.y___79776 = (0);
+    r0 = pxsim_ImageMethods.getRows(s.tmp_0, s.x___91755, s.tmp_1);
+    s.y___91772 = (0);
   case 2:
-    r0 = (s.y___79776 < 120);
+    r0 = (s.y___91772 < 120);
     s.tmp_0 = r0;
     r0 = pxsim_numops_toBoolDecr(s.tmp_0);
     if (!r0) { step = 5; continue; }
     r0 = s.caps[0].fields["mapLayer"];
     s.tmp_2 = r0;
-    r0 = pxsim_ImageMethods.getPixel(s.tmp_2, s.x___79759, s.y___79776);
+    r0 = pxsim_ImageMethods.getPixel(s.tmp_2, s.x___91755, s.y___91772);
     s.tmp_1 = r0;
     r0 = pxsim_numops_toBoolDecr(s.tmp_1);
     if (!r0) { step = 3; continue; }
     r0 = s.caps[0].fields["renderBuf"];
     s.tmp_3 = r0;
-    s.tmp_4 = r0 = s.y___79776;
+    s.tmp_4 = r0 = s.y___91772;
     r0 = s.caps[0].fields["colbuf"];
     s.tmp_7 = r0;
     r0 = s.caps[0].fields["shaderBuf"];
     s.tmp_9 = r0;
-    r0 = pxsim.BufferMethods.getByte(s.tmp_9, s.y___79776);
+    r0 = pxsim.BufferMethods.getByte(s.tmp_9, s.y___91772);
     s.tmp_8 = r0;
     r0 = pxsim_Array__getAt(s.tmp_7, s.tmp_8);
     s.tmp_6 = r0;
     r0 = s.caps[0].fields["renderBuf"];
     s.tmp_11 = r0;
-    r0 = pxsim.BufferMethods.getByte(s.tmp_11, s.y___79776);
+    r0 = pxsim.BufferMethods.getByte(s.tmp_11, s.y___91772);
     s.tmp_10 = r0;
     r0 = pxsim.BufferMethods.getByte(s.tmp_6, s.tmp_10);
     s.tmp_5 = r0;
     r0 = pxsim.BufferMethods.setByte(s.tmp_3, s.tmp_4, s.tmp_5);
   case 3:
   case 4:
-    r0 = (s.y___79776 + 1);
-    s.y___79776 = (r0);
+    r0 = (s.y___91772 + 1);
+    s.y___91772 = (r0);
     { step = 2; continue; }
   case 5:
     r0 = s.caps[0].fields["renderBuf"];
     s.tmp_0 = r0;
-    r0 = pxsim_ImageMethods.setRows(s.arg0, s.x___79759, s.tmp_0);
-    r0 = (s.x___79759 + 1);
-    s.x___79759 = (r0);
+    r0 = pxsim_ImageMethods.setRows(s.arg0, s.x___91755, s.tmp_0);
+    r0 = (s.x___91755 + 1);
+    s.x___91755 = (r0);
     { step = 1; continue; }
   case 6:
     r0 = undefined;
     return leave(s, r0)
   default: oops()
 } } }
-Shader_inline__P79756.info = {"start":3478,"length":872,"line":88,"column":58,"endLine":103,"endColumn":9,"fileName":"main.ts","functionName":"inline","argumentNames":["screenImg","camera"]}
+Shader_inline__P91752.info = {"start":3492,"length":872,"line":88,"column":58,"endLine":103,"endColumn":9,"fileName":"main.ts","functionName":"inline","argumentNames":["screenImg","camera"]}
 
-function Shader_inline__P79756_mk(s) {
+function Shader_inline__P91752_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: Shader_inline__P79756, depth: s.depth + 1,
+        parent: s, fn: Shader_inline__P91752, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -2091,8 +2091,8 @@ function Shader_inline__P79756_mk(s) {
   tmp_9: undefined,
   tmp_10: undefined,
   tmp_11: undefined,
-  x___79759: undefined,
-  y___79776: undefined,
+  x___91755: undefined,
+  y___91772: undefined,
   arg0: undefined,
   arg1: undefined,
 } }
@@ -2594,7 +2594,7 @@ function scene_Background_image__P75319_mk(s) {
 
 
 
-function ShaderPack_get__P76979(s) {
+function ShaderPack_get__P91617(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -2604,11 +2604,11 @@ if (yieldSteps-- < 0 && maybeYield(s, step, r0) || runtime !== pxsim.runtime) re
 switch (step) {
   case 0:
 
-    s.packNames___79675 = undefined;
-    s.packs___79677 = undefined;
-    s.test___79693 = undefined;
-    s.sample___79695 = undefined;
-    s.i___79697 = undefined;
+    s.packNames___91671 = undefined;
+    s.packs___91673 = undefined;
+    s.test___91689 = undefined;
+    s.sample___91691 = undefined;
+    s.i___91693 = undefined;
     if (s.lambdaArgs) {
       s.arg0 = (s.lambdaArgs[0]);
       s.lambdaArgs = null;
@@ -2616,8 +2616,8 @@ switch (step) {
     r0 = pxsim_Array__mk();
     s.tmp_0 = r0;
     r0 = pxsim_Array__push(s.tmp_0, "default");
-    s.packNames___79675 = (s.tmp_0);
-    r0 = pxsim_pxtcore_mkClassInstance(ShaderPack__C76975_VT);
+    s.packNames___91671 = (s.tmp_0);
+    r0 = pxsim_pxtcore_mkClassInstance(ShaderPack__C91625_VT);
     s.tmp_0 = r0;
     r0 = pxsim_Array__mk();
     s.tmp_1 = r0;
@@ -2823,7 +2823,7 @@ switch (step) {
     r0 = pxsim_Array__push(s.tmp_12, 12);
     r0 = pxsim_Array__push(s.tmp_12, 12);
     r0 = pxsim_Array__push(s.tmp_3, s.tmp_12);
-    s.tmp_13 = ShaderPack_constructor__P76976_mk(s);
+    s.tmp_13 = ShaderPack_constructor__P91626_mk(s);
     s.tmp_13.arg0 = s.tmp_0;
     s.tmp_13.arg1 = s.tmp_1;
     s.tmp_13.arg2 = s.tmp_3;
@@ -2833,9 +2833,9 @@ switch (step) {
     r0 = pxsim_Array__mk();
     s.tmp_14 = r0;
     r0 = pxsim_Array__push(s.tmp_14, s.tmp_0);
-    s.packs___79677 = (s.tmp_14);
+    s.packs___91673 = (s.tmp_14);
     r0 = pxsim_Array__mk();
-    s.test___79693 = (r0);
+    s.test___91689 = (r0);
     r0 = pxsim_Array__mk();
     s.tmp_0 = r0;
     r0 = pxsim_Array__push(s.tmp_0, 0);
@@ -2854,42 +2854,42 @@ switch (step) {
     r0 = pxsim_Array__push(s.tmp_0, 1);
     r0 = pxsim_Array__push(s.tmp_0, 2);
     r0 = pxsim_Array__push(s.tmp_0, 12);
-    s.sample___79695 = (s.tmp_0);
-    s.i___79697 = (0);
+    s.sample___91691 = (s.tmp_0);
+    s.i___91693 = (0);
   case 1:
-    r0 = (s.i___79697 < 16);
+    r0 = (s.i___91693 < 16);
     s.tmp_0 = r0;
     r0 = pxsim_numops_toBoolDecr(s.tmp_0);
     if (!r0) { step = 2; continue; }
-    s.tmp_1 = r0 = s.test___79693;
-    s.tmp_3 = r0 = s.sample___79695;
-    r0 = pxsim_Array__getAt(s.sample___79695, s.i___79697);
+    s.tmp_1 = r0 = s.test___91689;
+    s.tmp_3 = r0 = s.sample___91691;
+    r0 = pxsim_Array__getAt(s.sample___91691, s.i___91693);
     s.tmp_4 = r0;
     r0 = pxsim_Array__getAt(s.tmp_3, s.tmp_4);
     s.tmp_2 = r0;
     r0 = pxsim_Array__push(s.tmp_1, s.tmp_2);
-    r0 = (s.i___79697 + 1);
-    s.i___79697 = (r0);
+    r0 = (s.i___91693 + 1);
+    s.i___91693 = (r0);
     { step = 1; continue; }
   case 2:
     s.tmp_0 = console_log__P73023_mk(s);
-    s.tmp_0.arg0 = s.test___79693;
+    s.tmp_0.arg0 = s.test___91689;
     s.callLocIdx = 73; s.pc = 4; return s.tmp_0;
   case 4:
     r0 = s.retval;
-    s.tmp_0 = r0 = s.packs___79677;
-    r0 = pxsim_Array_.indexOf(s.packNames___79675, s.arg0, undefined);
+    s.tmp_0 = r0 = s.packs___91673;
+    r0 = pxsim_Array_.indexOf(s.packNames___91671, s.arg0, undefined);
     s.tmp_1 = r0;
     r0 = pxsim_Array__getAt(s.tmp_0, s.tmp_1);
     return leave(s, r0)
   default: oops()
 } } }
-ShaderPack_get__P76979.info = {"start":743,"length":1630,"line":21,"column":4,"endLine":53,"endColumn":5,"fileName":"main.ts","functionName":"get","argumentNames":["shader"]}
+ShaderPack_get__P91617.info = {"start":743,"length":1644,"line":21,"column":4,"endLine":53,"endColumn":5,"fileName":"main.ts","functionName":"get","argumentNames":["shader"]}
 
-function ShaderPack_get__P76979_mk(s) {
+function ShaderPack_get__P91617_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: ShaderPack_get__P76979, depth: s.depth + 1,
+        parent: s, fn: ShaderPack_get__P91617, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -2906,11 +2906,11 @@ function ShaderPack_get__P76979_mk(s) {
   tmp_12: undefined,
   tmp_13: undefined,
   tmp_14: undefined,
-  packNames___79675: undefined,
-  packs___79677: undefined,
-  test___79693: undefined,
-  sample___79695: undefined,
-  i___79697: undefined,
+  packNames___91671: undefined,
+  packs___91673: undefined,
+  test___91689: undefined,
+  sample___91691: undefined,
+  i___91693: undefined,
   arg0: undefined,
 } }
 
@@ -3748,7 +3748,7 @@ function helpers_arrayJoin__P72746_mk(s) {
 
 
 
-function ShaderPack_constructor__P76976(s) {
+function ShaderPack_constructor__P91626(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -3765,19 +3765,19 @@ switch (step) {
       s.lambdaArgs = null;
     }
     r0 = s.arg0;
-    if (!checkSubtype(r0, ShaderPack__C76975_VT)) failedCast(r0);
+    if (!checkSubtype(r0, ShaderPack__C91625_VT)) failedCast(r0);
     r0 = (s.arg0).fields["colorNames"] = (s.arg1);
     r0 = (s.arg0).fields["shaderColorSets"] = (s.arg2);
     r0 = undefined;
     return leave(s, r0)
   default: oops()
 } } }
-ShaderPack_constructor__P76976.info = {"start":94,"length":152,"line":3,"column":4,"endLine":6,"endColumn":5,"fileName":"main.ts","functionName":"inline","argumentNames":["this","colorNames","shaderColorSets"]}
+ShaderPack_constructor__P91626.info = {"start":94,"length":152,"line":3,"column":4,"endLine":6,"endColumn":5,"fileName":"main.ts","functionName":"inline","argumentNames":["this","colorNames","shaderColorSets"]}
 
-function ShaderPack_constructor__P76976_mk(s) {
+function ShaderPack_constructor__P91626_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: ShaderPack_constructor__P76976, depth: s.depth + 1,
+        parent: s, fn: ShaderPack_constructor__P91626, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   arg0: undefined,
   arg1: undefined,
@@ -42162,7 +42162,7 @@ const Math_FastRandom__C75703_VT = mkVTable({
     "pickRandom": Math_FastRandom_pickRandom__P75708,
   },
 });
-const ShaderPack__C76975_VT = mkVTable({
+const ShaderPack__C91625_VT = mkVTable({
   name: "ShaderPack",
   numFields: 2,
   classNo: 21,
@@ -42175,12 +42175,12 @@ const ShaderPack__C76975_VT = mkVTable({
     "set/colorNames": null,
     "shaderColorSets": null,
     "set/shaderColorSets": null,
-    "unpack": ShaderPack_unpack__P76977,
-    "getTintIdx": ShaderPack_getTintIdx__P76978,
-    "get": ShaderPack_get__P76979,
+    "unpack": ShaderPack_unpack__P91622,
+    "getTintIdx": ShaderPack_getTintIdx__P91624,
+    "get": ShaderPack_get__P91617,
   },
 });
-const Shader__C76980_VT = mkVTable({
+const Shader__C91618_VT = mkVTable({
   name: "Shader",
   numFields: 7,
   classNo: 22,
@@ -42203,7 +42203,7 @@ const Shader__C76980_VT = mkVTable({
     "set/zValue": null,
     "shader": null,
     "set/shader": null,
-    "directSetUnpackedShader": Shader_directSetUnpackedShader__P76984,
+    "directSetUnpackedShader": Shader_directSetUnpackedShader__P91620,
   },
 });
 const sprites_BaseSprite__C74738_VT = mkVTable({
@@ -43408,5 +43408,5 @@ const sprites_BaseSpriteSayRenderer__C74903_VT = mkVTable({
 
 const breakpoints = setupDebugger(1, ["sp1___76985","shader___76986"])
 
-return _main___P91369
+return _main___P91895
 })
