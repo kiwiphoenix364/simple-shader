@@ -13,3 +13,5 @@ Blocks support not implemented yet!
 1) .mapLayer - [public variable] - a 160x120 image that covers the screen, in which you can define which shaders are applied where. Any function that draws to an image will work here. Color 0 is no shader, color 1 is the first tint in the shader pack, color 2 is the second, etc.
 2) .setNewShader - sets a new shader (input not unpacked)
 3) .directSetUnpackedShader - sets a new already unpacked shader (from .unpack)
+## Custom Shaders
+Each shader pack is made up of 2 parts - the tint name array and the tint packs array. They are respective, meaning the first name will correspond to the first of the other array, etc. The tint name array is an array of strings that correspond to the tint packs. The tint pack array is an array of number arrays. Each number array in the tint packs array consists of 16 numbers.
