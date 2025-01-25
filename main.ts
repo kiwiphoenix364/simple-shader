@@ -22,7 +22,7 @@ class ShaderPack {
     static get (shader: string) {
         //reference for shader pack format
         //color sets and color set names are in respective orders in their arrays
-        //shader arrays go in order of colors, so the fifth item in the array ([4]) will be color four
+        //shader arrays go in order of colors on the screen, so the fifth item in the array ([4]) will be color four
         let packNames = ["default"]
         let packs = [
             new ShaderPack(
