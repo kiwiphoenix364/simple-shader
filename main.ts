@@ -87,21 +87,24 @@ class Shader {
         this.renderBuf = Buffer.create(120)
         this.shaderBuf = Buffer.create(120)
         this.shader = scene.createRenderable(this.zValue, (screenImg: Image, camera: scene.Camera) => {
-            for (let x = 0; x < 160; ++x) {
-                screenImg.getRows(x, this.renderBuf)
-                this.mapLayer.getRows(x, this.shaderBuf)
-                for (let y = 0; y < 120; ++y) {
-                    if (this.mapLayer.getPixel(x, y)) {
-                        this.renderBuf[y] = this.colbuf[this.shaderBuf[y]][this.renderBuf[y]]
-                        //use alternate compilation format
-                        //this.renderBuf[y] = (this.colbuf[this.renderBuf[y] + Math.imul(this.shaderBuf[y], 16)])
-                        //alt comp format + lookup table
-                        //this.renderBuf[y] = (this.colbuf[this.renderBuf[y] + this.lkupx16[this.shaderBuf[y]]])
-                    }
-                }
-                screenImg.setRows(x, this.renderBuf)
-            }
+            this.shadeImg(screenImg)
         })
+    }
+    protected shadeImg(img:Image) {
+        for (let x = 0; x < img.width; ++x) {
+            img.getRows(x, this.renderBuf)
+            this.mapLayer.getRows(x, this.shaderBuf)
+            for (let y = 0; y < img.height; ++y) {
+                if (this.shaderBuf[y]) {
+                    this.renderBuf[y] = this.colbuf[this.shaderBuf[y]][this.renderBuf[y]]
+                    //use alternate compilation format
+                    //this.renderBuf[y] = (this.colbuf[this.renderBuf[y] + Math.imul(this.shaderBuf[y], 16)])
+                    //alt comp format + lookup table
+                    //this.renderBuf[y] = (this.colbuf[this.renderBuf[y] + this.lkupx16[this.shaderBuf[y]]])
+                }
+            }
+            img.setRows(x, this.renderBuf)
+        }
     }
     setNewShader (shader: ShaderPack) {
         this.colbuf = shader.unpack()
