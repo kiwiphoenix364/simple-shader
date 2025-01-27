@@ -122,9 +122,20 @@ scene.setBackgroundImage(img`
     ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
     ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 `)
-let shader = new Shader(sp1, 1)
-shader.directSetUnpackedShader(ShaderPack.get("default").unpack())
-shader.mapLayer.fillCircle(60,60,50,sp1.getTintIdx("light"))
-shader.mapLayer.fillCircle(60, 60, 20, sp1.getTintIdx("light2"))
-shader.mapLayer.fillCircle(120, 40, 20, sp1.getTintIdx("dark"))
-shader.mapLayer.fillPolygon4(120, 110, 150, 70, 140, 60, 115, 90, sp1.getTintIdx("blue"))
+let shader = new Shader(sp1, true)
+let mySprite = sprites.create(img`
+    4 5
+    5 2
+    e e
+    e e
+    e e
+    e e
+    e e
+    e e
+`, SpriteKind.Player)
+let test = new ShaderAttachSprite(mySprite, shader, 1, 6, 12, 3)
+test.yOffset -= 3
+mySprite.setPosition(80, 24)
+game.onUpdate(function() {
+    
+})

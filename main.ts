@@ -48,7 +48,6 @@ class ShaderPack {
         for (let i = 0; i < 16; i++) {
             test.push(sample[sample[i]])
         }
-        console.log(test)
         
         return packs[packNames.indexOf(shader)]
     }
@@ -58,6 +57,7 @@ class Shader {
     //lookup table
     //lkupx16: Buffer
     //Shader pack
+    public refreshShaderLayer: boolean
     private currentShader: ShaderPack
     //Decompiled shader pack
     private colbuf: Buffer[]
@@ -70,7 +70,7 @@ class Shader {
     private zValue: number
     //Renderable for shader
     private shader: scene.Renderable
-    constructor(currentShader: ShaderPack, zValue: number) {
+    constructor(currentShader: ShaderPack, refreshShaderLayer: boolean, zValue = 0) {
         /*
         //build lookup table
         this.lkupx16 = Buffer.create(16)
@@ -78,6 +78,7 @@ class Shader {
             this.lkupx16[i] = (i * 16)
         }
         */
+        this.refreshShaderLayer = refreshShaderLayer
         this.zValue = zValue
         this.currentShader = currentShader
         //Unpack Shaderpack
@@ -89,6 +90,7 @@ class Shader {
         this.shader = scene.createRenderable(this.zValue, (screenImg: Image, camera: scene.Camera) => {
             this.shadeImg(screenImg)
         })
+        this.updateShaderLayer()
     }
     protected shadeImg(img:Image) {
         for (let x = 0; x < img.width; ++x) {
@@ -106,6 +108,16 @@ class Shader {
             img.setRows(x, this.renderBuf)
         }
     }
+    protected updateShaderLayer() {
+        game.currentScene().eventContext.registerFrameHandler(17, () => {
+            if (this.refreshShaderLayer) {
+                this.mapLayer = image.create(160,120)
+            }
+        })
+        game.currentScene().eventContext.registerFrameHandler(24, () => {
+            
+        })
+    }
     setNewShader (shader: ShaderPack) {
         this.colbuf = shader.unpack()
     }
@@ -117,5 +129,46 @@ class Shader {
     */
     directSetUnpackedShader (shader: Buffer[]) {
         this.colbuf = shader
+    }
+    static toScreenX(val: number) {
+        return val + CameraProperty.Left - 2
+    }
+    static toScreenY(val: number) {
+        return val + CameraProperty.Top - 4
+    }
+}
+class ShaderAttachSprite {
+    public sprite: Sprite
+    public shader: Shader
+    public tint: number
+    public radius: number
+    private currentRad: number
+    public flux: number
+    public smoothness: number
+    public xOffset = 0
+    public yOffset = 0
+    constructor(sprite: Sprite, shader: Shader, tint = 1, radius = 5, flux = 0, smoothness = 1) {
+        this.sprite = sprite
+        this.shader = shader
+        this.tint = tint
+        this.radius = radius
+        this.currentRad = this.radius
+        this.flux = flux
+        this.smoothness = smoothness
+        this.updateLightSources()
+    }
+    protected updateLightSources() {
+        game.currentScene().eventContext.registerFrameHandler(23, () => {
+            this.updateFlux()
+            this.shader.mapLayer.fillCircle(Shader.toScreenX(this.sprite.x) + this.xOffset, Shader.toScreenY(this.sprite.y) + this.yOffset, Math.round(this.currentRad), this.tint)
+        })
+    }
+    protected updateFlux() {
+        this.smoothness = Math.constrain(this.smoothness, Math.abs(this.flux) * -2, Math.abs(this.flux) * 2)
+        this.currentRad += Math.randomRange(0 - this.smoothness, this.smoothness)
+        //this.currentRad = Math.constrain(this.currentRad, this.radius + this.flux, this.radius - this.flux)
+        if (this.currentRad > this.radius + this.flux || this.currentRad < this.radius - this.flux) {
+            this.currentRad -= this.currentRad - (this.radius + this.flux)
+        }
     }
 }
