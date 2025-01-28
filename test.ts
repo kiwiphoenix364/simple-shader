@@ -126,7 +126,7 @@ let shader = new Shader(sp1, true, 0)
 
 
 
-for (let i = 0; i < 300; i++) {
+for (let i = 0; i < 100; i++) {
     let mySprite = sprites.create(img`
     4 5
     5 2

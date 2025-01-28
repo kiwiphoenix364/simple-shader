@@ -19,6 +19,9 @@ class ShaderPack {
     public getTintIdx (color: string) {
         return this.colorNames.indexOf(color) + 1
     }
+    public destroy() {
+        this.colorNames = this.shaderColorSets = null
+    }
     static get (shader: string) {
         //reference for shader pack format
         //color sets and color set names are in respective orders in their arrays
@@ -48,7 +51,6 @@ class ShaderPack {
         for (let j = 0; j < 16; j++) {
             test.push(sample[sample[j]])
         }
-        
         return packs[packNames.indexOf(shader)]
     }
 }
@@ -110,7 +112,7 @@ class Shader {
     }
     protected updateShaderLayer() {
         game.currentScene().eventContext.registerFrameHandler(17, () => {
-            if (this.refreshShaderLayer) {
+            if (this.refreshShaderLayer = true) {
                 this.mapLayer = image.create(160,120)
             }
         })
@@ -118,7 +120,7 @@ class Shader {
             
         })
     }
-    setNewShader (shader: ShaderPack) {
+    public setNewShader (shader: ShaderPack) {
         this.colbuf = shader.unpack()
     }
     /*
@@ -135,6 +137,10 @@ class Shader {
     }
     static toScreenY(val: number) {
         return val - scene.cameraProperty(CameraProperty.Top)
+    }
+    public destroy() {
+        this.shader.destroy()
+        this.refreshShaderLayer = this.currentShader = this.colbuf = this.mapLayer = this.renderBuf = this.shaderBuf = this.zValue = null
     }
 }
 class ShaderAttachSprite {
@@ -165,6 +171,9 @@ class ShaderAttachSprite {
         this.updater = game.currentScene().eventContext.registerFrameHandler(23, () => {
             this.updateFlux()
             this.shader.mapLayer.fillCircle(Shader.toScreenX(this.sprite.x) + this.xOffset, Shader.toScreenY(this.sprite.y) + this.yOffset, Math.round(this.currentRad), this.tint)
+            if (!this.shader) {
+                this.destroy()
+            }
         })
         //game.currentScene().eventContext.unregisterFrameHandler(controller)
     }
