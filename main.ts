@@ -45,8 +45,8 @@ class ShaderPack {
         //for generating the "2" varients
         let test = []
         let sample = [0, 1, 4, 1, 5, 1, 7, 5, 9, 1, 11, 1, 10, 1, 2, 12]
-        for (let i = 0; i < 16; i++) {
-            test.push(sample[sample[i]])
+        for (let j = 0; j < 16; j++) {
+            test.push(sample[sample[j]])
         }
         
         return packs[packNames.indexOf(shader)]
@@ -131,10 +131,10 @@ class Shader {
         this.colbuf = shader
     }
     static toScreenX(val: number) {
-        return val + CameraProperty.Left - 2
+        return val - scene.cameraProperty(CameraProperty.Left)
     }
     static toScreenY(val: number) {
-        return val + CameraProperty.Top - 4
+        return val - scene.cameraProperty(CameraProperty.Top)
     }
 }
 class ShaderAttachSprite {

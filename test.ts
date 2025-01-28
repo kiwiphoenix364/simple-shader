@@ -122,7 +122,7 @@ scene.setBackgroundImage(img`
     ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
     ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 `)
-let shader = new Shader(sp1, true)
+let shader = new Shader(sp1, true, 0)
 let mySprite = sprites.create(img`
     4 5
     5 2
@@ -133,9 +133,11 @@ let mySprite = sprites.create(img`
     e e
     e e
 `, SpriteKind.Player)
-let test = new ShaderAttachSprite(mySprite, shader, 1, 6, 12, 3)
+let test = new ShaderAttachSprite(mySprite, shader, 1, 4, 1, 0.1)
 test.yOffset -= 3
 mySprite.setPosition(80, 24)
 game.onUpdate(function() {
     
 })
+controller.moveSprite(mySprite)
+scene.cameraFollowSprite(mySprite)
