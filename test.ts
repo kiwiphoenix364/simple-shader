@@ -123,21 +123,32 @@ scene.setBackgroundImage(img`
     ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 `)
 let shader = new Shader(sp1, true, 0)
-
-
-
-for (let i = 0; i < 100; i++) {
-    let mySprite = sprites.create(img`
-    4 5
-    5 2
-    e e
-    e e
-    e e
-    e e
-    e e
-    e e
-`, SpriteKind.Player)
-    let test = new ShaderAttachSprite(mySprite, shader, 1, 4, 1, 0.1)
-    test.yOffset -= 3
-    mySprite.setPosition(Math.randomRange(40,120), Math.randomRange(20,100))
+tiles.setCurrentTilemap(tilemap`testtilemap`)
+for (let value of tiles.getTilesByType(sprites.castle.tileGrass2)) {
+    let tile = new TileShader(img`
+        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+    `, shader, value.x, value.y)
 }
+let mySprite = sprites.create(img`
+    7 7 7 . 7 7 7 . . 7 7 . 7 7 7
+    . 7 . . 7 7 . . 7 7 7 . . 7 .
+    . 7 . . 7 7 7 . 7 7 . . . 7 .
+`, SpriteKind.Player)
+controller.moveSprite(mySprite)
+scene.cameraFollowSprite(mySprite)
+new ShaderAttachSprite(mySprite, shader, 1, 10)

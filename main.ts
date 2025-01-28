@@ -72,6 +72,7 @@ class Shader {
     private zValue: number
     //Renderable for shader
     private shader: scene.Renderable
+    protected updater: any
     constructor(currentShader: ShaderPack, refreshShaderLayer: boolean, zValue = 0) {
         /*
         //build lookup table
@@ -111,13 +112,10 @@ class Shader {
         }
     }
     protected updateShaderLayer() {
-        game.currentScene().eventContext.registerFrameHandler(17, () => {
+        this.updater = game.currentScene().eventContext.registerFrameHandler(17, () => {
             if (this.refreshShaderLayer = true) {
                 this.mapLayer = image.create(160,120)
             }
-        })
-        game.currentScene().eventContext.registerFrameHandler(24, () => {
-            
         })
     }
     public setNewShader (shader: ShaderPack) {
@@ -140,6 +138,7 @@ class Shader {
     }
     public destroy() {
         this.shader.destroy()
+        game.currentScene().eventContext.unregisterFrameHandler(this.updater)
         this.refreshShaderLayer = this.currentShader = this.colbuf = this.mapLayer = this.renderBuf = this.shaderBuf = this.zValue = null
     }
 }
@@ -162,13 +161,13 @@ class ShaderAttachSprite {
         this.currentRad = this.radius
         this.flux = flux
         this.smoothness = smoothness
-        this.updateLightSources()
+        this.updateLightSource()
         this.sprite.onDestroyed(() => {
             this.destroy()
         })
     }
-    protected updateLightSources() {
-        this.updater = game.currentScene().eventContext.registerFrameHandler(23, () => {
+    protected updateLightSource() {
+        this.updater = game.currentScene().eventContext.registerFrameHandler(24, () => {
             if (this.shader.mapLayer != null) {
                 this.updateFlux()
                 this.shader.mapLayer.fillCircle(Shader.toScreenX(this.sprite.x) + this.xOffset, Shader.toScreenY(this.sprite.y) + this.yOffset, Math.round(this.currentRad), this.tint)
@@ -189,5 +188,79 @@ class ShaderAttachSprite {
     public destroy() {
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
         this.sprite = this.shader = this.tint = this.radius = this.currentRad = this.flux = this.smoothness = this.xOffset = this.yOffset = this.updater = null
+    }
+}
+class TileShader {
+    public image: Image
+    public shader: Shader
+    protected x: number
+    protected y: number
+    protected left: number
+    protected top: number
+    protected right: number
+    protected bottom: number
+    protected updater: any
+    constructor(image: Image, shader: Shader, x: number, y: number) {
+        this.image = image
+        this.shader = shader
+        this.x = x
+        this.y = y
+        this.left = this.x - this.image.width / 2
+        this.top = this.y - this.image.height / 2
+        this.right = this.left + this.image.width
+        this.bottom = this.top + this.image.height
+        this.updateTile()
+    }
+    public setX(x:number) {
+        this.x = x
+        this.left = this.x - this.image.width / 2
+        this.right = this.left + this.image.width
+    }
+    public setY(y: number) {
+        this.y = y
+        this.top = this.y - this.image.height / 2
+        this.bottom = this.top + this.image.height
+    }
+    public setPos(x:number, y: number) {
+        this.x = x
+        this.left = this.x - this.image.width / 2
+        this.right = this.left + this.image.width
+        this.y = y
+        this.top = this.y - this.image.height / 2
+        this.bottom = this.top + this.image.height
+    }
+    public setLeft(left: number) {
+        this.left = left
+        this.x = this.left + this.image.width / 2
+        this.right = this.left + this.image.width
+    }
+    public setTop(top: number) {
+        this.top = top
+        this.y = this.top + this.image.height / 2
+        this.bottom = this.top + this.image.height
+    }
+    public setRight(right: number) {
+        this.right = right
+        this.left = this.right - this.image.width
+        this.x = this.left + this.image.width / 2
+    }
+    public setBottom(bottom: number) {
+        this.bottom = bottom
+        this.top = this.bottom - this.image.height
+        this.y = this.top + this.image.height / 2
+    }    
+    protected updateTile() {
+        this.updater = game.currentScene().eventContext.registerFrameHandler(23, () => {
+            if (this.shader.mapLayer != null && Shader.toScreenY(this.top) < scene.screenHeight() && Shader.toScreenY(this.bottom) > 0 && Shader.toScreenX(this.left) < scene.screenWidth() && Shader.toScreenX(this.right) > 0) {
+                helpers.imageBlit(this.shader.mapLayer, Shader.toScreenX(this.left), Shader.toScreenY(this.top), this.image.width, this.image.height, this.image, 0, 0, this.image.width, this.image.height, true, false)
+            }
+            if (this.shader.mapLayer === null) {
+                this.destroy()
+            }
+        })
+    }
+    public destroy() {
+        game.currentScene().eventContext.unregisterFrameHandler(this.updater)
+        this.image = this.shader = this.left = this.top = this.x = this.y = this.right = this.bottom = null
     }
 }
