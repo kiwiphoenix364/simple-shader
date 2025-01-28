@@ -169,13 +169,14 @@ class ShaderAttachSprite {
     }
     protected updateLightSources() {
         this.updater = game.currentScene().eventContext.registerFrameHandler(23, () => {
-            this.updateFlux()
-            this.shader.mapLayer.fillCircle(Shader.toScreenX(this.sprite.x) + this.xOffset, Shader.toScreenY(this.sprite.y) + this.yOffset, Math.round(this.currentRad), this.tint)
-            if (!this.shader) {
+            if (this.shader.mapLayer != null) {
+                this.updateFlux()
+                this.shader.mapLayer.fillCircle(Shader.toScreenX(this.sprite.x) + this.xOffset, Shader.toScreenY(this.sprite.y) + this.yOffset, Math.round(this.currentRad), this.tint)
+            }
+            if (this.shader.mapLayer === null) {
                 this.destroy()
             }
         })
-        //game.currentScene().eventContext.unregisterFrameHandler(controller)
     }
     protected updateFlux() {
         this.smoothness = Math.constrain(this.smoothness, Math.abs(this.flux) * -2, Math.abs(this.flux) * 2)
