@@ -5,7 +5,7 @@ class ShaderPack {
         this.colorNames = colorNames
         this.shaderColorSets = shaderColorSets
     }
-    unpack () {
+    public unpack () {
         //let buf = Buffer.create(16)
         //for (let i = 0; i < this.shaderColorSets.length; i++) {
         //    buf = buf.concat(this.shaderColorSets[i])
@@ -16,7 +16,7 @@ class ShaderPack {
         }
         return buf
     }
-    getTintIdx (color: string) {
+    public getTintIdx (color: string) {
         return this.colorNames.indexOf(color) + 1
     }
     static get (shader: string) {
@@ -127,7 +127,7 @@ class Shader {
         this.colbuf = shader
     }
     */
-    directSetUnpackedShader (shader: Buffer[]) {
+    public directSetUnpackedShader (shader: Buffer[]) {
         this.colbuf = shader
     }
     static toScreenX(val: number) {
@@ -147,6 +147,7 @@ class ShaderAttachSprite {
     public smoothness: number
     public xOffset = 0
     public yOffset = 0
+    protected updater: any
     constructor(sprite: Sprite, shader: Shader, tint = 1, radius = 5, flux = 0, smoothness = 1) {
         this.sprite = sprite
         this.shader = shader
@@ -156,12 +157,16 @@ class ShaderAttachSprite {
         this.flux = flux
         this.smoothness = smoothness
         this.updateLightSources()
+        this.sprite.onDestroyed(() => {
+            this.destroy()
+        })
     }
     protected updateLightSources() {
-        game.currentScene().eventContext.registerFrameHandler(23, () => {
+        this.updater = game.currentScene().eventContext.registerFrameHandler(23, () => {
             this.updateFlux()
             this.shader.mapLayer.fillCircle(Shader.toScreenX(this.sprite.x) + this.xOffset, Shader.toScreenY(this.sprite.y) + this.yOffset, Math.round(this.currentRad), this.tint)
         })
+        //game.currentScene().eventContext.unregisterFrameHandler(controller)
     }
     protected updateFlux() {
         this.smoothness = Math.constrain(this.smoothness, Math.abs(this.flux) * -2, Math.abs(this.flux) * 2)
@@ -170,5 +175,9 @@ class ShaderAttachSprite {
         if (this.currentRad > this.radius + this.flux || this.currentRad < this.radius - this.flux) {
             this.currentRad -= this.currentRad - (this.radius + this.flux)
         }
+    }
+    public destroy() {
+        game.currentScene().eventContext.unregisterFrameHandler(this.updater)
+        this.sprite = this.shader = this.tint = this.radius = this.currentRad = this.flux = this.smoothness = this.xOffset = this.yOffset = this.updater = null
     }
 }
