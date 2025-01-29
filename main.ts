@@ -313,6 +313,6 @@ class TileShader {
     }
     public destroy() {
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
-        this.shader = this.image = this.left = this.top = this.x = this.y = this.right = this.bottom = this.updater = null
+        this.shader = this.image = this.x = this.y = this.left = this.top = this.right = this.bottom = this.updater = null
     }
 }
