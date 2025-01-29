@@ -60,9 +60,9 @@ class Shader {
     //lkupx16: Buffer
     //Shader pack
     public refreshShaderLayer: boolean
-    private currentShader: ShaderPack
+    protected currentShader: ShaderPack
     //Decompiled shader pack
-    private colbuf: Buffer[]
+    protected colbuf: Buffer[]
     //Shader augment image
     public mapLayer: Image
     //Render and shader buffers
