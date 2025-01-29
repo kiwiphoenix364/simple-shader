@@ -1,6 +1,6 @@
 {
     "name": "simple shader [beta]",
-    "version": "2.0.7",
+    "version": "2.0.8",
     "description": "",
     "dependencies": {
         "device": "*"
