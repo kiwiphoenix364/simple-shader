@@ -16,8 +16,8 @@ class ShaderPack {
         }
         return buf
     }
-    public getTintIdx (color: string) {
-        return this.colorNames.indexOf(color) + 1
+    public getTintIdx (name: string) {
+        return this.colorNames.indexOf(name) + 1
     }
     public destroy() {
         this.colorNames = this.shaderColorSets = null
