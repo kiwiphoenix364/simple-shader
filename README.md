@@ -12,7 +12,7 @@ A string of the names of the tints in shaderColorSets in the same order respecti
 _shaderColorSets: any[]_\
 An array of arrays of numbers - each array (tint) contains 16 colors, in the order of the pallete colors respectively. For example, if a given tint's fifth color in the array [4] is set to 9, color 4 will be replaced by color 9 in any area of the shader with that tint. 0 always should correspond to color 0, since that is clear. 15 total tints can be used.
 
-**.destroy()**\
+**.destroy() [function]**\
 Destroys the ShaderPack - it is easier for garbage collection to clear out
 
 **.get(shader:string) [static function]**\
@@ -20,10 +20,10 @@ Get a built in shader, using a string as an argument\
 "default" is the only current shader built-in\
 *custom shaders can be made
 
-**.getTintIdx(name:string)**\
+**.getTintIdx(name:string) [function]**\
 Gets the corresponding color of the shader map layer that a shader tint name corresponds to (on a Shader that's not unpacked)
 
-**.unpack()**\
+**.unpack() [function]**\
 Unpacks the Shader into the format read by the shader layer
 
 ## Class Shader
@@ -36,10 +36,10 @@ Whether to refresh the shader layer every frame or not\
 _zValue: number_\
 The Z layer of the Shader (if none is set, it will be automatically set to 0)
 
-**.destroy()**\
+**.destroy() [function]**\
 Destroys the Shader - any members of ShaderAttachSprite or TileShader applied to this Shader will also be deleted
 
-**.directSetUnpackedShader(shader: Buffer)**\
+**.directSetUnpackedShader(shader: Buffer) [function]**\
 Sets a new already unpacked Shader (from .unpack)
 
 **.mapLayer [public variable: Image]**\
@@ -48,7 +48,7 @@ A 160x120 image that covers the screen, in which you can define which shaders ar
 **.refreshShaderLayer [public variable: boolean]**\
 Whether to refresh the shader layer every frame (bool)
 
-**.setNewShader(shader: ShaderPack)**\
+**.setNewShader(shader: ShaderPack) [function]**\
 Unpacks a ShaderPack and sets it (input not unpacked)
 
 **.toScreenX(x: number) [static function]**\
@@ -73,7 +73,7 @@ How much the circle fluctuates\
 _smoothness: number_\
 How slowly the circle can expand and contract\
 
-**.destroy()**\
+**.destroy() [function]**\
 Destroys the ShaderAttachSprite
 
 **.flux [public variable: number]**\
@@ -112,7 +112,7 @@ The X value that the TileShader will be at (in the normal coordinate system, not
 _y_\
 The Y value that the TileShader will be at (in the normal coordinate system, not relative to camera)
 
-**.destroy()**\
+**.destroy() [function]**\
 Destroys the TileShader
 
 **.image [public variable: Image]**\
@@ -121,22 +121,22 @@ Image that will be drawn to the Shader that the TileShader is assigned to
 **.shader [public variable: Shader]**\
 The Shader that the TileShader is assigned to
 
-**.setBottom(bottom:number)**\
+**.setBottom(bottom:number) [function]**\
 Sets the Bottom value of the TileShader
 
-**.setLeft(left:number)**\
+**.setLeft(left:number) [function]**\
 Sets the Left value of the TileShader
 
-**.setPos(x:number, y: number)**\
+**.setPos(x:number, y: number) [function]**\
 Sets the X and Y values of the TileShader
 
-**.setRight(right:number)**\
+**.setRight(right:number) [function]**\
 Sets the Right value of the TileShader
 
-**.setTop(top:number)**\
+**.setTop(top:number) [function]**\
 Sets the Top value of the TileShader
 
-**.setX(x:number)**\
+**.setX(x:number) [function]**\
 Sets the X value of the TileShader
 
 **.setY(y:number)**\
