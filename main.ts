@@ -69,7 +69,7 @@ class Shader {
     private renderBuf: Buffer
     private shaderBuf: Buffer
     //zValue
-    private zValue: number
+    protected zValue: number
     //Renderable for shader
     private shader: scene.Renderable
     protected updater: any
@@ -90,10 +90,13 @@ class Shader {
         this.mapLayer = image.create(160, 120)
         this.renderBuf = Buffer.create(120)
         this.shaderBuf = Buffer.create(120)
+        this.runShader()
+        this.updateShaderLayer()
+    }
+    protected runShader() {
         this.shader = scene.createRenderable(this.zValue, (screenImg: Image, camera: scene.Camera) => {
             this.shadeImg(screenImg)
         })
-        this.updateShaderLayer()
     }
     protected shadeImg(img:Image) {
         for (let x = 0; x < img.width; ++x) {
