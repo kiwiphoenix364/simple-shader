@@ -45,7 +45,7 @@ Sets a new already unpacked Shader (from .unpack)
 **.mapLayer [public variable: Image]**\
 A 160x120 image that covers the screen, in which you can define which shaders are applied where. Any function that draws to an image will work here. Color 0 is no tint, color 1 is the first tint in the ShaderPack, color 2 is the second, etc.
 
-**refreshShaderLayer [public variable: boolean]**\
+**.refreshShaderLayer [public variable: boolean]**\
 Whether to refresh the shader layer every frame (bool)
 
 **.setNewShader(shader: ShaderPack)**\
@@ -76,28 +76,28 @@ How slowly the circle can expand and contract\
 **.destroy()**\
 Destroys the ShaderAttachSprite
 
-**flux [public variable: number]**\
+**.flux [public variable: number]**\
 How much the circle fluctuates
 
-**radius [public variable: number]**\
+**.radius [public variable: number]**\
 The radius of the circle
 
-**shader [public variable: Shader]**\
+**.shader [public variable: Shader]**\
 The Shader that the ShaderAttachSprite is assigned to
 
-**smoothness [public variable: number]**\
+**.smoothness [public variable: number]**\
 How slowly the circle can expand and contract
 
-**sprite [public variable: Sprite]**\
+**.sprite [public variable: Sprite]**\
 The sprite to attach the circle to
 
-**tint [public variable: number]**\
+**.tint [public variable: number]**\
 The tint (of the assigned ShaderPack) to draw the circle with
 
-**xOffset [public variable: number]**\
+**.xOffset [public variable: number]**\
 How much to offset the circle on the X axis
 
-**yOffset [public variable: number]**\
+**.yOffset [public variable: number]**\
 How much to offset the circle on the Y axis
 
 ## Class TileShader
@@ -115,10 +115,10 @@ The Y value that the TileShader will be at (in the normal coordinate system, not
 **.destroy()**\
 Destroys the TileShader
 
-**image [public variable: Image]**\
+**.image [public variable: Image]**\
 Image that will be drawn to the Shader that the TileShader is assigned to
 
-**shader [public variable: Shader]**\
+**.shader [public variable: Shader]**\
 The Shader that the TileShader is assigned to
 
 **.setBottom(bottom:number)**\
