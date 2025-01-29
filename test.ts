@@ -126,22 +126,22 @@ let shader = new Shader(sp1, true, 0)
 tiles.setCurrentTilemap(tilemap`testtilemap`)
 for (let value of tiles.getTilesByType(sprites.castle.tileGrass2)) {
     let tile = new TileShader(img`
-        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 9 . . 9 9 9 9 9 9 .
+        . 9 9 9 9 9 9 . . 9 9 9 9 9 9 .
+        . 9 9 9 9 9 9 . . 9 9 9 9 9 9 .
+        . 9 9 9 9 9 9 . . 9 9 9 9 9 9 .
+        . 9 9 9 9 9 9 . . 9 9 9 9 9 9 .
+        . 9 9 9 9 9 9 . . 9 9 9 9 9 9 .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . 9 9 9 9 9 9 . . 9 9 9 9 9 9 .
+        . 9 9 9 9 9 9 . . 9 9 9 9 9 9 .
+        . 9 9 9 9 9 9 . . 9 9 9 9 9 9 .
+        . 9 9 9 9 9 9 . . 9 9 9 9 9 9 .
+        . 9 9 9 9 9 9 . . 9 9 9 9 9 9 .
+        . 9 9 9 9 9 9 . . 9 9 9 9 9 9 .
+        . . . . . . . . . . . . . . . .
     `, shader, value.x, value.y)
 }
 let mySprite = sprites.create(img`
@@ -150,5 +150,11 @@ let mySprite = sprites.create(img`
     . 7 . . 7 7 7 . 7 7 . . . 7 .
 `, SpriteKind.Player)
 controller.moveSprite(mySprite)
+new ShaderAttachSprite(mySprite, shader, 2, 10)
 scene.cameraFollowSprite(mySprite)
-new ShaderAttachSprite(mySprite, shader, 1, 10)
+let mySprite2 = sprites.create(img`
+        7 7 7 . 7 7 7 . . 7 7 . 7 7 7
+        . 7 . . 7 7 . . 7 7 7 . . 7 .
+        . 7 . . 7 7 7 . 7 7 . . . 7 .
+`, SpriteKind.Player)
+new ShaderAttachSprite(mySprite2, shader, 1, 10)

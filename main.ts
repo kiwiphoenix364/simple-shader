@@ -168,13 +168,15 @@ class ShaderAttachSprite {
     }
     protected updateLightSource() {
         this.updater = game.currentScene().eventContext.registerFrameHandler(24, () => {
-            if (this.shader.mapLayer != null) {
-                this.updateFlux()
-                this.shader.mapLayer.fillCircle(Shader.toScreenX(this.sprite.x) + this.xOffset, Shader.toScreenY(this.sprite.y) + this.yOffset, Math.round(this.currentRad), this.tint)
-            }
-            if (this.shader.mapLayer === null) {
-                this.destroy()
-            }
+            if (Shader.toScreenX(this.sprite.x - this.currentRad) < scene.screenWidth() && Shader.toScreenX(this.sprite.x + this.currentRad) > 0 && Shader.toScreenY(this.sprite.y - this.currentRad) < scene.screenHeight() && Shader.toScreenY(this.sprite.y + this.currentRad) > 0) {
+                if (this.shader.mapLayer != null) {
+                    this.updateFlux()
+                    this.shader.mapLayer.fillCircle(Shader.toScreenX(this.sprite.x) + this.xOffset, Shader.toScreenY(this.sprite.y) + this.yOffset, Math.round(this.currentRad), this.tint)
+                }
+                if (this.shader.mapLayer === null) {
+                    this.destroy()
+                }
+            }   
         })
     }
     protected updateFlux() {
@@ -251,7 +253,7 @@ class TileShader {
     }    
     protected updateTile() {
         this.updater = game.currentScene().eventContext.registerFrameHandler(23, () => {
-            if (this.shader.mapLayer != null && Shader.toScreenY(this.top) < scene.screenHeight() && Shader.toScreenY(this.bottom) > 0 && Shader.toScreenX(this.left) < scene.screenWidth() && Shader.toScreenX(this.right) > 0) {
+            if (this.shader.mapLayer != null && Shader.toScreenX(this.left) < scene.screenWidth() && Shader.toScreenX(this.right) > 0 && Shader.toScreenY(this.top) < scene.screenHeight() && Shader.toScreenY(this.bottom) > 0) {
                 helpers.imageBlit(this.shader.mapLayer, Shader.toScreenX(this.left), Shader.toScreenY(this.top), this.image.width, this.image.height, this.image, 0, 0, this.image.width, this.image.height, true, false)
             }
             if (this.shader.mapLayer === null) {
