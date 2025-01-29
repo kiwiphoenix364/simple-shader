@@ -57,7 +57,7 @@ Takes in an X coordinate (x) and transforms it to the X coordinate it is on the 
 **.toScreenY(y: number) [static function]**\
 Takes in a Y coordinate (y) and transforms it to the Y coordinate it is on the camera - this is a useful util for shaders as they are relative to the screen
 
-## Class ShaderAttachSprite
+## Class CircleShaderAttachSprite
 
 **new ShaderAttachSprite(sprite: Sprite, shader: Shader, tint: number, radius: number, flux: number, smoothness: number)**\
 _sprite: Sprite_\
