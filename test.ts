@@ -150,11 +150,11 @@ let mySprite = sprites.create(img`
     . 7 . . 7 7 7 . 7 7 . . . 7 .
 `, SpriteKind.Player)
 controller.moveSprite(mySprite)
-new ShaderAttachSprite(mySprite, shader, 2, 10)
+new CircleShaderAttachSprite(mySprite, shader, 2, 10)
 scene.cameraFollowSprite(mySprite)
 let mySprite2 = sprites.create(img`
         7 7 7 . 7 7 7 . . 7 7 . 7 7 7
         . 7 . . 7 7 . . 7 7 7 . . 7 .
         . 7 . . 7 7 7 . 7 7 . . . 7 .
 `, SpriteKind.Player)
-new ShaderAttachSprite(mySprite2, shader, 1, 10)
+new CircleShaderAttachSprite(mySprite2, shader, 1, 10)

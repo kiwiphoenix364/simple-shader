@@ -145,7 +145,7 @@ class Shader {
         this.refreshShaderLayer = this.currentPack = this.decompShader = this.mapLayer = this.renderBuf = this.shaderBuf = this.zValue = null
     }
 }
-class ShaderAttachSprite {
+class CircleShaderAttachSprite {
     public sprite: Sprite
     public shader: Shader
     public tint: number
