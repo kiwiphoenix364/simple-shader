@@ -57,13 +57,48 @@ Takes in an X coordinate (x) and transforms it to the X coordinate it is on the 
 **.toScreenY(y: number) [static function]**\
 Takes in a Y coordinate (y) and transforms it to the Y coordinate it is on the camera - this is a useful util for shaders as they are relative to the screen
 
-## Class CircleShaderAttachSprite
+## Class ShaderAttachSprite
 
-**new CircleShaderAttachSprite(sprite: Sprite, shader: Shader, tint: number, radius: number, flux: number, smoothness: number)**\
-_sprite: Sprite_\
-The sprite to attach the circle to\
+**new ShaderAttachSprite(shader: Shader, sprite: Sprite, image: Image, xOffset: number, yOffset: number)**\
 _shader: Shader_\
 The Shader that the CircleShaderAttachSprite is assigned to\
+_sprite: Sprite_\
+The sprite to attach the circle to\
+_image: Image_\
+Image that will be drawn to the Shader that the ShaderAttachSprite is assigned to\
+_xOffset: number_\
+How much to offset the circle on the X axis\
+_yOffset: number_\
+
+**.destroy() [function]**\
+Destroys the ShaderAttachSprite
+
+**.image [public variable: Image]**\
+Image that will be drawn to the Shader that the TileShader is assigned to
+
+**.shader [public variable: Shader]**\
+The Shader that the ShaderAttachSprite is assigned to\
+
+**.sprite [public variable: Sprite]**\
+The sprite to attach the image to
+
+**.xOffset [public variable: number]**\
+How much to offset the image on the X axis
+
+**.yOffset [public variable: number]**\
+How much to offset the image on the Y axis
+
+## Class CircleShaderAttachSprite
+
+**new CircleShaderAttachSprite(shader: Shader, sprite: Sprite, xOffset: number, yOffset: number, tint: number, radius: number, flux: number, smoothness: number)**\
+_shader: Shader_\
+The Shader that the CircleShaderAttachSprite is assigned to\
+_sprite: Sprite_\
+The sprite to attach the circle to\
+_xOffset: number_\
+How much to offset the circle on the X axis\
+_yOffset: number_\
+How much to offset the circle on the Y axis\
 _tint: number_\
 The tint (of the assigned ShaderPack) to draw the circle with\
 _radius: number_\
@@ -102,14 +137,14 @@ How much to offset the circle on the Y axis
 
 ## Class TileShader
 
-**new TileShader(image: Image, shader: Shader, x: number, y: number)**\
-_image_\
-Image that will be drawn to the Shader that the TileShader is assigned to\
-_shader_\
+**new TileShader(shader: Shader, image: Image, x: number, y: number)**\
+_shader: Shader_\
 The Shader that the TileShader is assigned to\
-_x_\
+_image: Image_\
+Image that will be drawn to the Shader that the TileShader is assigned to\
+_x: number_\
 The X value that the TileShader will be at (in the normal coordinate system, not relative to camera)\
-_y_\
+_y: number_\
 The Y value that the TileShader will be at (in the normal coordinate system, not relative to camera)
 
 **.destroy() [function]**\
