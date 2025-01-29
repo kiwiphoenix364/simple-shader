@@ -37,7 +37,7 @@ _zValue: number_\
 The Z layer of the Shader (if none is set, it will be automatically set to 0)
 
 **.destroy() [function]**\
-Destroys the Shader - any members of ShaderAttachSprite or TileShader applied to this Shader will also be deleted
+Destroys the Shader - any members of CircleShaderAttachSprite or TileShader applied to this Shader will also be deleted
 
 **.directSetUnpackedShader(shader: Buffer) [function]**\
 Sets a new already unpacked Shader (from .unpack)
@@ -59,11 +59,11 @@ Takes in a Y coordinate (y) and transforms it to the Y coordinate it is on the c
 
 ## Class CircleShaderAttachSprite
 
-**new ShaderAttachSprite(sprite: Sprite, shader: Shader, tint: number, radius: number, flux: number, smoothness: number)**\
+**new CircleShaderAttachSprite(sprite: Sprite, shader: Shader, tint: number, radius: number, flux: number, smoothness: number)**\
 _sprite: Sprite_\
 The sprite to attach the circle to\
 _shader: Shader_\
-The Shader that the ShaderAttachSprite is assigned to\
+The Shader that the CircleShaderAttachSprite is assigned to\
 _tint: number_\
 The tint (of the assigned ShaderPack) to draw the circle with\
 _radius: number_\
@@ -74,7 +74,7 @@ _smoothness: number_\
 How slowly the circle can expand and contract\
 
 **.destroy() [function]**\
-Destroys the ShaderAttachSprite
+Destroys the CircleShaderAttachSprite
 
 **.flux [public variable: number]**\
 How much the circle fluctuates
@@ -83,7 +83,7 @@ How much the circle fluctuates
 The radius of the circle
 
 **.shader [public variable: Shader]**\
-The Shader that the ShaderAttachSprite is assigned to
+The Shader that the CircleShaderAttachSprite is assigned to
 
 **.smoothness [public variable: number]**\
 How slowly the circle can expand and contract
