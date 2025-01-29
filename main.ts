@@ -133,11 +133,11 @@ class Shader {
     public directSetUnpackedShader (shader: Buffer[]) {
         this.decompShader = shader
     }
-    static toScreenX(xVal: number) {
-        return xVal - scene.cameraProperty(CameraProperty.Left)
+    static toScreenX(x: number) {
+        return x - scene.cameraProperty(CameraProperty.Left)
     }
-    static toScreenY(yVal: number) {
-        return yVal - scene.cameraProperty(CameraProperty.Top)
+    static toScreenY(y: number) {
+        return y - scene.cameraProperty(CameraProperty.Top)
     }
     public destroy() {
         this.shader.destroy()
