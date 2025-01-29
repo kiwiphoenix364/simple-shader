@@ -46,11 +46,11 @@ class ShaderPack {
         ]
         
         //for generating the "2" varients
-        let test = []
-        let sample = [0, 1, 4, 1, 5, 1, 7, 5, 9, 1, 11, 1, 10, 1, 2, 12]
-        for (let j = 0; j < 16; j++) {
-            test.push(sample[sample[j]])
-        }
+        //let test = []
+        //let sample = [0, 1, 4, 1, 5, 1, 7, 5, 9, 1, 11, 1, 10, 1, 2, 12]
+        //for (let j = 0; j < 16; j++) {
+        //    test.push(sample[sample[j]])
+        //}
         return packs[packNames.indexOf(shader)]
     }
 }
