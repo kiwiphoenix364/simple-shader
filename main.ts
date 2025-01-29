@@ -60,9 +60,9 @@ class Shader {
     //lkupx16: Buffer
     //Shader pack
     public refreshShaderLayer: boolean
-    protected currentShader: ShaderPack
+    protected currentPack: ShaderPack
     //Decompiled shader pack
-    protected colbuf: Buffer[]
+    protected decompShader: Buffer[]
     //Shader augment image
     public mapLayer: Image
     //Render and shader buffers
@@ -73,7 +73,7 @@ class Shader {
     //Renderable for shader
     private shader: scene.Renderable
     protected updater: any
-    constructor(currentShader: ShaderPack, refreshShaderLayer: boolean, zValue = 0) {
+    constructor(currentPack: ShaderPack, refreshShaderLayer: boolean, zValue = 0) {
         /*
         //build lookup table
         this.lkupx16 = Buffer.create(16)
@@ -83,9 +83,9 @@ class Shader {
         */
         this.refreshShaderLayer = refreshShaderLayer
         this.zValue = zValue
-        this.currentShader = currentShader
+        this.currentPack = currentPack
         //Unpack Shaderpack
-        this.colbuf = this.currentShader.unpack()
+        this.decompShader = this.currentPack.unpack()
         //create buffer image
         this.mapLayer = image.create(160, 120)
         this.renderBuf = Buffer.create(120)
@@ -101,11 +101,11 @@ class Shader {
             this.mapLayer.getRows(x, this.shaderBuf)
             for (let y = 0; y < img.height; ++y) {
                 if (this.shaderBuf[y]) {
-                    this.renderBuf[y] = this.colbuf[this.shaderBuf[y]][this.renderBuf[y]]
+                    this.renderBuf[y] = this.decompShader[this.shaderBuf[y]][this.renderBuf[y]]
                     //use alternate compilation format
-                    //this.renderBuf[y] = (this.colbuf[this.renderBuf[y] + Math.imul(this.shaderBuf[y], 16)])
+                    //this.renderBuf[y] = (this.decompShader[this.renderBuf[y] + Math.imul(this.shaderBuf[y], 16)])
                     //alt comp format + lookup table
-                    //this.renderBuf[y] = (this.colbuf[this.renderBuf[y] + this.lkupx16[this.shaderBuf[y]]])
+                    //this.renderBuf[y] = (this.decompShader[this.renderBuf[y] + this.lkupx16[this.shaderBuf[y]]])
                 }
             }
             img.setRows(x, this.renderBuf)
@@ -119,16 +119,16 @@ class Shader {
         })
     }
     public setNewShader (shader: ShaderPack) {
-        this.colbuf = shader.unpack()
+        this.decompShader = shader.unpack()
     }
     /*
     //alt function
     directSetUnpackedShader(array: Buffer) {
-        this.colbuf = shader
+        this.decompShader = shader
     }
     */
     public directSetUnpackedShader (shader: Buffer[]) {
-        this.colbuf = shader
+        this.decompShader = shader
     }
     static toScreenX(val: number) {
         return val - scene.cameraProperty(CameraProperty.Left)
@@ -139,7 +139,7 @@ class Shader {
     public destroy() {
         this.shader.destroy()
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
-        this.refreshShaderLayer = this.currentShader = this.colbuf = this.mapLayer = this.renderBuf = this.shaderBuf = this.zValue = null
+        this.refreshShaderLayer = this.currentPack = this.decompShader = this.mapLayer = this.renderBuf = this.shaderBuf = this.zValue = null
     }
 }
 class ShaderAttachSprite {
