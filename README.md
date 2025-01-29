@@ -68,7 +68,7 @@ _image: Image_\
 Image that will be drawn to the Shader that the ShaderAttachSprite is assigned to\
 _xOffset: number_\
 How much to offset the circle on the X axis\
-_yOffset: number_\
+_yOffset: number_
 
 **.destroy() [function]**\
 Destroys the ShaderAttachSprite
@@ -106,7 +106,7 @@ The radius of the circle\
 _flux: number_\
 How much the circle fluctuates\
 _smoothness: number_\
-How slowly the circle can expand and contract\
+How slowly the circle can expand and contract
 
 **.destroy() [function]**\
 Destroys the CircleShaderAttachSprite
