@@ -1,5 +1,5 @@
-// meta={"simUrl":"https://trg-arcade.userpxt.io/v1.12.58/---simulator","cdnUrl":"https://cdn.makecode.com","version":"2.0.4","target":"arcade","targetVersion":"1.12.58","repo":"kiwiphoenix364/simple-shader-beta"}
-// total=1405056 new=11.19% cached=83.37% other=5.43%
+// meta={"simUrl":"https://trg-arcade.userpxt.io/v1.12.58/---simulator","cdnUrl":"https://cdn.makecode.com","version":"2.0.5","target":"arcade","targetVersion":"1.12.58","repo":"kiwiphoenix364/simple-shader-beta"}
+// total=1405657 new=11.23% cached=83.34% other=5.43%
 (function (ectx) {
 'use strict';
 const runtime = ectx.runtime;
@@ -465,7 +465,7 @@ const pxsim_pxtrt = pxsim.pxtrt;
 const pxsim_numops = pxsim.numops;
 
 
-function _main___P77275(s) {
+function _main___P82602(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -476,8 +476,8 @@ switch (step) {
   case 0:
 
     s.value___76114 = undefined;
-    s.unnamed838___U1 = undefined;
-    s.unnamed839___U2 = undefined;
+    s.unnamed882___U1 = undefined;
+    s.unnamed883___U2 = undefined;
     s.tile___76118 = undefined;
     globals._intervals___49430 = (undefined);
     globals._pollEventQueue___49439 = (undefined);
@@ -883,7 +883,7 @@ switch (step) {
     s.callLocIdx = 67; s.pc = 40; return s.tmp_0;
   case 40:
     r0 = s.retval;
-    s.tmp_0 = ShaderPack_get__P76294_mk(s);
+    s.tmp_0 = ShaderPack_get__P81661_mk(s);
     s.tmp_0.arg0 = "default";
     s.callLocIdx = 68; s.pc = 41; return s.tmp_0;
   case 41:
@@ -895,9 +895,9 @@ switch (step) {
     s.callLocIdx = 69; s.pc = 42; return s.tmp_0;
   case 42:
     r0 = s.retval;
-    r0 = pxsim_pxtcore_mkClassInstance(Shader__C76295_VT);
+    r0 = pxsim_pxtcore_mkClassInstance(Shader__C81662_VT);
     s.tmp_0 = r0;
-    s.tmp_1 = Shader_constructor__P76304_mk(s);
+    s.tmp_1 = Shader_constructor__P81671_mk(s);
     s.tmp_1.arg0 = s.tmp_0;
     s.tmp_1.arg1 = globals.sp1___76101;
     s.tmp_1.arg2 = true;
@@ -922,19 +922,19 @@ switch (step) {
     s.callLocIdx = 73; s.pc = 46; return s.tmp_0;
   case 46:
     r0 = s.retval;
-    s.unnamed838___U1 = (r0);
-    s.unnamed839___U2 = (0);
+    s.unnamed882___U1 = (r0);
+    s.unnamed883___U2 = (0);
   case 1:
-    s.tmp_0 = r0 = s.unnamed839___U2;
-    r0 = pxsim_Array__length(s.unnamed838___U1);
+    s.tmp_0 = r0 = s.unnamed883___U2;
+    r0 = pxsim_Array__length(s.unnamed882___U1);
     s.tmp_1 = r0;
     r0 = (s.tmp_0 < s.tmp_1);
     if (!r0) { step = 2; continue; }
-    r0 = pxsim_Array__getAt(s.unnamed838___U1, s.unnamed839___U2);
+    r0 = pxsim_Array__getAt(s.unnamed882___U1, s.unnamed883___U2);
     s.value___76114 = (r0);
-    r0 = pxsim_pxtcore_mkClassInstance(TileShader__C76305_VT);
+    r0 = pxsim_pxtcore_mkClassInstance(TileShader__C81672_VT);
     s.tmp_2 = r0;
-    s.tmp_3 = TileShader_constructor__P76315_mk(s);
+    s.tmp_3 = TileShader_constructor__P81682_mk(s);
     s.tmp_3.arg0 = s.tmp_2;
     r0 = pxsim.image.ofBuffer(_hex76122);
     s.tmp_3.arg1 = r0;
@@ -955,11 +955,11 @@ switch (step) {
   case 47:
     r0 = s.retval;
     s.tile___76118 = (s.tmp_2);
-    r0 = (s.unnamed839___U2 + 1);
-    s.unnamed839___U2 = (r0);
+    r0 = (s.unnamed883___U2 + 1);
+    s.unnamed883___U2 = (r0);
     { step = 1; continue; }
   case 2:
-    s.unnamed838___U1 = (undefined);
+    s.unnamed882___U1 = (undefined);
     s.tmp_0 = sprites_create__P47278_mk(s);
     r0 = pxsim.image.ofBuffer(_hex76132);
     s.tmp_0.arg0 = r0;
@@ -975,9 +975,9 @@ switch (step) {
     s.callLocIdx = 78; s.pc = 51; return s.tmp_0;
   case 51:
     r0 = s.retval;
-    r0 = pxsim_pxtcore_mkClassInstance(ShaderAttachSprite__C76316_VT);
+    r0 = pxsim_pxtcore_mkClassInstance(ShaderAttachSprite__C81683_VT);
     s.tmp_0 = r0;
-    s.tmp_1 = ShaderAttachSprite_constructor__P76320_mk(s);
+    s.tmp_1 = ShaderAttachSprite_constructor__P81687_mk(s);
     s.tmp_1.arg0 = s.tmp_0;
     s.tmp_1.arg1 = globals.mySprite___76129;
     s.tmp_1.arg2 = globals.shader___76107;
@@ -1001,9 +1001,9 @@ switch (step) {
   case 54:
     r0 = s.retval;
     globals.mySprite2___76143 = (r0);
-    r0 = pxsim_pxtcore_mkClassInstance(ShaderAttachSprite__C76316_VT);
+    r0 = pxsim_pxtcore_mkClassInstance(ShaderAttachSprite__C81683_VT);
     s.tmp_0 = r0;
-    s.tmp_1 = ShaderAttachSprite_constructor__P76320_mk(s);
+    s.tmp_1 = ShaderAttachSprite_constructor__P81687_mk(s);
     s.tmp_1.arg0 = s.tmp_0;
     s.tmp_1.arg1 = globals.mySprite2___76143;
     s.tmp_1.arg2 = globals.shader___76107;
@@ -1018,13 +1018,13 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-_main___P77275.info = {"start":0,"length":0,"line":0,"column":0,"endLine":0,"endColumn":0,"fileName":"main.ts","functionName":"<main>","argumentNames":[]}
-_main___P77275.continuations = [  ]
+_main___P82602.info = {"start":0,"length":0,"line":0,"column":0,"endLine":0,"endColumn":0,"fileName":"main.ts","functionName":"<main>","argumentNames":[]}
+_main___P82602.continuations = [  ]
 
-function _main___P77275_mk(s) {
+function _main___P82602_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: _main___P77275, depth: s.depth + 1,
+        parent: s, fn: _main___P82602, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -1033,8 +1033,8 @@ function _main___P77275_mk(s) {
   tmp_4: undefined,
   tmp_5: undefined,
   value___76114: undefined,
-  unnamed838___U1: undefined,
-  unnamed839___U2: undefined,
+  unnamed882___U1: undefined,
+  unnamed883___U2: undefined,
   tile___76118: undefined,
 } }
 
@@ -2919,7 +2919,7 @@ function Math_max__P45132_mk(s) {
 
 
 
-function ShaderAttachSprite_constructor__P76320(s) {
+function ShaderAttachSprite_constructor__P81687(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -2940,7 +2940,7 @@ switch (step) {
       s.lambdaArgs = null;
     }
     r0 = s.arg0;
-    if (!checkSubtype(r0, ShaderAttachSprite__C76316_VT)) failedCast(r0);
+    if (!checkSubtype(r0, ShaderAttachSprite__C81683_VT)) failedCast(r0);
     r0 = (s.arg0).fields["xOffset"] = (0);
     r0 = (s.arg0).fields["yOffset"] = (0);
     r0 = (s.arg0).fields["sprite"] = (s.arg1);
@@ -2952,12 +2952,12 @@ switch (step) {
     r0 = (s.arg0).fields["currentRad"] = (s.tmp_0);
     r0 = (s.arg0).fields["flux"] = (s.arg5);
     r0 = (s.arg0).fields["smoothness"] = (s.arg6);
-    s.tmp_0 = ShaderAttachSprite_updateLightSource__P76317_mk(s);
+    s.tmp_0 = ShaderAttachSprite_updateLightSource__P81684_mk(s);
     s.tmp_0.arg0 = s.arg0;
     s.callLocIdx = 94; s.pc = 1; return s.tmp_0;
   case 1:
     r0 = s.retval;
-    r0 = pxsim_pxtcore_mkAction(1, ShaderAttachSprite_inline__P76612);
+    r0 = pxsim_pxtcore_mkAction(1, ShaderAttachSprite_inline__P81979);
     s.tmp_0 = r0;
     r0 = pxsim_pxtrt_stclo(s.tmp_0, 0, s.arg0);
     s.tmp_1 = Sprite_onDestroyed__P47430_mk(s);
@@ -2971,12 +2971,12 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-ShaderAttachSprite_constructor__P76320.info = {"start":6126,"length":434,"line":158,"column":4,"endLine":170,"endColumn":5,"fileName":"main.ts","functionName":"inline","argumentNames":["this","sprite","shader","tint","radius","flux","smoothness"]}
+ShaderAttachSprite_constructor__P81687.info = {"start":6126,"length":434,"line":158,"column":4,"endLine":170,"endColumn":5,"fileName":"main.ts","functionName":"inline","argumentNames":["this","sprite","shader","tint","radius","flux","smoothness"]}
 
-function ShaderAttachSprite_constructor__P76320_mk(s) {
+function ShaderAttachSprite_constructor__P81687_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: ShaderAttachSprite_constructor__P76320, depth: s.depth + 1,
+        parent: s, fn: ShaderAttachSprite_constructor__P81687, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -2993,7 +2993,7 @@ function ShaderAttachSprite_constructor__P76320_mk(s) {
 
 
 
-function ShaderAttachSprite_inline__P76612(s) {
+function ShaderAttachSprite_inline__P81979(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -3003,7 +3003,7 @@ if (yieldSteps-- < 0 && maybeYield(s, step, r0) || runtime !== pxsim.runtime) re
 switch (step) {
   case 0:
 
-    s.tmp_0 = ShaderAttachSprite_destroy__P76319_mk(s);
+    s.tmp_0 = ShaderAttachSprite_destroy__P81686_mk(s);
     s.tmp_0.arg0 = s.caps[0];
     s.callLocIdx = 95; s.pc = 1; return s.tmp_0;
   case 1:
@@ -3012,12 +3012,12 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-ShaderAttachSprite_inline__P76612.info = {"start":6506,"length":46,"line":167,"column":32,"endLine":169,"endColumn":9,"fileName":"main.ts","functionName":"inline","argumentNames":[]}
+ShaderAttachSprite_inline__P81979.info = {"start":6506,"length":46,"line":167,"column":32,"endLine":169,"endColumn":9,"fileName":"main.ts","functionName":"inline","argumentNames":[]}
 
-function ShaderAttachSprite_inline__P76612_mk(s) {
+function ShaderAttachSprite_inline__P81979_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: ShaderAttachSprite_inline__P76612, depth: s.depth + 1,
+        parent: s, fn: ShaderAttachSprite_inline__P81979, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
 } }
@@ -3026,7 +3026,7 @@ function ShaderAttachSprite_inline__P76612_mk(s) {
 
 
 
-function ShaderAttachSprite_destroy__P76319(s) {
+function ShaderAttachSprite_destroy__P81686(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -3041,7 +3041,7 @@ switch (step) {
       s.lambdaArgs = null;
     }
     r0 = s.arg0;
-    if (!checkSubtype(r0, ShaderAttachSprite__C76316_VT)) failedCast(r0);
+    if (!checkSubtype(r0, ShaderAttachSprite__C81683_VT)) failedCast(r0);
     s.tmp_0 = control_EventContext_unregisterFrameHandler__P45406_mk(s);
     s.tmp_1 = game_currentScene__P48002_mk(s);
     s.callLocIdx = 119; s.pc = 2; return s.tmp_1;
@@ -3068,12 +3068,12 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-ShaderAttachSprite_destroy__P76319.info = {"start":7952,"length":265,"line":192,"column":4,"endLine":195,"endColumn":5,"fileName":"main.ts","functionName":"destroy","argumentNames":["this"]}
+ShaderAttachSprite_destroy__P81686.info = {"start":8012,"length":265,"line":192,"column":4,"endLine":195,"endColumn":5,"fileName":"main.ts","functionName":"destroy","argumentNames":["this"]}
 
-function ShaderAttachSprite_destroy__P76319_mk(s) {
+function ShaderAttachSprite_destroy__P81686_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: ShaderAttachSprite_destroy__P76319, depth: s.depth + 1,
+        parent: s, fn: ShaderAttachSprite_destroy__P81686, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -3264,7 +3264,7 @@ function Sprite_onDestroyed__P47430_mk(s) {
 
 
 
-function ShaderAttachSprite_updateLightSource__P76317(s) {
+function ShaderAttachSprite_updateLightSource__P81684(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -3279,8 +3279,8 @@ switch (step) {
       s.lambdaArgs = null;
     }
     r0 = s.arg0;
-    if (!checkSubtype(r0, ShaderAttachSprite__C76316_VT)) failedCast(r0);
-    r0 = pxsim_pxtcore_mkAction(1, ShaderAttachSprite_updateLightSource_inline__P76622);
+    if (!checkSubtype(r0, ShaderAttachSprite__C81683_VT)) failedCast(r0);
+    r0 = pxsim_pxtcore_mkAction(1, ShaderAttachSprite_updateLightSource_inline__P81989);
     s.tmp_0 = r0;
     r0 = pxsim_pxtrt_stclo(s.tmp_0, 0, s.arg0);
     s.tmp_1 = r0 = s.arg0;
@@ -3302,12 +3302,12 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-ShaderAttachSprite_updateLightSource__P76317.info = {"start":6566,"length":849,"line":171,"column":4,"endLine":183,"endColumn":5,"fileName":"main.ts","functionName":"updateLightSource","argumentNames":["this"]}
+ShaderAttachSprite_updateLightSource__P81684.info = {"start":6566,"length":909,"line":171,"column":4,"endLine":183,"endColumn":5,"fileName":"main.ts","functionName":"updateLightSource","argumentNames":["this"]}
 
-function ShaderAttachSprite_updateLightSource__P76317_mk(s) {
+function ShaderAttachSprite_updateLightSource__P81684_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: ShaderAttachSprite_updateLightSource__P76317, depth: s.depth + 1,
+        parent: s, fn: ShaderAttachSprite_updateLightSource__P81684, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -3321,7 +3321,7 @@ function ShaderAttachSprite_updateLightSource__P76317_mk(s) {
 
 
 
-function ShaderAttachSprite_updateLightSource_inline__P76622(s) {
+function ShaderAttachSprite_updateLightSource_inline__P81989(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -3331,122 +3331,138 @@ if (yieldSteps-- < 0 && maybeYield(s, step, r0) || runtime !== pxsim.runtime) re
 switch (step) {
   case 0:
 
-    s.tmp_2 = Shader_toScreenX__P76301_mk(s);
-    s.tmp_4 = Sprite_x__P47357_mk(s);
+    s.tmp_2 = Shader_toScreenX__P81668_mk(s);
+    s.tmp_5 = Sprite_x__P47357_mk(s);
     r0 = s.caps[0].fields["sprite"];
-    s.tmp_4.arg0 = r0;
-    s.callLocIdx = 98; s.pc = 14; return s.tmp_4;
+    s.tmp_5.arg0 = r0;
+    s.callLocIdx = 98; s.pc = 14; return s.tmp_5;
   case 14:
     r0 = s.retval;
-    s.tmp_3 = r0;
+    s.tmp_4 = r0;
     r0 = s.caps[0].fields["currentRad"];
-    s.tmp_5 = r0;
-    r0 = (s.tmp_3 - s.tmp_5);
+    s.tmp_6 = r0;
+    r0 = (s.tmp_4 - s.tmp_6);
+    s.tmp_3 = r0;
+    r0 = s.caps[0].fields["xOffset"];
+    s.tmp_7 = r0;
+    r0 = (s.tmp_3 + s.tmp_7);
     s.tmp_2.arg0 = r0;
     s.callLocIdx = 99; s.pc = 13; return s.tmp_2;
   case 13:
     r0 = s.retval;
     s.tmp_1 = r0;
     r0 = pxsim_ImageMethods.width(globals.screen___47035);
-    s.tmp_6 = r0;
-    r0 = (s.tmp_1 < s.tmp_6);
+    s.tmp_8 = r0;
+    r0 = (s.tmp_1 < s.tmp_8);
     s.tmp_0 = r0;
     r0 = pxsim_numops_toBool(s.tmp_0);
     if (r0) { step = 1; continue; }
     r0 = s.tmp_0;
     { step = 2; continue; }
   case 1:
-    s.tmp_8 = Shader_toScreenX__P76301_mk(s);
-    s.tmp_10 = Sprite_x__P47357_mk(s);
+    s.tmp_10 = Shader_toScreenX__P81668_mk(s);
+    s.tmp_13 = Sprite_x__P47357_mk(s);
     r0 = s.caps[0].fields["sprite"];
-    s.tmp_10.arg0 = r0;
-    s.callLocIdx = 101; s.pc = 16; return s.tmp_10;
+    s.tmp_13.arg0 = r0;
+    s.callLocIdx = 101; s.pc = 16; return s.tmp_13;
   case 16:
     r0 = s.retval;
-    s.tmp_9 = r0;
+    s.tmp_12 = r0;
     r0 = s.caps[0].fields["currentRad"];
+    s.tmp_14 = r0;
+    r0 = (s.tmp_12 + s.tmp_14);
     s.tmp_11 = r0;
-    r0 = (s.tmp_9 + s.tmp_11);
-    s.tmp_8.arg0 = r0;
-    s.callLocIdx = 102; s.pc = 15; return s.tmp_8;
+    r0 = s.caps[0].fields["xOffset"];
+    s.tmp_15 = r0;
+    r0 = (s.tmp_11 + s.tmp_15);
+    s.tmp_10.arg0 = r0;
+    s.callLocIdx = 102; s.pc = 15; return s.tmp_10;
   case 15:
     r0 = s.retval;
-    s.tmp_7 = r0;
-    r0 = (s.tmp_7 > 0);
+    s.tmp_9 = r0;
+    r0 = (s.tmp_9 > 0);
   case 2:
     // jmp value (already in r0)
-    s.tmp_12 = r0;
-    r0 = pxsim_numops_toBool(s.tmp_12);
+    s.tmp_16 = r0;
+    r0 = pxsim_numops_toBool(s.tmp_16);
     if (r0) { step = 3; continue; }
-    r0 = s.tmp_12;
+    r0 = s.tmp_16;
     { step = 4; continue; }
   case 3:
-    s.tmp_14 = Shader_toScreenY__P76302_mk(s);
-    s.tmp_16 = Sprite_y__P47359_mk(s);
+    s.tmp_18 = Shader_toScreenY__P81669_mk(s);
+    s.tmp_21 = Sprite_y__P47359_mk(s);
     r0 = s.caps[0].fields["sprite"];
-    s.tmp_16.arg0 = r0;
-    s.callLocIdx = 103; s.pc = 18; return s.tmp_16;
+    s.tmp_21.arg0 = r0;
+    s.callLocIdx = 103; s.pc = 18; return s.tmp_21;
   case 18:
     r0 = s.retval;
-    s.tmp_15 = r0;
+    s.tmp_20 = r0;
     r0 = s.caps[0].fields["currentRad"];
-    s.tmp_17 = r0;
-    r0 = (s.tmp_15 - s.tmp_17);
-    s.tmp_14.arg0 = r0;
-    s.callLocIdx = 104; s.pc = 17; return s.tmp_14;
+    s.tmp_22 = r0;
+    r0 = (s.tmp_20 - s.tmp_22);
+    s.tmp_19 = r0;
+    r0 = s.caps[0].fields["yOffset"];
+    s.tmp_23 = r0;
+    r0 = (s.tmp_19 + s.tmp_23);
+    s.tmp_18.arg0 = r0;
+    s.callLocIdx = 104; s.pc = 17; return s.tmp_18;
   case 17:
     r0 = s.retval;
-    s.tmp_13 = r0;
+    s.tmp_17 = r0;
     r0 = pxsim_ImageMethods.height(globals.screen___47035);
-    s.tmp_18 = r0;
-    r0 = (s.tmp_13 < s.tmp_18);
+    s.tmp_24 = r0;
+    r0 = (s.tmp_17 < s.tmp_24);
   case 4:
     // jmp value (already in r0)
-    s.tmp_19 = r0;
-    r0 = pxsim_numops_toBool(s.tmp_19);
+    s.tmp_25 = r0;
+    r0 = pxsim_numops_toBool(s.tmp_25);
     if (r0) { step = 5; continue; }
-    r0 = s.tmp_19;
+    r0 = s.tmp_25;
     { step = 6; continue; }
   case 5:
-    s.tmp_21 = Shader_toScreenY__P76302_mk(s);
-    s.tmp_23 = Sprite_y__P47359_mk(s);
+    s.tmp_27 = Shader_toScreenY__P81669_mk(s);
+    s.tmp_30 = Sprite_y__P47359_mk(s);
     r0 = s.caps[0].fields["sprite"];
-    s.tmp_23.arg0 = r0;
-    s.callLocIdx = 106; s.pc = 20; return s.tmp_23;
+    s.tmp_30.arg0 = r0;
+    s.callLocIdx = 106; s.pc = 20; return s.tmp_30;
   case 20:
     r0 = s.retval;
-    s.tmp_22 = r0;
+    s.tmp_29 = r0;
     r0 = s.caps[0].fields["currentRad"];
-    s.tmp_24 = r0;
-    r0 = (s.tmp_22 + s.tmp_24);
-    s.tmp_21.arg0 = r0;
-    s.callLocIdx = 107; s.pc = 19; return s.tmp_21;
+    s.tmp_31 = r0;
+    r0 = (s.tmp_29 + s.tmp_31);
+    s.tmp_28 = r0;
+    r0 = s.caps[0].fields["yOffset"];
+    s.tmp_32 = r0;
+    r0 = (s.tmp_28 + s.tmp_32);
+    s.tmp_27.arg0 = r0;
+    s.callLocIdx = 107; s.pc = 19; return s.tmp_27;
   case 19:
     r0 = s.retval;
-    s.tmp_20 = r0;
-    r0 = (s.tmp_20 > 0);
+    s.tmp_26 = r0;
+    r0 = (s.tmp_26 > 0);
   case 6:
     // jmp value (already in r0)
-    s.tmp_25 = r0;
-    r0 = pxsim_numops_toBoolDecr(s.tmp_25);
+    s.tmp_33 = r0;
+    r0 = pxsim_numops_toBoolDecr(s.tmp_33);
     if (!r0) { step = 11; continue; }
     r0 = s.caps[0].fields["shader"];
     r0 = r0.fields["mapLayer"];
-    s.tmp_27 = r0;
-    r0 = (s.tmp_27 != null);
-    s.tmp_26 = r0;
-    r0 = pxsim_numops_toBoolDecr(s.tmp_26);
+    s.tmp_35 = r0;
+    r0 = (s.tmp_35 != null);
+    s.tmp_34 = r0;
+    r0 = pxsim_numops_toBoolDecr(s.tmp_34);
     if (!r0) { step = 7; continue; }
-    s.tmp_28 = ShaderAttachSprite_updateFlux__P76318_mk(s);
-    s.tmp_28.arg0 = s.caps[0];
-    s.callLocIdx = 108; s.pc = 21; return s.tmp_28;
+    s.tmp_36 = ShaderAttachSprite_updateFlux__P81685_mk(s);
+    s.tmp_36.arg0 = s.caps[0];
+    s.callLocIdx = 108; s.pc = 21; return s.tmp_36;
   case 21:
     r0 = s.retval;
     s.tmp_0 = helpers_imageFillCircle__P46964_mk(s);
     r0 = s.caps[0].fields["shader"];
     r0 = r0.fields["mapLayer"];
     s.tmp_0.arg0 = r0;
-    s.tmp_2 = Shader_toScreenX__P76301_mk(s);
+    s.tmp_2 = Shader_toScreenX__P81668_mk(s);
     s.tmp_3 = Sprite_x__P47357_mk(s);
     r0 = s.caps[0].fields["sprite"];
     s.tmp_3.arg0 = r0;
@@ -3462,7 +3478,7 @@ switch (step) {
     s.tmp_4 = r0;
     r0 = (s.tmp_1 + s.tmp_4);
     s.tmp_0.arg1 = r0;
-    s.tmp_6 = Shader_toScreenY__P76302_mk(s);
+    s.tmp_6 = Shader_toScreenY__P81669_mk(s);
     s.tmp_7 = Sprite_y__P47359_mk(s);
     r0 = s.caps[0].fields["sprite"];
     s.tmp_7.arg0 = r0;
@@ -3496,7 +3512,7 @@ switch (step) {
     s.tmp_0 = r0;
     r0 = pxsim_numops_toBoolDecr(s.tmp_0);
     if (!r0) { step = 9; continue; }
-    s.tmp_2 = ShaderAttachSprite_destroy__P76319_mk(s);
+    s.tmp_2 = ShaderAttachSprite_destroy__P81686_mk(s);
     s.tmp_2.arg0 = s.caps[0];
     s.callLocIdx = 114; s.pc = 27; return s.tmp_2;
   case 27:
@@ -3509,12 +3525,12 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-ShaderAttachSprite_updateLightSource_inline__P76622.info = {"start":6680,"length":727,"line":172,"column":81,"endLine":182,"endColumn":9,"fileName":"main.ts","functionName":"inline","argumentNames":[]}
+ShaderAttachSprite_updateLightSource_inline__P81989.info = {"start":6680,"length":787,"line":172,"column":81,"endLine":182,"endColumn":9,"fileName":"main.ts","functionName":"inline","argumentNames":[]}
 
-function ShaderAttachSprite_updateLightSource_inline__P76622_mk(s) {
+function ShaderAttachSprite_updateLightSource_inline__P81989_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: ShaderAttachSprite_updateLightSource_inline__P76622, depth: s.depth + 1,
+        parent: s, fn: ShaderAttachSprite_updateLightSource_inline__P81989, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -3545,6 +3561,14 @@ function ShaderAttachSprite_updateLightSource_inline__P76622_mk(s) {
   tmp_26: undefined,
   tmp_27: undefined,
   tmp_28: undefined,
+  tmp_29: undefined,
+  tmp_30: undefined,
+  tmp_31: undefined,
+  tmp_32: undefined,
+  tmp_33: undefined,
+  tmp_34: undefined,
+  tmp_35: undefined,
+  tmp_36: undefined,
 } }
 
 
@@ -3665,7 +3689,7 @@ function helpers_pack__P49602_mk(s) {
 
 
 
-function ShaderAttachSprite_updateFlux__P76318(s) {
+function ShaderAttachSprite_updateFlux__P81685(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -3680,7 +3704,7 @@ switch (step) {
       s.lambdaArgs = null;
     }
     r0 = s.arg0;
-    if (!checkSubtype(r0, ShaderAttachSprite__C76316_VT)) failedCast(r0);
+    if (!checkSubtype(r0, ShaderAttachSprite__C81683_VT)) failedCast(r0);
     s.tmp_0 = r0 = s.arg0;
     s.tmp_2 = Math_constrain__P45286_mk(s);
     r0 = s.arg0.fields["smoothness"];
@@ -3773,12 +3797,12 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-ShaderAttachSprite_updateFlux__P76318.info = {"start":7421,"length":525,"line":184,"column":4,"endLine":191,"endColumn":5,"fileName":"main.ts","functionName":"updateFlux","argumentNames":["this"]}
+ShaderAttachSprite_updateFlux__P81685.info = {"start":7481,"length":525,"line":184,"column":4,"endLine":191,"endColumn":5,"fileName":"main.ts","functionName":"updateFlux","argumentNames":["this"]}
 
-function ShaderAttachSprite_updateFlux__P76318_mk(s) {
+function ShaderAttachSprite_updateFlux__P81685_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: ShaderAttachSprite_updateFlux__P76318, depth: s.depth + 1,
+        parent: s, fn: ShaderAttachSprite_updateFlux__P81685, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -3939,7 +3963,7 @@ function scene_screenHeight__P47885_mk(s) {
 
 
 
-function Shader_toScreenY__P76302(s) {
+function Shader_toScreenY__P81669(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -3964,12 +3988,12 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-Shader_toScreenY__P76302.info = {"start":5434,"length":101,"line":138,"column":4,"endLine":140,"endColumn":5,"fileName":"main.ts","functionName":"toScreenY","argumentNames":["val"]}
+Shader_toScreenY__P81669.info = {"start":5434,"length":101,"line":138,"column":4,"endLine":140,"endColumn":5,"fileName":"main.ts","functionName":"toScreenY","argumentNames":["val"]}
 
-function Shader_toScreenY__P76302_mk(s) {
+function Shader_toScreenY__P81669_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: Shader_toScreenY__P76302, depth: s.depth + 1,
+        parent: s, fn: Shader_toScreenY__P81669, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -4470,7 +4494,7 @@ function scene_screenWidth__P47884_mk(s) {
 
 
 
-function Shader_toScreenX__P76301(s) {
+function Shader_toScreenX__P81668(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -4495,12 +4519,12 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-Shader_toScreenX__P76301.info = {"start":5326,"length":102,"line":135,"column":4,"endLine":137,"endColumn":5,"fileName":"main.ts","functionName":"toScreenX","argumentNames":["val"]}
+Shader_toScreenX__P81668.info = {"start":5326,"length":102,"line":135,"column":4,"endLine":137,"endColumn":5,"fileName":"main.ts","functionName":"toScreenX","argumentNames":["val"]}
 
-function Shader_toScreenX__P76301_mk(s) {
+function Shader_toScreenX__P81668_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: Shader_toScreenX__P76301, depth: s.depth + 1,
+        parent: s, fn: Shader_toScreenX__P81668, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -9459,7 +9483,7 @@ function tiles_Location_x__P47701_mk(s) {
 
 
 
-function TileShader_constructor__P76315(s) {
+function TileShader_constructor__P81682(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -9478,7 +9502,7 @@ switch (step) {
       s.lambdaArgs = null;
     }
     r0 = s.arg0;
-    if (!checkSubtype(r0, TileShader__C76305_VT)) failedCast(r0);
+    if (!checkSubtype(r0, TileShader__C81672_VT)) failedCast(r0);
     r0 = (s.arg0).fields["image"] = (s.arg1);
     r0 = (s.arg0).fields["shader"] = (s.arg2);
     r0 = (s.arg0).fields["x"] = (s.arg3);
@@ -9527,7 +9551,7 @@ switch (step) {
     r0 = (s.tmp_2 + s.tmp_3);
     s.tmp_1 = r0;
     r0 = (s.tmp_0).fields["bottom"] = (s.tmp_1);
-    s.tmp_0 = TileShader_updateTile__P76313_mk(s);
+    s.tmp_0 = TileShader_updateTile__P81680_mk(s);
     s.tmp_0.arg0 = s.arg0;
     s.callLocIdx = 121; s.pc = 1; return s.tmp_0;
   case 1:
@@ -9536,12 +9560,12 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-TileShader_constructor__P76315.info = {"start":8490,"length":402,"line":207,"column":4,"endLine":217,"endColumn":5,"fileName":"main.ts","functionName":"inline","argumentNames":["this","image","shader","x","y"]}
+TileShader_constructor__P81682.info = {"start":8550,"length":402,"line":207,"column":4,"endLine":217,"endColumn":5,"fileName":"main.ts","functionName":"inline","argumentNames":["this","image","shader","x","y"]}
 
-function TileShader_constructor__P76315_mk(s) {
+function TileShader_constructor__P81682_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: TileShader_constructor__P76315, depth: s.depth + 1,
+        parent: s, fn: TileShader_constructor__P81682, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -9560,7 +9584,7 @@ function TileShader_constructor__P76315_mk(s) {
 
 
 
-function TileShader_updateTile__P76313(s) {
+function TileShader_updateTile__P81680(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -9575,8 +9599,8 @@ switch (step) {
       s.lambdaArgs = null;
     }
     r0 = s.arg0;
-    if (!checkSubtype(r0, TileShader__C76305_VT)) failedCast(r0);
-    r0 = pxsim_pxtcore_mkAction(1, TileShader_updateTile_inline__P77032);
+    if (!checkSubtype(r0, TileShader__C81672_VT)) failedCast(r0);
+    r0 = pxsim_pxtcore_mkAction(1, TileShader_updateTile_inline__P82411);
     s.tmp_0 = r0;
     r0 = pxsim_pxtrt_stclo(s.tmp_0, 0, s.arg0);
     s.tmp_1 = r0 = s.arg0;
@@ -9598,12 +9622,12 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-TileShader_updateTile__P76313.info = {"start":10208,"length":692,"line":256,"column":4,"endLine":265,"endColumn":5,"fileName":"main.ts","functionName":"updateTile","argumentNames":["this"]}
+TileShader_updateTile__P81680.info = {"start":10268,"length":692,"line":256,"column":4,"endLine":265,"endColumn":5,"fileName":"main.ts","functionName":"updateTile","argumentNames":["this"]}
 
-function TileShader_updateTile__P76313_mk(s) {
+function TileShader_updateTile__P81680_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: TileShader_updateTile__P76313, depth: s.depth + 1,
+        parent: s, fn: TileShader_updateTile__P81680, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -9617,7 +9641,7 @@ function TileShader_updateTile__P76313_mk(s) {
 
 
 
-function TileShader_updateTile_inline__P77032(s) {
+function TileShader_updateTile_inline__P82411(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -9637,7 +9661,7 @@ switch (step) {
     r0 = s.tmp_0;
     { step = 2; continue; }
   case 1:
-    s.tmp_3 = Shader_toScreenX__P76301_mk(s);
+    s.tmp_3 = Shader_toScreenX__P81668_mk(s);
     r0 = s.caps[0].fields["left"];
     s.tmp_3.arg0 = r0;
     s.callLocIdx = 123; s.pc = 13; return s.tmp_3;
@@ -9655,7 +9679,7 @@ switch (step) {
     r0 = s.tmp_5;
     { step = 4; continue; }
   case 3:
-    s.tmp_7 = Shader_toScreenX__P76301_mk(s);
+    s.tmp_7 = Shader_toScreenX__P81668_mk(s);
     r0 = s.caps[0].fields["right"];
     s.tmp_7.arg0 = r0;
     s.callLocIdx = 125; s.pc = 14; return s.tmp_7;
@@ -9671,7 +9695,7 @@ switch (step) {
     r0 = s.tmp_8;
     { step = 6; continue; }
   case 5:
-    s.tmp_10 = Shader_toScreenY__P76302_mk(s);
+    s.tmp_10 = Shader_toScreenY__P81669_mk(s);
     r0 = s.caps[0].fields["top"];
     s.tmp_10.arg0 = r0;
     s.callLocIdx = 126; s.pc = 15; return s.tmp_10;
@@ -9689,7 +9713,7 @@ switch (step) {
     r0 = s.tmp_12;
     { step = 8; continue; }
   case 7:
-    s.tmp_14 = Shader_toScreenY__P76302_mk(s);
+    s.tmp_14 = Shader_toScreenY__P81669_mk(s);
     r0 = s.caps[0].fields["bottom"];
     s.tmp_14.arg0 = r0;
     s.callLocIdx = 128; s.pc = 16; return s.tmp_14;
@@ -9706,14 +9730,14 @@ switch (step) {
     r0 = s.caps[0].fields["shader"];
     r0 = r0.fields["mapLayer"];
     s.tmp_16.arg0 = r0;
-    s.tmp_17 = Shader_toScreenX__P76301_mk(s);
+    s.tmp_17 = Shader_toScreenX__P81668_mk(s);
     r0 = s.caps[0].fields["left"];
     s.tmp_17.arg0 = r0;
     s.callLocIdx = 129; s.pc = 18; return s.tmp_17;
   case 18:
     r0 = s.retval;
     s.tmp_16.arg1 = r0;
-    s.tmp_18 = Shader_toScreenY__P76302_mk(s);
+    s.tmp_18 = Shader_toScreenY__P81669_mk(s);
     r0 = s.caps[0].fields["top"];
     s.tmp_18.arg0 = r0;
     s.callLocIdx = 130; s.pc = 19; return s.tmp_18;
@@ -9754,7 +9778,7 @@ switch (step) {
     s.tmp_0 = r0;
     r0 = pxsim_numops_toBoolDecr(s.tmp_0);
     if (!r0) { step = 11; continue; }
-    s.tmp_2 = TileShader_destroy__P76314_mk(s);
+    s.tmp_2 = TileShader_destroy__P81681_mk(s);
     s.tmp_2.arg0 = s.caps[0];
     s.callLocIdx = 132; s.pc = 20; return s.tmp_2;
   case 20:
@@ -9765,12 +9789,12 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-TileShader_updateTile_inline__P77032.info = {"start":10315,"length":577,"line":257,"column":81,"endLine":264,"endColumn":9,"fileName":"main.ts","functionName":"inline","argumentNames":[]}
+TileShader_updateTile_inline__P82411.info = {"start":10375,"length":577,"line":257,"column":81,"endLine":264,"endColumn":9,"fileName":"main.ts","functionName":"inline","argumentNames":[]}
 
-function TileShader_updateTile_inline__P77032_mk(s) {
+function TileShader_updateTile_inline__P82411_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: TileShader_updateTile_inline__P77032, depth: s.depth + 1,
+        parent: s, fn: TileShader_updateTile_inline__P82411, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -9801,7 +9825,7 @@ function TileShader_updateTile_inline__P77032_mk(s) {
 
 
 
-function TileShader_destroy__P76314(s) {
+function TileShader_destroy__P81681(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -9816,7 +9840,7 @@ switch (step) {
       s.lambdaArgs = null;
     }
     r0 = s.arg0;
-    if (!checkSubtype(r0, TileShader__C76305_VT)) failedCast(r0);
+    if (!checkSubtype(r0, TileShader__C81672_VT)) failedCast(r0);
     s.tmp_0 = control_EventContext_unregisterFrameHandler__P45406_mk(s);
     s.tmp_1 = game_currentScene__P48002_mk(s);
     s.callLocIdx = 134; s.pc = 2; return s.tmp_1;
@@ -9841,12 +9865,12 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-TileShader_destroy__P76314.info = {"start":10906,"length":213,"line":266,"column":4,"endLine":269,"endColumn":5,"fileName":"main.ts","functionName":"destroy","argumentNames":["this"]}
+TileShader_destroy__P81681.info = {"start":10966,"length":213,"line":266,"column":4,"endLine":269,"endColumn":5,"fileName":"main.ts","functionName":"destroy","argumentNames":["this"]}
 
-function TileShader_destroy__P76314_mk(s) {
+function TileShader_destroy__P81681_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: TileShader_destroy__P76314, depth: s.depth + 1,
+        parent: s, fn: TileShader_destroy__P81681, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -11932,7 +11956,7 @@ function tiles_TileMapData_scale__P47725_mk(s) {
 
 
 
-function Shader_constructor__P76304(s) {
+function Shader_constructor__P81671(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -11950,12 +11974,12 @@ switch (step) {
       s.lambdaArgs = null;
     }
     r0 = s.arg0;
-    if (!checkSubtype(r0, Shader__C76295_VT)) failedCast(r0);
+    if (!checkSubtype(r0, Shader__C81662_VT)) failedCast(r0);
     r0 = (s.arg0).fields["refreshShaderLayer"] = (s.arg2);
     r0 = (s.arg0).fields["zValue"] = (s.arg3);
     r0 = (s.arg0).fields["currentPack"] = (s.arg1);
     s.tmp_0 = r0 = s.arg0;
-    s.tmp_2 = ShaderPack_unpack__P76322_mk(s);
+    s.tmp_2 = ShaderPack_unpack__P81689_mk(s);
     r0 = s.arg0.fields["currentPack"];
     s.tmp_2.arg0 = r0;
     s.callLocIdx = 85; s.pc = 1; return s.tmp_2;
@@ -11975,12 +11999,12 @@ switch (step) {
     r0 = pxsim.control.createBuffer(120);
     s.tmp_1 = r0;
     r0 = (s.tmp_0).fields["shaderBuf"] = (s.tmp_1);
-    s.tmp_0 = Shader_runShader__P76296_mk(s);
+    s.tmp_0 = Shader_runShader__P81663_mk(s);
     s.tmp_0.arg0 = s.arg0;
     s.callLocIdx = 86; s.pc = 2; return s.tmp_0;
   case 2:
     r0 = s.retval;
-    s.tmp_0 = Shader_updateShaderLayer__P76298_mk(s);
+    s.tmp_0 = Shader_updateShaderLayer__P81665_mk(s);
     s.tmp_0.arg0 = s.arg0;
     s.callLocIdx = 87; s.pc = 3; return s.tmp_0;
   case 3:
@@ -11989,12 +12013,12 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-Shader_constructor__P76304.info = {"start":3015,"length":710,"line":75,"column":4,"endLine":94,"endColumn":5,"fileName":"main.ts","functionName":"inline","argumentNames":["this","currentPack","refreshShaderLayer","zValue"]}
+Shader_constructor__P81671.info = {"start":3015,"length":710,"line":75,"column":4,"endLine":94,"endColumn":5,"fileName":"main.ts","functionName":"inline","argumentNames":["this","currentPack","refreshShaderLayer","zValue"]}
 
-function Shader_constructor__P76304_mk(s) {
+function Shader_constructor__P81671_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: Shader_constructor__P76304, depth: s.depth + 1,
+        parent: s, fn: Shader_constructor__P81671, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -12009,7 +12033,7 @@ function Shader_constructor__P76304_mk(s) {
 
 
 
-function Shader_updateShaderLayer__P76298(s) {
+function Shader_updateShaderLayer__P81665(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -12024,8 +12048,8 @@ switch (step) {
       s.lambdaArgs = null;
     }
     r0 = s.arg0;
-    if (!checkSubtype(r0, Shader__C76295_VT)) failedCast(r0);
-    r0 = pxsim_pxtcore_mkAction(1, Shader_updateShaderLayer_inline__P76517);
+    if (!checkSubtype(r0, Shader__C81662_VT)) failedCast(r0);
+    r0 = pxsim_pxtcore_mkAction(1, Shader_updateShaderLayer_inline__P81884);
     s.tmp_0 = r0;
     r0 = pxsim_pxtrt_stclo(s.tmp_0, 0, s.arg0);
     s.tmp_1 = r0 = s.arg0;
@@ -12047,12 +12071,12 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-Shader_updateShaderLayer__P76298.info = {"start":4734,"length":261,"line":116,"column":4,"endLine":122,"endColumn":5,"fileName":"main.ts","functionName":"updateShaderLayer","argumentNames":["this"]}
+Shader_updateShaderLayer__P81665.info = {"start":4734,"length":261,"line":116,"column":4,"endLine":122,"endColumn":5,"fileName":"main.ts","functionName":"updateShaderLayer","argumentNames":["this"]}
 
-function Shader_updateShaderLayer__P76298_mk(s) {
+function Shader_updateShaderLayer__P81665_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: Shader_updateShaderLayer__P76298, depth: s.depth + 1,
+        parent: s, fn: Shader_updateShaderLayer__P81665, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -12066,7 +12090,7 @@ function Shader_updateShaderLayer__P76298_mk(s) {
 
 
 
-function Shader_updateShaderLayer_inline__P76517(s) {
+function Shader_updateShaderLayer_inline__P81884(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -12089,12 +12113,12 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-Shader_updateShaderLayer_inline__P76517.info = {"start":4848,"length":139,"line":117,"column":81,"endLine":121,"endColumn":9,"fileName":"main.ts","functionName":"inline","argumentNames":[]}
+Shader_updateShaderLayer_inline__P81884.info = {"start":4848,"length":139,"line":117,"column":81,"endLine":121,"endColumn":9,"fileName":"main.ts","functionName":"inline","argumentNames":[]}
 
-function Shader_updateShaderLayer_inline__P76517_mk(s) {
+function Shader_updateShaderLayer_inline__P81884_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: Shader_updateShaderLayer_inline__P76517, depth: s.depth + 1,
+        parent: s, fn: Shader_updateShaderLayer_inline__P81884, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -12104,7 +12128,7 @@ function Shader_updateShaderLayer_inline__P76517_mk(s) {
 
 
 
-function Shader_runShader__P76296(s) {
+function Shader_runShader__P81663(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -12119,8 +12143,8 @@ switch (step) {
       s.lambdaArgs = null;
     }
     r0 = s.arg0;
-    if (!checkSubtype(r0, Shader__C76295_VT)) failedCast(r0);
-    r0 = pxsim_pxtcore_mkAction(1, Shader_runShader_inline__P76447);
+    if (!checkSubtype(r0, Shader__C81662_VT)) failedCast(r0);
+    r0 = pxsim_pxtcore_mkAction(1, Shader_runShader_inline__P81814);
     s.tmp_0 = r0;
     r0 = pxsim_pxtrt_stclo(s.tmp_0, 0, s.arg0);
     s.tmp_1 = r0 = s.arg0;
@@ -12138,12 +12162,12 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-Shader_runShader__P76296.info = {"start":3731,"length":185,"line":95,"column":4,"endLine":99,"endColumn":5,"fileName":"main.ts","functionName":"runShader","argumentNames":["this"]}
+Shader_runShader__P81663.info = {"start":3731,"length":185,"line":95,"column":4,"endLine":99,"endColumn":5,"fileName":"main.ts","functionName":"runShader","argumentNames":["this"]}
 
-function Shader_runShader__P76296_mk(s) {
+function Shader_runShader__P81663_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: Shader_runShader__P76296, depth: s.depth + 1,
+        parent: s, fn: Shader_runShader__P81663, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -12156,7 +12180,7 @@ function Shader_runShader__P76296_mk(s) {
 
 
 
-function Shader_runShader_inline__P76447(s) {
+function Shader_runShader_inline__P81814(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -12171,7 +12195,7 @@ switch (step) {
       s.arg1 = (s.lambdaArgs[1]);
       s.lambdaArgs = null;
     }
-    s.tmp_0 = Shader_shadeImg__P76297_mk(s);
+    s.tmp_0 = Shader_shadeImg__P81664_mk(s);
     s.tmp_0.arg0 = s.caps[0];
     s.tmp_0.arg1 = s.arg0;
     s.callLocIdx = 88; s.pc = 1; return s.tmp_0;
@@ -12181,12 +12205,12 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-Shader_runShader_inline__P76447.info = {"start":3814,"length":94,"line":96,"column":58,"endLine":98,"endColumn":9,"fileName":"main.ts","functionName":"inline","argumentNames":["screenImg","camera"]}
+Shader_runShader_inline__P81814.info = {"start":3814,"length":94,"line":96,"column":58,"endLine":98,"endColumn":9,"fileName":"main.ts","functionName":"inline","argumentNames":["screenImg","camera"]}
 
-function Shader_runShader_inline__P76447_mk(s) {
+function Shader_runShader_inline__P81814_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: Shader_runShader_inline__P76447, depth: s.depth + 1,
+        parent: s, fn: Shader_runShader_inline__P81814, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   arg0: undefined,
@@ -12197,7 +12221,7 @@ function Shader_runShader_inline__P76447_mk(s) {
 
 
 
-function Shader_shadeImg__P76297(s) {
+function Shader_shadeImg__P81664(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -12207,18 +12231,18 @@ if (yieldSteps-- < 0 && maybeYield(s, step, r0) || runtime !== pxsim.runtime) re
 switch (step) {
   case 0:
 
-    s.x___76454 = undefined;
-    s.y___76473 = undefined;
+    s.x___81821 = undefined;
+    s.y___81840 = undefined;
     if (s.lambdaArgs) {
       s.arg0 = (s.lambdaArgs[0]);
       s.arg1 = (s.lambdaArgs[1]);
       s.lambdaArgs = null;
     }
     r0 = s.arg0;
-    if (!checkSubtype(r0, Shader__C76295_VT)) failedCast(r0);
-    s.x___76454 = (0);
+    if (!checkSubtype(r0, Shader__C81662_VT)) failedCast(r0);
+    s.x___81821 = (0);
   case 1:
-    s.tmp_1 = r0 = s.x___76454;
+    s.tmp_1 = r0 = s.x___81821;
     r0 = pxsim_ImageMethods.width(s.arg1);
     s.tmp_2 = r0;
     r0 = (s.tmp_1 < s.tmp_2);
@@ -12227,15 +12251,15 @@ switch (step) {
     if (!r0) { step = 6; continue; }
     r0 = s.arg0.fields["renderBuf"];
     s.tmp_3 = r0;
-    r0 = pxsim_ImageMethods.getRows(s.arg1, s.x___76454, s.tmp_3);
+    r0 = pxsim_ImageMethods.getRows(s.arg1, s.x___81821, s.tmp_3);
     r0 = s.arg0.fields["mapLayer"];
     s.tmp_0 = r0;
     r0 = s.arg0.fields["shaderBuf"];
     s.tmp_1 = r0;
-    r0 = pxsim_ImageMethods.getRows(s.tmp_0, s.x___76454, s.tmp_1);
-    s.y___76473 = (0);
+    r0 = pxsim_ImageMethods.getRows(s.tmp_0, s.x___81821, s.tmp_1);
+    s.y___81840 = (0);
   case 2:
-    s.tmp_1 = r0 = s.y___76473;
+    s.tmp_1 = r0 = s.y___81840;
     r0 = pxsim_ImageMethods.height(s.arg1);
     s.tmp_2 = r0;
     r0 = (s.tmp_1 < s.tmp_2);
@@ -12244,51 +12268,51 @@ switch (step) {
     if (!r0) { step = 5; continue; }
     r0 = s.arg0.fields["shaderBuf"];
     s.tmp_4 = r0;
-    r0 = pxsim.BufferMethods.getByte(s.tmp_4, s.y___76473);
+    r0 = pxsim.BufferMethods.getByte(s.tmp_4, s.y___81840);
     s.tmp_3 = r0;
     r0 = pxsim_numops_toBoolDecr(s.tmp_3);
     if (!r0) { step = 3; continue; }
     r0 = s.arg0.fields["renderBuf"];
     s.tmp_5 = r0;
-    s.tmp_6 = r0 = s.y___76473;
+    s.tmp_6 = r0 = s.y___81840;
     r0 = s.arg0.fields["decompShader"];
     s.tmp_9 = r0;
     r0 = s.arg0.fields["shaderBuf"];
     s.tmp_11 = r0;
-    r0 = pxsim.BufferMethods.getByte(s.tmp_11, s.y___76473);
+    r0 = pxsim.BufferMethods.getByte(s.tmp_11, s.y___81840);
     s.tmp_10 = r0;
     r0 = pxsim_Array__getAt(s.tmp_9, s.tmp_10);
     s.tmp_8 = r0;
     r0 = s.arg0.fields["renderBuf"];
     s.tmp_13 = r0;
-    r0 = pxsim.BufferMethods.getByte(s.tmp_13, s.y___76473);
+    r0 = pxsim.BufferMethods.getByte(s.tmp_13, s.y___81840);
     s.tmp_12 = r0;
     r0 = pxsim.BufferMethods.getByte(s.tmp_8, s.tmp_12);
     s.tmp_7 = r0;
     r0 = pxsim.BufferMethods.setByte(s.tmp_5, s.tmp_6, s.tmp_7);
   case 3:
   case 4:
-    r0 = (s.y___76473 + 1);
-    s.y___76473 = (r0);
+    r0 = (s.y___81840 + 1);
+    s.y___81840 = (r0);
     { step = 2; continue; }
   case 5:
     r0 = s.arg0.fields["renderBuf"];
     s.tmp_0 = r0;
-    r0 = pxsim_ImageMethods.setRows(s.arg1, s.x___76454, s.tmp_0);
-    r0 = (s.x___76454 + 1);
-    s.x___76454 = (r0);
+    r0 = pxsim_ImageMethods.setRows(s.arg1, s.x___81821, s.tmp_0);
+    r0 = (s.x___81821 + 1);
+    s.x___81821 = (r0);
     { step = 1; continue; }
   case 6:
     r0 = undefined;
     return leave(s, r0)
   default: oops()
 } } }
-Shader_shadeImg__P76297.info = {"start":3922,"length":806,"line":100,"column":4,"endLine":115,"endColumn":5,"fileName":"main.ts","functionName":"shadeImg","argumentNames":["this","img"]}
+Shader_shadeImg__P81664.info = {"start":3922,"length":806,"line":100,"column":4,"endLine":115,"endColumn":5,"fileName":"main.ts","functionName":"shadeImg","argumentNames":["this","img"]}
 
-function Shader_shadeImg__P76297_mk(s) {
+function Shader_shadeImg__P81664_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: Shader_shadeImg__P76297, depth: s.depth + 1,
+        parent: s, fn: Shader_shadeImg__P81664, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -12304,8 +12328,8 @@ function Shader_shadeImg__P76297_mk(s) {
   tmp_11: undefined,
   tmp_12: undefined,
   tmp_13: undefined,
-  x___76454: undefined,
-  y___76473: undefined,
+  x___81821: undefined,
+  y___81840: undefined,
   arg0: undefined,
   arg1: undefined,
 } }
@@ -12314,7 +12338,7 @@ function Shader_shadeImg__P76297_mk(s) {
 
 
 
-function ShaderPack_unpack__P76322(s) {
+function ShaderPack_unpack__P81689(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -12324,23 +12348,23 @@ if (yieldSteps-- < 0 && maybeYield(s, step, r0) || runtime !== pxsim.runtime) re
 switch (step) {
   case 0:
 
-    s.buf___76338 = undefined;
-    s.i___76342 = undefined;
+    s.buf___81705 = undefined;
+    s.i___81709 = undefined;
     if (s.lambdaArgs) {
       s.arg0 = (s.lambdaArgs[0]);
       s.lambdaArgs = null;
     }
     r0 = s.arg0;
-    if (!checkSubtype(r0, ShaderPack__C76321_VT)) failedCast(r0);
+    if (!checkSubtype(r0, ShaderPack__C81688_VT)) failedCast(r0);
     r0 = pxsim_Array__mk();
     s.tmp_0 = r0;
     r0 = pxsim.control.createBuffer(0);
     s.tmp_1 = r0;
     r0 = pxsim_Array__push(s.tmp_0, s.tmp_1);
-    s.buf___76338 = (s.tmp_0);
-    s.i___76342 = (0);
+    s.buf___81705 = (s.tmp_0);
+    s.i___81709 = (0);
   case 1:
-    s.tmp_1 = r0 = s.i___76342;
+    s.tmp_1 = r0 = s.i___81709;
     r0 = s.arg0.fields["shaderColorSets"];
     s.tmp_3 = r0;
     r0 = pxsim_Array__length(s.tmp_3);
@@ -12349,31 +12373,31 @@ switch (step) {
     s.tmp_0 = r0;
     r0 = pxsim_numops_toBoolDecr(s.tmp_0);
     if (!r0) { step = 2; continue; }
-    s.tmp_4 = r0 = s.buf___76338;
+    s.tmp_4 = r0 = s.buf___81705;
     s.tmp_6 = Buffer_fromArray__P45212_mk(s);
     r0 = s.arg0.fields["shaderColorSets"];
     s.tmp_7 = r0;
-    r0 = pxsim_Array__getAt(s.tmp_7, s.i___76342);
+    r0 = pxsim_Array__getAt(s.tmp_7, s.i___81709);
     s.tmp_6.arg0 = r0;
     s.callLocIdx = 83; s.pc = 3; return s.tmp_6;
   case 3:
     r0 = s.retval;
     s.tmp_5 = r0;
     r0 = pxsim_Array__push(s.tmp_4, s.tmp_5);
-    r0 = (s.i___76342 + 1);
-    s.i___76342 = (r0);
+    r0 = (s.i___81709 + 1);
+    s.i___81709 = (r0);
     { step = 1; continue; }
   case 2:
-    r0 = s.buf___76338;
+    r0 = s.buf___81705;
     return leave(s, r0)
   default: oops()
 } } }
-ShaderPack_unpack__P76322.info = {"start":252,"length":400,"line":7,"column":4,"endLine":17,"endColumn":5,"fileName":"main.ts","functionName":"unpack","argumentNames":["this"]}
+ShaderPack_unpack__P81689.info = {"start":252,"length":400,"line":7,"column":4,"endLine":17,"endColumn":5,"fileName":"main.ts","functionName":"unpack","argumentNames":["this"]}
 
-function ShaderPack_unpack__P76322_mk(s) {
+function ShaderPack_unpack__P81689_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: ShaderPack_unpack__P76322, depth: s.depth + 1,
+        parent: s, fn: ShaderPack_unpack__P81689, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -12383,8 +12407,8 @@ function ShaderPack_unpack__P76322_mk(s) {
   tmp_5: undefined,
   tmp_6: undefined,
   tmp_7: undefined,
-  buf___76338: undefined,
-  i___76342: undefined,
+  buf___81705: undefined,
+  i___81709: undefined,
   arg0: undefined,
 } }
 
@@ -12600,7 +12624,7 @@ function scene_Background_image__P47678_mk(s) {
 
 
 
-function ShaderPack_get__P76294(s) {
+function ShaderPack_get__P81661(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -12610,8 +12634,8 @@ if (yieldSteps-- < 0 && maybeYield(s, step, r0) || runtime !== pxsim.runtime) re
 switch (step) {
   case 0:
 
-    s.packNames___76376 = undefined;
-    s.packs___76378 = undefined;
+    s.packNames___81743 = undefined;
+    s.packs___81745 = undefined;
     if (s.lambdaArgs) {
       s.arg0 = (s.lambdaArgs[0]);
       s.lambdaArgs = null;
@@ -12619,8 +12643,8 @@ switch (step) {
     r0 = pxsim_Array__mk();
     s.tmp_0 = r0;
     r0 = pxsim_Array__push(s.tmp_0, "default");
-    s.packNames___76376 = (s.tmp_0);
-    r0 = pxsim_pxtcore_mkClassInstance(ShaderPack__C76321_VT);
+    s.packNames___81743 = (s.tmp_0);
+    r0 = pxsim_pxtcore_mkClassInstance(ShaderPack__C81688_VT);
     s.tmp_0 = r0;
     r0 = pxsim_Array__mk();
     s.tmp_1 = r0;
@@ -12826,7 +12850,7 @@ switch (step) {
     r0 = pxsim_Array__push(s.tmp_12, 12);
     r0 = pxsim_Array__push(s.tmp_12, 12);
     r0 = pxsim_Array__push(s.tmp_3, s.tmp_12);
-    s.tmp_13 = ShaderPack_constructor__P76325_mk(s);
+    s.tmp_13 = ShaderPack_constructor__P81692_mk(s);
     s.tmp_13.arg0 = s.tmp_0;
     s.tmp_13.arg1 = s.tmp_1;
     s.tmp_13.arg2 = s.tmp_3;
@@ -12836,20 +12860,20 @@ switch (step) {
     r0 = pxsim_Array__mk();
     s.tmp_14 = r0;
     r0 = pxsim_Array__push(s.tmp_14, s.tmp_0);
-    s.packs___76378 = (s.tmp_14);
-    s.tmp_0 = r0 = s.packs___76378;
-    r0 = pxsim_Array_.indexOf(s.packNames___76376, s.arg0, undefined);
+    s.packs___81745 = (s.tmp_14);
+    s.tmp_0 = r0 = s.packs___81745;
+    r0 = pxsim_Array_.indexOf(s.packNames___81743, s.arg0, undefined);
     s.tmp_1 = r0;
     r0 = pxsim_Array__getAt(s.tmp_0, s.tmp_1);
     return leave(s, r0)
   default: oops()
 } } }
-ShaderPack_get__P76294.info = {"start":841,"length":1617,"line":24,"column":4,"endLine":54,"endColumn":5,"fileName":"main.ts","functionName":"get","argumentNames":["shader"]}
+ShaderPack_get__P81661.info = {"start":841,"length":1617,"line":24,"column":4,"endLine":54,"endColumn":5,"fileName":"main.ts","functionName":"get","argumentNames":["shader"]}
 
-function ShaderPack_get__P76294_mk(s) {
+function ShaderPack_get__P81661_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: ShaderPack_get__P76294, depth: s.depth + 1,
+        parent: s, fn: ShaderPack_get__P81661, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -12866,8 +12890,8 @@ function ShaderPack_get__P76294_mk(s) {
   tmp_12: undefined,
   tmp_13: undefined,
   tmp_14: undefined,
-  packNames___76376: undefined,
-  packs___76378: undefined,
+  packNames___81743: undefined,
+  packs___81745: undefined,
   arg0: undefined,
 } }
 
@@ -12875,7 +12899,7 @@ function ShaderPack_get__P76294_mk(s) {
 
 
 
-function ShaderPack_constructor__P76325(s) {
+function ShaderPack_constructor__P81692(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -12892,19 +12916,19 @@ switch (step) {
       s.lambdaArgs = null;
     }
     r0 = s.arg0;
-    if (!checkSubtype(r0, ShaderPack__C76321_VT)) failedCast(r0);
+    if (!checkSubtype(r0, ShaderPack__C81688_VT)) failedCast(r0);
     r0 = (s.arg0).fields["colorNames"] = (s.arg1);
     r0 = (s.arg0).fields["shaderColorSets"] = (s.arg2);
     r0 = undefined;
     return leave(s, r0)
   default: oops()
 } } }
-ShaderPack_constructor__P76325.info = {"start":94,"length":152,"line":3,"column":4,"endLine":6,"endColumn":5,"fileName":"main.ts","functionName":"inline","argumentNames":["this","colorNames","shaderColorSets"]}
+ShaderPack_constructor__P81692.info = {"start":94,"length":152,"line":3,"column":4,"endLine":6,"endColumn":5,"fileName":"main.ts","functionName":"inline","argumentNames":["this","colorNames","shaderColorSets"]}
 
-function ShaderPack_constructor__P76325_mk(s) {
+function ShaderPack_constructor__P81692_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: ShaderPack_constructor__P76325, depth: s.depth + 1,
+        parent: s, fn: ShaderPack_constructor__P81692, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   arg0: undefined,
   arg1: undefined,
@@ -45687,7 +45711,7 @@ const tiles_Location__C47696_VT = mkVTable({
     "tileSet": tiles_Location_tileSet__P47707,
   },
 });
-const ShaderPack__C76321_VT = mkVTable({
+const ShaderPack__C81688_VT = mkVTable({
   name: "ShaderPack",
   numFields: 2,
   classNo: 22,
@@ -45700,11 +45724,11 @@ const ShaderPack__C76321_VT = mkVTable({
     "set/colorNames": null,
     "shaderColorSets": null,
     "set/shaderColorSets": null,
-    "unpack": ShaderPack_unpack__P76322,
-    "get": ShaderPack_get__P76294,
+    "unpack": ShaderPack_unpack__P81689,
+    "get": ShaderPack_get__P81661,
   },
 });
-const Shader__C76295_VT = mkVTable({
+const Shader__C81662_VT = mkVTable({
   name: "Shader",
   numFields: 9,
   classNo: 23,
@@ -45731,14 +45755,14 @@ const Shader__C76295_VT = mkVTable({
     "set/shader": null,
     "updater": null,
     "set/updater": null,
-    "runShader": Shader_runShader__P76296,
-    "shadeImg": Shader_shadeImg__P76297,
-    "updateShaderLayer": Shader_updateShaderLayer__P76298,
-    "toScreenX": Shader_toScreenX__P76301,
-    "toScreenY": Shader_toScreenY__P76302,
+    "runShader": Shader_runShader__P81663,
+    "shadeImg": Shader_shadeImg__P81664,
+    "updateShaderLayer": Shader_updateShaderLayer__P81665,
+    "toScreenX": Shader_toScreenX__P81668,
+    "toScreenY": Shader_toScreenY__P81669,
   },
 });
-const ShaderAttachSprite__C76316_VT = mkVTable({
+const ShaderAttachSprite__C81683_VT = mkVTable({
   name: "ShaderAttachSprite",
   numFields: 10,
   classNo: 24,
@@ -45767,12 +45791,12 @@ const ShaderAttachSprite__C76316_VT = mkVTable({
     "set/yOffset": null,
     "updater": null,
     "set/updater": null,
-    "updateLightSource": ShaderAttachSprite_updateLightSource__P76317,
-    "updateFlux": ShaderAttachSprite_updateFlux__P76318,
-    "destroy": ShaderAttachSprite_destroy__P76319,
+    "updateLightSource": ShaderAttachSprite_updateLightSource__P81684,
+    "updateFlux": ShaderAttachSprite_updateFlux__P81685,
+    "destroy": ShaderAttachSprite_destroy__P81686,
   },
 });
-const TileShader__C76305_VT = mkVTable({
+const TileShader__C81672_VT = mkVTable({
   name: "TileShader",
   numFields: 9,
   classNo: 25,
@@ -45799,8 +45823,8 @@ const TileShader__C76305_VT = mkVTable({
     "set/bottom": null,
     "updater": null,
     "set/updater": null,
-    "updateTile": TileShader_updateTile__P76313,
-    "destroy": TileShader_destroy__P76314,
+    "updateTile": TileShader_updateTile__P81680,
+    "destroy": TileShader_destroy__P81681,
   },
 });
 const scene_Camera__C47784_VT = mkVTable({
@@ -47011,5 +47035,5 @@ const sprites_BaseSpriteSayRenderer__C47262_VT = mkVTable({
 
 const breakpoints = setupDebugger(1, ["transparency16___49373","sp1___76101","shader___76107","mySprite___76129","mySprite2___76143"])
 
-return _main___P77275
+return _main___P82602
 })
