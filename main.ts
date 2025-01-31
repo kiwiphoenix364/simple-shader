@@ -171,19 +171,23 @@ class ShaderAttachSprite {
     }
     protected updateShaderPos() {
         this.updater = game.currentScene().eventContext.registerFrameHandler(24, () => {
-            this.x = this.sprite.x + this.xOffset
-            this.y = this.sprite.y + this.yOffset
-            this.left = this.x - this.image.width / 2
-            this.top = this.y - this.image.height / 2
-            this.right = this.left + this.image.width
-            this.bottom = this.top + this.image.height
-            if (this.shader.mapLayer === null) {
-                this.destroy()
-            }
-            if (Shader.toScreenX(this.left) < scene.screenWidth() && Shader.toScreenX(this.right) > 0 && Shader.toScreenY(this.top) < scene.screenHeight() && Shader.toScreenY(this.bottom) > 0) {
-                helpers.imageBlit(this.shader.mapLayer, Shader.toScreenX(this.left), Shader.toScreenY(this.top), this.image.width, this.image.height, this.image, 0, 0, this.image.width, this.image.height, true, false)
-            }
+            this.updateFunction()
         })
+    }
+    protected updateFunction() {
+        this.x = this.sprite.x + this.xOffset
+        this.y = this.sprite.y + this.yOffset
+        this.left = this.x - this.image.width / 2
+        this.top = this.y - this.image.height / 2
+        this.right = this.left + this.image.width
+        this.bottom = this.top + this.image.height
+        if (this.shader.mapLayer === null) {
+            this.destroy()
+            return
+        }
+        if (Shader.toScreenX(this.left) < scene.screenWidth() && Shader.toScreenX(this.right) > 0 && Shader.toScreenY(this.top) < scene.screenHeight() && Shader.toScreenY(this.bottom) > 0) {
+            helpers.imageBlit(this.shader.mapLayer, Shader.toScreenX(this.left), Shader.toScreenY(this.top), this.image.width, this.image.height, this.image, 0, 0, this.image.width, this.image.height, true, false)
+        }
     }
     public destroy() {
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
@@ -217,16 +221,20 @@ class CircleShaderAttachSprite {
         })
     }
     protected updateLightSource() {
+        this.updateFunction()
+    }
+    protected updateFunction() {
         this.updater = game.currentScene().eventContext.registerFrameHandler(24, () => {
             if (this.shader.mapLayer === null) {
                 this.destroy()
+                return
             }
             if (Shader.toScreenX(this.sprite.x - this.currentRad + this.xOffset) < scene.screenWidth() && Shader.toScreenX(this.sprite.x + this.currentRad + this.xOffset) > 0 && Shader.toScreenY(this.sprite.y - this.currentRad + this.yOffset) < scene.screenHeight() && Shader.toScreenY(this.sprite.y + this.currentRad + this.yOffset) > 0) {
                 if (this.smoothness != 0) {
                     this.updateFlux()
                 }
                 this.shader.mapLayer.fillCircle(Shader.toScreenX(this.sprite.x) + this.xOffset, Shader.toScreenY(this.sprite.y) + this.yOffset, Math.round(this.currentRad), this.tint)
-            }  
+            }
         })
     }
     protected updateFlux() {
@@ -303,13 +311,17 @@ class TileShader {
     }    
     protected updateTile() {
         this.updater = game.currentScene().eventContext.registerFrameHandler(23, () => {
-            if (this.shader.mapLayer === null) {
-                this.destroy()
-            }
-            if (Shader.toScreenX(this.left) < scene.screenWidth() && Shader.toScreenX(this.right) > 0 && Shader.toScreenY(this.top) < scene.screenHeight() && Shader.toScreenY(this.bottom) > 0) {
-                helpers.imageBlit(this.shader.mapLayer, Shader.toScreenX(this.left), Shader.toScreenY(this.top), this.image.width, this.image.height, this.image, 0, 0, this.image.width, this.image.height, true, false)
-            }
+            this.updateFunction()
         })
+    }
+    protected updateFunction() {
+        if(this.shader.mapLayer === null) {
+            this.destroy()
+            return
+        }
+        if (Shader.toScreenX(this.left) < scene.screenWidth() && Shader.toScreenX(this.right) > 0 && Shader.toScreenY(this.top) < scene.screenHeight() && Shader.toScreenY(this.bottom) > 0) {
+            helpers.imageBlit(this.shader.mapLayer, Shader.toScreenX(this.left), Shader.toScreenY(this.top), this.image.width, this.image.height, this.image, 0, 0, this.image.width, this.image.height, true, false)
+        }
     }
     public destroy() {
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
