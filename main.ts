@@ -177,11 +177,11 @@ class ShaderAttachSprite {
             this.top = this.y - this.image.height / 2
             this.right = this.left + this.image.width
             this.bottom = this.top + this.image.height
-            if (this.shader.mapLayer != null && Shader.toScreenX(this.left) < scene.screenWidth() && Shader.toScreenX(this.right) > 0 && Shader.toScreenY(this.top) < scene.screenHeight() && Shader.toScreenY(this.bottom) > 0) {
-                helpers.imageBlit(this.shader.mapLayer, Shader.toScreenX(this.left), Shader.toScreenY(this.top), this.image.width, this.image.height, this.image, 0, 0, this.image.width, this.image.height, true, false)
-            }
             if (this.shader.mapLayer === null) {
                 this.destroy()
+            }
+            if (Shader.toScreenX(this.left) < scene.screenWidth() && Shader.toScreenX(this.right) > 0 && Shader.toScreenY(this.top) < scene.screenHeight() && Shader.toScreenY(this.bottom) > 0) {
+                helpers.imageBlit(this.shader.mapLayer, Shader.toScreenX(this.left), Shader.toScreenY(this.top), this.image.width, this.image.height, this.image, 0, 0, this.image.width, this.image.height, true, false)
             }
         })
     }
@@ -218,15 +218,15 @@ class CircleShaderAttachSprite {
     }
     protected updateLightSource() {
         this.updater = game.currentScene().eventContext.registerFrameHandler(24, () => {
+            if (this.shader.mapLayer === null) {
+                this.destroy()
+            }
             if (Shader.toScreenX(this.sprite.x - this.currentRad + this.xOffset) < scene.screenWidth() && Shader.toScreenX(this.sprite.x + this.currentRad + this.xOffset) > 0 && Shader.toScreenY(this.sprite.y - this.currentRad + this.yOffset) < scene.screenHeight() && Shader.toScreenY(this.sprite.y + this.currentRad + this.yOffset) > 0) {
-                if (this.shader.mapLayer != null) {
+                if (this.smoothness != 0) {
                     this.updateFlux()
-                    this.shader.mapLayer.fillCircle(Shader.toScreenX(this.sprite.x) + this.xOffset, Shader.toScreenY(this.sprite.y) + this.yOffset, Math.round(this.currentRad), this.tint)
                 }
-                if (this.shader.mapLayer === null) {
-                    this.destroy()
-                }
-            }   
+                this.shader.mapLayer.fillCircle(Shader.toScreenX(this.sprite.x) + this.xOffset, Shader.toScreenY(this.sprite.y) + this.yOffset, Math.round(this.currentRad), this.tint)
+            }  
         })
     }
     protected updateFlux() {
@@ -303,11 +303,11 @@ class TileShader {
     }    
     protected updateTile() {
         this.updater = game.currentScene().eventContext.registerFrameHandler(23, () => {
-            if (this.shader.mapLayer != null && Shader.toScreenX(this.left) < scene.screenWidth() && Shader.toScreenX(this.right) > 0 && Shader.toScreenY(this.top) < scene.screenHeight() && Shader.toScreenY(this.bottom) > 0) {
-                helpers.imageBlit(this.shader.mapLayer, Shader.toScreenX(this.left), Shader.toScreenY(this.top), this.image.width, this.image.height, this.image, 0, 0, this.image.width, this.image.height, true, false)
-            }
             if (this.shader.mapLayer === null) {
                 this.destroy()
+            }
+            if (Shader.toScreenX(this.left) < scene.screenWidth() && Shader.toScreenX(this.right) > 0 && Shader.toScreenY(this.top) < scene.screenHeight() && Shader.toScreenY(this.bottom) > 0) {
+                helpers.imageBlit(this.shader.mapLayer, Shader.toScreenX(this.left), Shader.toScreenY(this.top), this.image.width, this.image.height, this.image, 0, 0, this.image.width, this.image.height, true, false)
             }
         })
     }
