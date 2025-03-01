@@ -72,7 +72,7 @@ class Shader {
     protected zValue: number
     //Renderable for shader
     private shader: scene.Renderable
-    protected updater: any
+    protected updater: control.FrameCallback
     constructor(currentPack: ShaderPack, refreshShaderLayer: boolean, zValue = 0) {
         /*
         //build lookup table
@@ -157,7 +157,7 @@ class ShaderAttachSprite {
     protected top: number
     protected right: number
     protected bottom: number
-    protected updater: any
+    protected updater: control.FrameCallback
     constructor(shader: Shader, sprite: Sprite, image: Image, xOffset = 0, yOffset = 0) {
         this.shader = shader
         this.sprite = sprite
@@ -204,7 +204,7 @@ class CircleShaderAttachSprite {
     public smoothness: number
     public xOffset: number
     public yOffset: number
-    protected updater: any
+    protected updater: control.FrameCallback
     constructor(shader: Shader, sprite: Sprite, xOffset = 0, yOffset = 0, tint = 1, radius = 5, flux = 0, smoothness = 1) {
         this.shader = shader
         this.sprite = sprite
@@ -259,7 +259,7 @@ class TileShader {
     protected top: number
     protected right: number
     protected bottom: number
-    protected updater: any
+    protected updater: control.FrameCallback
     constructor(shader: Shader, image: Image, x: number, y: number) {
         this.image = image
         this.shader = shader
