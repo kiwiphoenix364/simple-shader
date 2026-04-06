@@ -116,7 +116,7 @@ class Shader {
     }
     protected updateShaderLayer() {
         this.updater = game.currentScene().eventContext.registerFrameHandler(17, () => {
-            if (this.refreshShaderLayer = true) {
+            if (this.refreshShaderLayer === true) {
                 this.mapLayer = image.create(160,120)
             }
         })
