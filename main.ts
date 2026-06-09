@@ -19,6 +19,9 @@ class ShaderPack {
     public getTintIdx (name: string) {
         return this.colorNames.indexOf(name) + 1
     }
+    public getShaderShade(name: string) {
+        return Buffer.fromArray(this.shaderColorSets[this.colorNames.indexOf(name)])
+    }
     public destroy() {
         this.colorNames = this.shaderColorSets = null
     }
@@ -324,5 +327,95 @@ class TileShader {
     public destroy() {
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
         this.shader = this.image = this.x = this.y = this.left = this.top = this.right = this.bottom = this.updater = null
+    }
+}
+class LiteShader {
+    //Declare initial variables
+    //lookup table
+    //lkupx16: Buffer
+    //Shader pack
+    public refreshShaderLayer: boolean
+    protected currentPack: ShaderPack
+    //Decompiled shader pack
+    protected decompShader: Buffer[]
+    //Shader augment image
+    protected mapLayer: Image
+    //Render and shader buffers
+    private renderBuf: Buffer
+    private shaderBuf: Buffer
+    //zValue
+    protected zValue: number
+    //Renderable for shader
+    public shade: Buffer
+    private shader: scene.Renderable
+    protected updater: control.FrameCallback
+    public unusedColor: number
+    constructor(singleShade: Buffer, refreshShaderLayer: boolean, zValue = 0) {
+        /*
+        //build lookup table
+        this.lkupx16 = Buffer.create(16)
+        for (let i = 0; i < 16; i++) {
+            this.lkupx16[i] = (i * 16)
+        }
+        */
+        this.refreshShaderLayer = refreshShaderLayer
+        this.zValue = zValue
+        this.shade = singleShade
+        //create buffer image
+        this.mapLayer = image.create(scene.screenWidth(), scene.screenHeight())
+        this.runShader()
+        this.updateShaderLayer()
+        this.unusedColor = 15
+        for (let i = 1; i < 16; i++) {
+            if (this.shade[i] == i)  {
+                this.unusedColor = i
+            }
+        }
+    }
+    protected runShader() {
+        this.shader = scene.createRenderable(this.zValue, (screenImg: Image, camera: scene.Camera) => {
+            this.shadeImg(screenImg)
+        })
+    }
+    protected shadeImg(img: Image) {
+        let tempImg = img.clone()
+        tempImg.mapRect(0, 0, scene.screenWidth(), scene.screenHeight(), this.shade)
+        tempImg.drawTransparentImage(this.mapLayer, 0, 0)
+        tempImg.replace(this.unusedColor, 0)
+        img.drawTransparentImage(tempImg, 0, 0)
+    }
+    protected updateShaderLayer() {
+        this.updater = game.currentScene().eventContext.registerFrameHandler(17, () => {
+            if (this.refreshShaderLayer === true) {
+                this.mapLayer = image.create(160, 120)
+            }
+        })
+    }
+    public setMapLayerRaw(mapLayer: Image) {
+        this.mapLayer = mapLayer
+    }
+    public setMapLayer(mapLayer: Image) {
+        this.mapLayer = mapLayer
+        this.mapLayer.replace(1, this.unusedColor)
+    }
+    public setNewShade(shade: Buffer) {
+        this.shade = shade
+        this.unusedColor = 15
+        for (let i = 1; i < 16; i++) {
+            if (this.shade[i] == i) {
+                this.unusedColor = i
+            }
+        }
+    }
+    static toScreenX(x: number) {
+        return x - scene.cameraProperty(CameraProperty.Left)
+    }
+    static toScreenY(y: number) {
+        return y - scene.cameraProperty(CameraProperty.Top)
+    }
+    public destroy() {
+        this.shader.destroy()
+        game.currentScene().eventContext.unregisterFrameHandler(this.updater)
+        this.refreshShaderLayer = this.currentPack = this.decompShader = this.mapLayer = this.renderBuf = this.shaderBuf = this.zValue = this.updater = null
     }
 }
