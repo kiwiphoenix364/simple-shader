@@ -10,7 +10,7 @@ class ShaderPack {
         //for (let i = 0; i < this.shaderColorSets.length; i++) {
         //    buf = buf.concat(this.shaderColorSets[i])
         //}
-        let buf = [Buffer.create(0)]
+        let buf: Buffer[] = []
         for (let i = 0; i < this.shaderColorSets.length; i++) {
             buf.push(Buffer.fromArray(this.shaderColorSets[i]))
         }
@@ -87,9 +87,9 @@ class Shader {
         //Unpack Shaderpack
         this.decompShader = this.currentPack.unpack()
         //create buffer image
-        this.mapLayer = image.create(160, 120)
-        this.renderBuf = Buffer.create(120)
-        this.shaderBuf = Buffer.create(120)
+        this.mapLayer = image.create(scene.screenWidth(), scene.screenHeight())
+        this.renderBuf = Buffer.create(scene.screenHeight() * scene.screenWidth())
+        this.shaderBuf = Buffer.create(scene.screenHeight() * scene.screenWidth())
         this.runShader()
         this.updateShaderLayer()
     }
@@ -99,20 +99,18 @@ class Shader {
         })
     }
     protected shadeImg(img:Image) {
-        for (let x = 0; x < img.width; ++x) {
-            img.getRows(x, this.renderBuf)
-            this.mapLayer.getRows(x, this.shaderBuf)
-            for (let y = 0; y < img.height; ++y) {
-                if (this.shaderBuf[y]) {
-                    this.renderBuf[y] = this.decompShader[this.shaderBuf[y]][this.renderBuf[y]]
-                    //use alternate compilation format
-                    //this.renderBuf[y] = (this.decompShader[this.renderBuf[y] + Math.imul(this.shaderBuf[y], 16)])
-                    //alt comp format + lookup table
-                    //this.renderBuf[y] = (this.decompShader[this.renderBuf[y] + this.lkupx16[this.shaderBuf[y]]])
-                }
+        img.getRows(0, this.renderBuf)
+        this.mapLayer.getRows(0, this.shaderBuf)
+        for (let x = 0; x < img.width * img.height; ++x) {
+            if (this.shaderBuf[x]) {
+                this.renderBuf[x] = this.decompShader[this.shaderBuf[x]][this.renderBuf[x]]
+                //use alternate compilation format
+                //this.renderBuf[y] = (this.decompShader[this.renderBuf[y] + Math.imul(this.shaderBuf[y], 16)])
+                //alt comp format + lookup table
+                //this.renderBuf[y] = (this.decompShader[this.renderBuf[y] + this.lkupx16[this.shaderBuf[y]]])
             }
-            img.setRows(x, this.renderBuf)
         }
+        img.setRows(0, this.renderBuf)
     }
     protected updateShaderLayer() {
         this.updater = game.currentScene().eventContext.registerFrameHandler(17, () => {
