@@ -1,6 +1,6 @@
 class ShaderPack {
     private colorNames: string[]
-    private shaderColorSets: any[]
+    private shaderColorSets: number[][]
     constructor(colorNames: string[], shaderColorSets: any[]) {
         this.colorNames = colorNames
         this.shaderColorSets = shaderColorSets
@@ -10,9 +10,9 @@ class ShaderPack {
         //for (let i = 0; i < this.shaderColorSets.length; i++) {
         //    buf = buf.concat(this.shaderColorSets[i])
         //}
-        let buf: Buffer[] = []
+        let buf: Buffer = Buffer.fromArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
         for (let i = 0; i < this.shaderColorSets.length; i++) {
-            buf.push(Buffer.fromArray(this.shaderColorSets[i]))
+            buf = buf.concat(Buffer.fromArray(this.shaderColorSets[i]))
         }
         return buf
     }
@@ -65,7 +65,7 @@ class Shader {
     public refreshShaderLayer: boolean
     protected currentPack: ShaderPack
     //Decompiled shader pack
-    protected decompShader: Buffer[]
+    protected decompShader: Buffer
     //Shader augment image
     public mapLayer: Image
     //Render and shader buffers
@@ -104,14 +104,14 @@ class Shader {
     protected shadeImg(img:Image) {
         img.getRows(0, this.renderBuf)
         this.mapLayer.getRows(0, this.shaderBuf)
-        for (let x = 0; x < img.width * img.height; ++x) {
-            if (this.shaderBuf[x]) {
-                this.renderBuf[x] = this.decompShader[this.shaderBuf[x]][this.renderBuf[x]]
+        for (let x = 0; x < img.width * img.height; x++) {
+                this.renderBuf[x] = this.decompShader[this.renderBuf[x] | this.shaderBuf[x] << 4];
+                //this.renderBuf[x] = this.decompShader[this.renderBuf[x] | this.shaderBuf[x] << 4];
+                //this.shaderBuf[x] ? this.renderBuf[x] = this.decompShader[this.renderBuf[x] | this.shaderBuf[x] << 4] : null;
                 //use alternate compilation format
                 //this.renderBuf[y] = (this.decompShader[this.renderBuf[y] + Math.imul(this.shaderBuf[y], 16)])
                 //alt comp format + lookup table
                 //this.renderBuf[y] = (this.decompShader[this.renderBuf[y] + this.lkupx16[this.shaderBuf[y]]])
-            }
         }
         img.setRows(0, this.renderBuf)
     }
@@ -131,7 +131,7 @@ class Shader {
         this.decompShader = shader
     }
     */
-    public directSetUnpackedShader (shader: Buffer[]) {
+    public directSetUnpackedShader (shader: Buffer) {
         this.decompShader = shader
     }
     static toScreenX(x: number) {
