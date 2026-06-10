@@ -118,7 +118,7 @@ class Shader {
     protected updateShaderLayer() {
         this.updater = game.currentScene().eventContext.registerFrameHandler(17, () => {
             if (this.refreshShaderLayer === true) {
-                this.mapLayer = image.create(160,120)
+                this.mapLayer.fill(0)
             }
         })
     }
@@ -365,12 +365,7 @@ class LiteShader {
         this.mapLayer = image.create(scene.screenWidth(), scene.screenHeight())
         this.runShader()
         this.updateShaderLayer()
-        this.unusedColor = 15
-        for (let i = 1; i < 16; i++) {
-            if (this.shade[i] == i)  {
-                this.unusedColor = i
-            }
-        }
+        this.setUnusedColor()
     }
     protected runShader() {
         this.shader = scene.createRenderable(this.zValue, (screenImg: Image, camera: scene.Camera) => {
@@ -387,7 +382,7 @@ class LiteShader {
     protected updateShaderLayer() {
         this.updater = game.currentScene().eventContext.registerFrameHandler(17, () => {
             if (this.refreshShaderLayer === true) {
-                this.mapLayer = image.create(160, 120)
+                this.mapLayer.fill(0)
             }
         })
     }
@@ -400,18 +395,20 @@ class LiteShader {
     }
     public setNewShade(shade: Buffer) {
         this.shade = shade
-        this.unusedColor = 15
-        for (let i = 1; i < 16; i++) {
-            if (this.shade[i] == i) {
-                this.unusedColor = i
-            }
-        }
+        this.setUnusedColor()
     }
     static toScreenX(x: number) {
         return x - scene.cameraProperty(CameraProperty.Left)
     }
     static toScreenY(y: number) {
         return y - scene.cameraProperty(CameraProperty.Top)
+    }
+    public setUnusedColor() {
+        this.unusedColor = 15
+        for (let i = 1; i < 16; i++) {
+            this.shade.toArray(NumberFormat.Int8LE).indexOf(i) == -1 ? this.unusedColor = i : null;
+        }
+        return this.unusedColor
     }
     public destroy() {
         this.shader.destroy()
