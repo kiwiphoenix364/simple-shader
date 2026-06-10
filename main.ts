@@ -331,13 +331,8 @@ class TileShader {
 }
 class LiteShader {
     //Declare initial variables
-    //lookup table
-    //lkupx16: Buffer
     //Shader pack
     public refreshShaderLayer: boolean
-    protected currentPack: ShaderPack
-    //Decompiled shader pack
-    protected decompShader: Buffer[]
     //Shader augment image
     protected mapLayer: Image
     //Render and shader buffers
@@ -413,6 +408,6 @@ class LiteShader {
     public destroy() {
         this.shader.destroy()
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
-        this.refreshShaderLayer = this.currentPack = this.decompShader = this.mapLayer = this.renderBuf = this.shaderBuf = this.zValue = this.updater = null
+        this.refreshShaderLayer = this.mapLayer = this.renderBuf = this.shaderBuf = this.zValue = this.updater = this.shade = this.unusedColor = null
     }
 }
