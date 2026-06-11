@@ -178,8 +178,8 @@ class ShaderAttachSprite {
     protected updateFunction() {
         this.x = this.sprite.x + this.xOffset
         this.y = this.sprite.y + this.yOffset
-        this.left = this.x - this.image.width / 2
-        this.top = this.y - this.image.height / 2
+        this.left = this.x - this.image.width >> 1
+        this.top = this.y - this.image.height >> 1
         this.right = this.left + this.image.width
         this.bottom = this.top + this.image.height
         if (this.shader.mapLayer === null) {
@@ -187,7 +187,8 @@ class ShaderAttachSprite {
             return
         }
         if (Shader.toScreenX(this.left) < scene.screenWidth() && Shader.toScreenX(this.right) > 0 && Shader.toScreenY(this.top) < scene.screenHeight() && Shader.toScreenY(this.bottom) > 0) {
-            helpers.imageBlit(this.shader.mapLayer, Shader.toScreenX(this.left), Shader.toScreenY(this.top), this.image.width, this.image.height, this.image, 0, 0, this.image.width, this.image.height, true, false)
+            this.shader.mapLayer.drawTransparentImage(this.image, Shader.toScreenX(this.left), Shader.toScreenY(this.top))
+            //helpers.imageBlit(this.shader.mapLayer, Shader.toScreenX(this.left), Shader.toScreenY(this.top), this.image.width, this.image.height, this.image, 0, 0, this.image.width, this.image.height, true, false)
         }
     }
     public destroy() {
@@ -266,49 +267,49 @@ class TileShader {
         this.shader = shader
         this.x = x
         this.y = y
-        this.left = this.x - this.image.width / 2
-        this.top = this.y - this.image.height / 2
+        this.left = this.x - this.image.width >> 1
+        this.top = this.y - this.image.height >> 1
         this.right = this.left + this.image.width
         this.bottom = this.top + this.image.height
         this.updateTile()
     }
     public setX(x:number) {
         this.x = x
-        this.left = this.x - this.image.width / 2
+        this.left = this.x - this.image.width >> 1
         this.right = this.left + this.image.width
     }
     public setY(y: number) {
         this.y = y
-        this.top = this.y - this.image.height / 2
+        this.top = this.y - this.image.height >> 1
         this.bottom = this.top + this.image.height
     }
     public setPos(x:number, y: number) {
         this.x = x
-        this.left = this.x - this.image.width / 2
+        this.left = this.x - this.image.width >> 1
         this.right = this.left + this.image.width
         this.y = y
-        this.top = this.y - this.image.height / 2
+        this.top = this.y - this.image.height >> 1
         this.bottom = this.top + this.image.height
     }
     public setLeft(left: number) {
         this.left = left
-        this.x = this.left + this.image.width / 2
+        this.x = this.left + this.image.width >> 1
         this.right = this.left + this.image.width
     }
     public setTop(top: number) {
         this.top = top
-        this.y = this.top + this.image.height / 2
+        this.y = this.top + this.image.height >> 1
         this.bottom = this.top + this.image.height
     }
     public setRight(right: number) {
         this.right = right
         this.left = this.right - this.image.width
-        this.x = this.left + this.image.width / 2
+        this.x = this.left + this.image.width >> 1
     }
     public setBottom(bottom: number) {
         this.bottom = bottom
         this.top = this.bottom - this.image.height
-        this.y = this.top + this.image.height / 2
+        this.y = this.top + this.image.height >> 1
     }    
     protected updateTile() {
         this.updater = game.currentScene().eventContext.registerFrameHandler(23, () => {
@@ -321,7 +322,8 @@ class TileShader {
             return
         }
         if (Shader.toScreenX(this.left) < scene.screenWidth() && Shader.toScreenX(this.right) > 0 && Shader.toScreenY(this.top) < scene.screenHeight() && Shader.toScreenY(this.bottom) > 0) {
-            helpers.imageBlit(this.shader.mapLayer, Shader.toScreenX(this.left), Shader.toScreenY(this.top), this.image.width, this.image.height, this.image, 0, 0, this.image.width, this.image.height, true, false)
+            this.shader.mapLayer.drawTransparentImage(this.image, Shader.toScreenX(this.left), Shader.toScreenY(this.top))
+            //helpers.imageBlit(this.shader.mapLayer, Shader.toScreenX(this.left), Shader.toScreenY(this.top), this.image.width, this.image.height, this.image, 0, 0, this.image.width, this.image.height, true, false)
         }
     }
     public destroy() {
@@ -334,25 +336,19 @@ class LiteShader {
     //Shader pack
     public refreshShaderLayer: boolean
     //Shader augment image
-    protected mapLayer: Image
+    public mapLayer: Image
     //Render and shader buffers
-    private renderBuf: Buffer
-    private shaderBuf: Buffer
+    protected renderBuf: Buffer
+    protected shaderBuf: Buffer
     //zValue
     protected zValue: number
     //Renderable for shader
     public shade: Buffer
-    private shader: scene.Renderable
+    protected shader: scene.Renderable
     protected updater: control.FrameCallback
     public unusedColor: number
+    protected tempImg = image.create(scene.screenWidth(), scene.screenHeight())
     constructor(singleShade: Buffer, refreshShaderLayer: boolean, zValue = 0) {
-        /*
-        //build lookup table
-        this.lkupx16 = Buffer.create(16)
-        for (let i = 0; i < 16; i++) {
-            this.lkupx16[i] = (i * 16)
-        }
-        */
         this.refreshShaderLayer = refreshShaderLayer
         this.zValue = zValue
         this.shade = singleShade
@@ -368,10 +364,11 @@ class LiteShader {
         })
     }
     protected shadeImg(img: Image) {
-        let tempImg = img.clone()
-        tempImg.mapRect(0, 0, scene.screenWidth(), scene.screenHeight(), this.shade)
+        let tempImg = image.create(scene.screenWidth(), scene.screenHeight())
+        tempImg.copyFrom(img)
         tempImg.drawTransparentImage(this.mapLayer, 0, 0)
         tempImg.replace(this.unusedColor, 0)
+        tempImg.mapRect(0, 0, scene.screenWidth(), scene.screenHeight(), this.shade)
         img.drawTransparentImage(tempImg, 0, 0)
     }
     protected updateShaderLayer() {
@@ -380,9 +377,6 @@ class LiteShader {
                 this.mapLayer.fill(0)
             }
         })
-    }
-    public setMapLayerRaw(mapLayer: Image) {
-        this.mapLayer = mapLayer
     }
     public setMapLayer(mapLayer: Image) {
         this.mapLayer = mapLayer
@@ -400,8 +394,13 @@ class LiteShader {
     }
     public setUnusedColor() {
         this.unusedColor = 15
+        /*
         for (let i = 1; i < 16; i++) {
             this.shade.toArray(NumberFormat.Int8LE).indexOf(i) == -1 ? this.unusedColor = i : null;
+        }
+        */
+        for (let i = 1; i < 16; i++) {
+            this.shade[i] == i ? this.unusedColor = i : null;
         }
         return this.unusedColor
     }
@@ -409,5 +408,65 @@ class LiteShader {
         this.shader.destroy()
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
         this.refreshShaderLayer = this.mapLayer = this.renderBuf = this.shaderBuf = this.zValue = this.updater = this.shade = this.unusedColor = null
+    }
+}
+class LiteShaderX2 extends LiteShader {
+    public mapLayer2: Image
+    public shade2: Buffer
+    public unusedColor2: number
+    constructor(singleShade: Buffer, secondShade: Buffer, refreshShaderLayer: boolean, zValue = 0) {
+        super(singleShade, refreshShaderLayer, zValue)
+        this.shade2 = secondShade
+        //create buffer image
+        this.mapLayer2 = image.create(scene.screenWidth(), scene.screenHeight())
+        this.setUnusedColor2()
+    }
+    protected runShader() {
+        this.shader = scene.createRenderable(this.zValue, (screenImg: Image, camera: scene.Camera) => {
+            this.shadeImg(screenImg)
+        })
+    }
+    protected shadeImg(img: Image) {
+        let tempImg = image.create(scene.screenWidth(), scene.screenHeight())
+        tempImg.copyFrom(img)
+        tempImg.drawTransparentImage(this.mapLayer, 0, 0)
+        //helpers.imageBlit(tempImg, 0, 0, scene.screenWidth(), scene.screenHeight(), this.mapLayer, 0, 0, scene.screenWidth(), scene.screenHeight(), true, false)
+        tempImg.replace(this.unusedColor, 0)
+        tempImg.mapRect(0, 0, scene.screenWidth(), scene.screenHeight(), this.shade)
+        img.drawTransparentImage(tempImg, 0, 0)
+        //helpers.imageBlit(img, 0, 0, scene.screenWidth(), scene.screenHeight(), tempImg, 0, 0, scene.screenWidth(), scene.screenHeight(), true, false)
+
+        tempImg.copyFrom(img)
+        tempImg.drawTransparentImage(this.mapLayer2, 0, 0)
+        //helpers.imageBlit(tempImg, 0, 0, scene.screenWidth(), scene.screenHeight(), this.mapLayer2, 0, 0, scene.screenWidth(), scene.screenHeight(), true, false)
+        tempImg.replace(this.unusedColor2, 0)
+        tempImg.mapRect(0, 0, scene.screenWidth(), scene.screenHeight(), this.shade2)
+        img.drawTransparentImage(tempImg, 0, 0)
+        //helpers.imageBlit(img, 0, 0, scene.screenWidth(), scene.screenHeight(), tempImg, 0, 0, scene.screenWidth(), scene.screenHeight(), true, false)
+    }
+    public setMapLayer2(mapLayer: Image) {
+        this.mapLayer2 = mapLayer
+        this.mapLayer2.replace(1, this.unusedColor2)
+    }
+    public setNewShade2(shade2: Buffer) {
+        this.shade2 = shade2
+        this.setUnusedColor2()
+    }
+    public setUnusedColor2() {
+        this.unusedColor2 = 15
+        /*
+        for (let i = 1; i < 16; i++) {
+            this.shade2.toArray(NumberFormat.Int8LE).indexOf(i) == -1 ? this.unusedColor2 = i : null;
+        }
+        */
+        for (let i = 1; i < 16; i++) {
+            this.shade2[i] == i ? this.unusedColor2 = i : null;
+        }
+        return this.unusedColor2
+    }
+    public destroy() {
+        this.shader.destroy()
+        game.currentScene().eventContext.unregisterFrameHandler(this.updater)
+        this.refreshShaderLayer = this.unusedColor2 = this.mapLayer2 = this.mapLayer = this.renderBuf = this.shaderBuf = this.zValue = this.updater = this.shade = this.unusedColor = null
     }
 }
