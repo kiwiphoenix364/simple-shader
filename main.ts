@@ -1,3 +1,6 @@
+class ShaderBlocks {
+
+}
 class ShaderPack {
     private colorNames: string[]
     private shaderColorSets: number[][]
@@ -5,7 +8,7 @@ class ShaderPack {
         this.colorNames = colorNames
         this.shaderColorSets = shaderColorSets
     }
-    public unpack () {
+    public unpack() {
         //let buf = Buffer.create(16)
         //for (let i = 0; i < this.shaderColorSets.length; i++) {
         //    buf = buf.concat(this.shaderColorSets[i])
@@ -16,7 +19,7 @@ class ShaderPack {
         }
         return buf
     }
-    public getTintIdx (name: string) {
+    public getTintIdx(name: string) {
         return this.colorNames.indexOf(name) + 1
     }
     public getShaderShade(name: string) {
@@ -25,7 +28,7 @@ class ShaderPack {
     public destroy() {
         this.colorNames = this.shaderColorSets = null
     }
-    static get (shader: string) {
+    static get(shader: string) {
         //reference for shader pack format
         //color sets and color set names are in respective orders in their arrays
         //shader arrays go in order of colors on the screen, so the fifth item in the array ([4]) will be color four
@@ -47,7 +50,7 @@ class ShaderPack {
                 ]
             )
         ]
-        
+
         //for generating the "2" varients
         //let test = []
         //let sample = [0, 1, 4, 1, 5, 1, 7, 5, 9, 1, 11, 1, 10, 1, 2, 12]
@@ -96,7 +99,7 @@ class Shader {
             this.shadeImg(screenImg)
         })
     }
-    protected shadeImg(img:Image) {
+    protected shadeImg(img: Image) {
         let shaderBuf = Buffer.create(Math.imul(img.width, img.height))
         let renderBuf = Buffer.create(Math.imul(img.width, img.height))
         let decompShader = Buffer.create(0).concat(this.decompShader)
@@ -105,15 +108,15 @@ class Shader {
         let x = Math.imul(img.width, img.height)
         let y = 0
         while (y < x) {
-                renderBuf[y] = decompShader[renderBuf[y] | shaderBuf[y] << 4];
-                //this.renderBuf[y] = this.decompShader[this.renderBuf[y]];
-                //this.renderBuf[x] = this.decompShader[this.renderBuf[x] | this.shaderBuf[x] << 4];
-                //this.shaderBuf[x] ? this.renderBuf[x] = this.decompShader[this.renderBuf[x] | this.shaderBuf[x] << 4] : null;
-                //use alternate compilation format
-                //this.renderBuf[y] = (this.decompShader[this.renderBuf[y] + Math.imul(this.shaderBuf[y], 16)])
-                //alt comp format + lookup table
-                //this.renderBuf[y] = (this.decompShader[this.renderBuf[y] + this.lkupx16[this.shaderBuf[y]]])
-                y++
+            renderBuf[y] = decompShader[renderBuf[y] | shaderBuf[y] << 4];
+            //this.renderBuf[y] = this.decompShader[this.renderBuf[y]];
+            //this.renderBuf[x] = this.decompShader[this.renderBuf[x] | this.shaderBuf[x] << 4];
+            //this.shaderBuf[x] ? this.renderBuf[x] = this.decompShader[this.renderBuf[x] | this.shaderBuf[x] << 4] : null;
+            //use alternate compilation format
+            //this.renderBuf[y] = (this.decompShader[this.renderBuf[y] + Math.imul(this.shaderBuf[y], 16)])
+            //alt comp format + lookup table
+            //this.renderBuf[y] = (this.decompShader[this.renderBuf[y] + this.lkupx16[this.shaderBuf[y]]])
+            y++
         }
         img.setRows(0, renderBuf)
     }
@@ -124,7 +127,7 @@ class Shader {
             }
         })
     }
-    public setNewShader (shader: ShaderPack) {
+    public setNewShader(shader: ShaderPack) {
         this.decompShader = shader.unpack()
     }
     /*
@@ -133,7 +136,7 @@ class Shader {
         this.decompShader = shader
     }
     */
-    public directSetUnpackedShader (shader: Buffer) {
+    public directSetUnpackedShader(shader: Buffer) {
         this.decompShader = shader
     }
     static toScreenX(x: number) {
@@ -151,7 +154,7 @@ class Shader {
 class ShaderAttachSprite {
     public sprite: Sprite
     public image: Image
-    public shader: Shader
+    public shader: Shader | LiteShader
     public xOffset: number
     public yOffset: number
     protected x: number
@@ -161,9 +164,12 @@ class ShaderAttachSprite {
     protected right: number
     protected bottom: number
     protected updater: control.FrameCallback
-    constructor(shader: Shader, sprite: Sprite, image: Image, xOffset = 0, yOffset = 0) {
+    constructor(shader: Shader | LiteShader, sprite: Sprite, image: Image, xOffset = 0, yOffset = 0) {
         this.shader = shader
         this.sprite = sprite
+        if (shader instanceof LiteShader) {
+            image.replace(1, shader.unusedColor)
+        }
         this.image = image
         this.xOffset = xOffset
         this.yOffset = yOffset
@@ -180,8 +186,8 @@ class ShaderAttachSprite {
     protected updateFunction() {
         this.x = this.sprite.x + this.xOffset
         this.y = this.sprite.y + this.yOffset
-        this.left = this.x - this.image.width >> 1
-        this.top = this.y - this.image.height >> 1
+        this.left = this.x - (this.image.width >> 1)
+        this.top = this.y - (this.image.height >> 1)
         this.right = this.left + this.image.width
         this.bottom = this.top + this.image.height
         if (this.shader.mapLayer === null) {
@@ -366,7 +372,7 @@ class LiteShader {
         tempImg.copyFrom(img)
         tempImg.drawTransparentImage(this.mapLayer, 0, 0)
         tempImg.replace(this.unusedColor, 0)
-        tempImg.mapRect(0, 0, scene.screenWidth(), scene.screenHeight(), this.shade)
+        img.mapRect(0, 0, scene.screenWidth(), scene.screenHeight(), this.shade)
         img.drawTransparentImage(tempImg, 0, 0)
     }
     protected updateShaderLayer() {
@@ -428,19 +434,16 @@ class LiteShaderX2 extends LiteShader {
         let tempImg = image.create(scene.screenWidth(), scene.screenHeight())
         tempImg.copyFrom(img)
         tempImg.drawTransparentImage(this.mapLayer, 0, 0)
-        //helpers.imageBlit(tempImg, 0, 0, scene.screenWidth(), scene.screenHeight(), this.mapLayer, 0, 0, scene.screenWidth(), scene.screenHeight(), true, false)
         tempImg.replace(this.unusedColor, 0)
-        tempImg.mapRect(0, 0, scene.screenWidth(), scene.screenHeight(), this.shade)
+        img.mapRect(0, 0, scene.screenWidth(), scene.screenHeight(), this.shade)
         img.drawTransparentImage(tempImg, 0, 0)
-        //helpers.imageBlit(img, 0, 0, scene.screenWidth(), scene.screenHeight(), tempImg, 0, 0, scene.screenWidth(), scene.screenHeight(), true, false)
 
         tempImg.copyFrom(img)
         tempImg.drawTransparentImage(this.mapLayer2, 0, 0)
-        //helpers.imageBlit(tempImg, 0, 0, scene.screenWidth(), scene.screenHeight(), this.mapLayer2, 0, 0, scene.screenWidth(), scene.screenHeight(), true, false)
         tempImg.replace(this.unusedColor2, 0)
-        tempImg.mapRect(0, 0, scene.screenWidth(), scene.screenHeight(), this.shade2)
+        img.mapRect(0, 0, scene.screenWidth(), scene.screenHeight(), this.shade2)
         img.drawTransparentImage(tempImg, 0, 0)
-        //helpers.imageBlit(img, 0, 0, scene.screenWidth(), scene.screenHeight(), tempImg, 0, 0, scene.screenWidth(), scene.screenHeight(), true, false)
+
     }
     public setMapLayer2(mapLayer: Image) {
         this.mapLayer2 = mapLayer
