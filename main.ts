@@ -154,7 +154,7 @@ class Shader {
 class ShaderAttachSprite {
     public sprite: Sprite
     public image: Image
-    public shader: Shader | LiteShader
+    public shader: Shader | LiteShaderX2
     public xOffset: number
     public yOffset: number
     protected x: number
@@ -164,12 +164,9 @@ class ShaderAttachSprite {
     protected right: number
     protected bottom: number
     protected updater: control.FrameCallback
-    constructor(shader: Shader | LiteShader, sprite: Sprite, image: Image, xOffset = 0, yOffset = 0) {
+    constructor(shader: Shader | LiteShaderX2, sprite: Sprite, image: Image, xOffset = 0, yOffset = 0) {
         this.shader = shader
         this.sprite = sprite
-        if (shader instanceof LiteShader) {
-            image.replace(1, shader.unusedColor)
-        }
         this.image = image
         this.xOffset = xOffset
         this.yOffset = yOffset
