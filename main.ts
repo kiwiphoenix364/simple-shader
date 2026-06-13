@@ -451,7 +451,6 @@ class LiteShaderX2 extends LiteShader {
     public shade2: Buffer
     public unusedColor2: number
     public refreshShaderLayer2: boolean
-    public updater2: control.FrameCallback
     constructor(singleShade: Buffer, secondShade: Buffer, refreshShaderLayer = true, refreshShaderLayer2 = true, zValue = 0) {
         super(singleShade, refreshShaderLayer, zValue)
         this.shade2 = secondShade
@@ -459,7 +458,7 @@ class LiteShaderX2 extends LiteShader {
         //create buffer image
         this.mapLayer2 = image.create(scene.screenWidth(), scene.screenHeight())
         this.setUnusedColor2()
-        this.updateShaderLayer2()
+        this.updateShaderLayer()
     }
     protected runShader() {
         this.shader = scene.createRenderable(this.zValue, (screenImg: Image, camera: scene.Camera) => {
@@ -481,8 +480,11 @@ class LiteShaderX2 extends LiteShader {
         img.drawTransparentImage(tempImg, 0, 0)
 
     }
-    protected updateShaderLayer2() {
-        this.updater2 = game.currentScene().eventContext.registerFrameHandler(17, () => {
+    protected updateShaderLayer() {
+        this.updater = game.currentScene().eventContext.registerFrameHandler(17, () => {
+            if (this.refreshShaderLayer === true) {
+                this.mapLayer.fill(0)
+            }
             if (this.refreshShaderLayer2 === true) {
                 this.mapLayer2.fill(0)
             }
@@ -511,6 +513,6 @@ class LiteShaderX2 extends LiteShader {
     public destroy() {
         this.shader.destroy()
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
-        this.refreshShaderLayer = this.refreshShaderLayer2 = this.unusedColor2 = this.mapLayer2 = this.mapLayer = this.zValue = this.updater = this.updater2 = this.shade = this.unusedColor = null
+        this.refreshShaderLayer = this.refreshShaderLayer2 = this.unusedColor2 = this.mapLayer2 = this.mapLayer = this.zValue = this.updater = this.shade = this.unusedColor = null
     }
 }
