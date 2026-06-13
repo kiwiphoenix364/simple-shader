@@ -154,7 +154,8 @@ class Shader {
 class ShaderAttachSprite {
     public sprite: Sprite
     public image: Image
-    public shader: Shader | LiteShaderX2
+    public shader: Shader | LiteShader | LiteShaderX2
+    public mapLayer: Image
     public xOffset: number
     public yOffset: number
     protected x: number
@@ -164,21 +165,36 @@ class ShaderAttachSprite {
     protected right: number
     protected bottom: number
     protected updater: control.FrameCallback
-    constructor(shader: Shader | LiteShaderX2, sprite: Sprite, image: Image, xOffset = 0, yOffset = 0) {
-        this.shader = shader
+    protected lite: boolean
+    protected l2: boolean
+    constructor(shader: Shader | LiteShader | LiteShaderX2, sprite: Sprite, image: Image, xOffset = 0, yOffset = 0, liteShader = false, layer2 = false) {
         this.sprite = sprite
-        this.image = image
         this.xOffset = xOffset
         this.yOffset = yOffset
+        // Yes, a proper example of an assignment if in the wild
+        if (liteShader = this.lite) {
+            this.shader = shader
+            if (this.l2 = layer2)  {
+                this.mapLayer = (shader as LiteShaderX2).mapLayer2
+                image.replace(1, (shader as LiteShaderX2).unusedColor2)
+                this.image = image
+            } else {
+                this.mapLayer = shader.mapLayer
+                image.replace(1, (shader as LiteShader).unusedColor)
+                this.image = image
+            }
+        } else {
+            this.mapLayer = shader.mapLayer
+        }
         this.updateShaderPos()
         this.sprite.onDestroyed(() => {
             this.destroy()
         })
     }
     protected updateShaderPos() {
-        this.updater = game.currentScene().eventContext.registerFrameHandler(24, () => {
-            this.updateFunction()
-        })
+            this.updater = game.currentScene().eventContext.registerFrameHandler(24, () => {
+                this.updateFunction()
+            })
     }
     protected updateFunction() {
         this.x = this.sprite.x + this.xOffset
@@ -187,18 +203,37 @@ class ShaderAttachSprite {
         this.top = this.y - (this.image.height >> 1)
         this.right = this.left + this.image.width
         this.bottom = this.top + this.image.height
-        if (this.shader.mapLayer === null) {
+        if (this.mapLayer === null) {
             this.destroy()
             return
         }
         if (Shader.toScreenX(this.left) < scene.screenWidth() && Shader.toScreenX(this.right) > 0 && Shader.toScreenY(this.top) < scene.screenHeight() && Shader.toScreenY(this.bottom) > 0) {
-            this.shader.mapLayer.drawTransparentImage(this.image, Shader.toScreenX(this.left), Shader.toScreenY(this.top))
+            this.mapLayer.drawTransparentImage(this.image, Shader.toScreenX(this.left), Shader.toScreenY(this.top))
             //helpers.imageBlit(this.shader.mapLayer, Shader.toScreenX(this.left), Shader.toScreenY(this.top), this.image.width, this.image.height, this.image, 0, 0, this.image.width, this.image.height, true, false)
         }
     }
+    public setImage(img: Image) {
+        this.image = img
+    }
+    public setImageLite(img: Image) {
+        if (this.l2)
+            img.replace(1, (this.shader as LiteShaderX2).unusedColor2)
+        else
+            img.replace(1, (this.shader as LiteShader).unusedColor)
+        this.image = img
+    }
+    public setImageSafe(img: Image) {
+        if (this.lite) {
+            if (this.l2)
+                img.replace(1, (this.shader as LiteShaderX2).unusedColor2)
+            else
+                img.replace(1, (this.shader as LiteShader).unusedColor)
+        }
+        this.image = img
+    }
     public destroy() {
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
-        this.shader = this.sprite = this.image = this.x = this.y = this.left = this.top = this.right = this.bottom = this.xOffset = this.yOffset = this.updater = null
+        this.mapLayer = this.sprite = this.image = this.x = this.y = this.left = this.top = this.right = this.bottom = this.xOffset = this.yOffset = this.updater = null
     }
 }
 class CircleShaderAttachSprite {
@@ -280,41 +315,41 @@ class TileShader {
     }
     public setX(x: number) {
         this.x = x
-        this.left = this.x - this.image.width >> 1
+        this.left = this.x - (this.image.width >> 1)
         this.right = this.left + this.image.width
     }
     public setY(y: number) {
         this.y = y
-        this.top = this.y - this.image.height >> 1
+        this.top = this.y - (this.image.height >> 1)
         this.bottom = this.top + this.image.height
     }
     public setPos(x: number, y: number) {
         this.x = x
-        this.left = this.x - this.image.width >> 1
+        this.left = this.x - (this.image.width >> 1)
         this.right = this.left + this.image.width
         this.y = y
-        this.top = this.y - this.image.height >> 1
+        this.top = this.y - (this.image.height >> 1)
         this.bottom = this.top + this.image.height
     }
     public setLeft(left: number) {
         this.left = left
-        this.x = this.left + this.image.width >> 1
+        this.x = this.left + (this.image.width >> 1)
         this.right = this.left + this.image.width
     }
     public setTop(top: number) {
         this.top = top
-        this.y = this.top + this.image.height >> 1
+        this.y = this.top + (this.image.height >> 1)
         this.bottom = this.top + this.image.height
     }
     public setRight(right: number) {
         this.right = right
         this.left = this.right - this.image.width
-        this.x = this.left + this.image.width >> 1
+        this.x = this.left + (this.image.width >> 1)
     }
     public setBottom(bottom: number) {
         this.bottom = bottom
         this.top = this.bottom - this.image.height
-        this.y = this.top + this.image.height >> 1
+        this.y = this.top + (this.image.height >> 1)
     }
     protected updateTile() {
         this.updater = game.currentScene().eventContext.registerFrameHandler(23, () => {
