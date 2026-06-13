@@ -765,6 +765,7 @@ let mySprite = sprites.create(img`
     . . . e e e e e e e e . . . . .
     . . . . . . . . . . . . . . . .
 `, SpriteKind.Player)
+
 let attachedShader = new ShaderAttachSprite(shader, mySprite, img`
     ..........111111111111..........
     ........1111111111111111........
@@ -798,7 +799,8 @@ let attachedShader = new ShaderAttachSprite(shader, mySprite, img`
     ......11111111111111111111......
     ........1111111111111111........
     ..........111111111111..........
-`)
+`, 0, 0, true, false)
+
 mySprite.setVelocity(50, 50)
 game.onUpdate(function() {
     if (mySprite.x < 0 || mySprite.x > 160) {
