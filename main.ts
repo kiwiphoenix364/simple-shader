@@ -154,7 +154,7 @@ class Shader {
 class ShaderAttachSprite {
     public sprite: Sprite
     public image: Image
-    public shader: Shader | LiteShader | LiteShaderX2
+    public shader: Shader | LiteShader
     public mapLayer: Image
     public xOffset: number
     public yOffset: number
@@ -167,12 +167,12 @@ class ShaderAttachSprite {
     protected updater: control.FrameCallback
     protected lite: boolean
     protected l2: boolean
-    constructor(shader: Shader | LiteShader | LiteShaderX2, sprite: Sprite, image: Image, xOffset = 0, yOffset = 0, liteShader = false, layer2 = false) {
+    constructor(shader: Shader | LiteShader, sprite: Sprite, image: Image, xOffset = 0, yOffset = 0, liteShader = false, layer2 = false) {
         this.sprite = sprite
         this.xOffset = xOffset
         this.yOffset = yOffset
         // Yes, a proper example of an assignment if in the wild
-        if (liteShader = this.lite) {
+        if (this.lite = liteShader) {
             this.shader = shader
             if (this.l2 = layer2)  {
                 this.mapLayer = (shader as LiteShaderX2).mapLayer2
