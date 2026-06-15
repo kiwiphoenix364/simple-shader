@@ -76,7 +76,7 @@ class Shader {
     //Renderable for shader
     private shader: scene.Renderable
     protected updater: control.FrameCallback
-    constructor(currentPack: ShaderPack, refreshShaderLayer: boolean, zValue = 0) {
+    constructor(currentPack: ShaderPack, refreshShaderLayer = true, zValue = 0) {
         /*
         //build lookup table
         this.lkupx16 = Buffer.create(16)
@@ -127,6 +127,9 @@ class Shader {
             }
         })
     }
+    public setMapLayer(mapLayer: Image) {
+        this.mapLayer = mapLayer
+    }
     public setNewShader(shader: ShaderPack) {
         this.decompShader = shader.unpack()
     }
@@ -165,8 +168,8 @@ class ShaderAttachSprite {
     protected right: number
     protected bottom: number
     protected updater: control.FrameCallback
-    protected lite: boolean
-    protected l2: boolean
+    protected lite = false
+    protected l2 = false
     constructor(shader: Shader | LiteShader, sprite: Sprite, image: Image, xOffset = 0, yOffset = 0, liteShader = false, layer2 = false) {
         this.sprite = sprite
         this.xOffset = xOffset
@@ -185,6 +188,7 @@ class ShaderAttachSprite {
             }
         } else {
             this.mapLayer = shader.mapLayer
+            this.image = image
         }
         this.updateShaderPos()
         this.sprite.onDestroyed(() => {
@@ -248,14 +252,15 @@ class CircleShaderAttachSprite {
     public xOffset: number
     public yOffset: number
     protected updater: control.FrameCallback
-    protected lite: boolean
-    protected l2: boolean
+    protected lite = false
+    protected l2 = false
     constructor(shader: Shader | LiteShader, sprite: Sprite, xOffset = 0, yOffset = 0, tint = 1, radius = 5, flux = 0, smoothness = 1, liteShader = false, layer2 = false) {
         this.sprite = sprite
         this.xOffset = xOffset
         this.yOffset = yOffset
         if (this.lite = liteShader) {
             this.shader = shader
+            this.tint = 1
             if (this.l2 = layer2) {
                 this.mapLayer = (shader as LiteShaderX2).mapLayer2
             } else {
@@ -263,8 +268,8 @@ class CircleShaderAttachSprite {
             }
         } else {
             this.mapLayer = shader.mapLayer
+            this.tint = tint
         }
-        this.tint = tint
         this.radius = radius
         this.currentRad = this.radius
         this.flux = flux
@@ -299,7 +304,7 @@ class CircleShaderAttachSprite {
     }
     protected updateFunction() {
         this.updater = game.currentScene().eventContext.registerFrameHandler(24, () => {
-            if (this.shader.mapLayer === null) {
+            if (this.mapLayer === null) {
                 this.destroy()
                 return
             }
@@ -335,21 +340,25 @@ class TileShader {
     protected right: number
     protected bottom: number
     protected updater: control.FrameCallback
-    protected lite: boolean
-    protected l2: boolean
+    protected lite = false
+    protected l2 = false
     constructor(shader: Shader | LiteShader, image: Image, x: number, y: number, liteShader = false, layer2 = false) {
-        this.image = image
         this.x = x
         this.y = y
         if (this.lite = liteShader) {
             this.shader = shader
             if (this.l2 = layer2) {
                 this.mapLayer = (shader as LiteShaderX2).mapLayer2
+                image.replace(1, (shader as LiteShaderX2).unusedColor2)
+                this.image = image
             } else {
                 this.mapLayer = shader.mapLayer
+                image.replace(1, (shader as LiteShader).unusedColor)
+                this.image = image
             }
         } else {
             this.mapLayer = shader.mapLayer
+            this.image = image
         }
         this.left = this.x - this.image.width >> 1
         this.top = this.y - this.image.height >> 1
@@ -401,7 +410,7 @@ class TileShader {
         })
     }
     protected updateFunction() {
-        if (this.shader.mapLayer === null) {
+        if (this.mapLayer === null) {
             this.destroy()
             return
         }
@@ -498,8 +507,8 @@ class LiteShader {
             this.shade.toArray(NumberFormat.Int8LE).indexOf(i) == -1 ? this.unusedColor = i : null;
         }
         */
-        for (let i = 1; i < 16; i++) {
-            this.shade[i] == i ? this.unusedColor = i : null;
+        for (let j = 1; j < 16; j++) {
+            this.shade[j] == j ? this.unusedColor = j : null;
         }
         return this.unusedColor
     }
@@ -529,18 +538,18 @@ class LiteShaderX2 extends LiteShader {
         })
     }
     protected shadeImg(img: Image) {
-        let tempImg = image.create(scene.screenWidth(), scene.screenHeight())
-        tempImg.copyFrom(img)
-        tempImg.drawTransparentImage(this.mapLayer, 0, 0)
-        tempImg.replace(this.unusedColor, 0)
+        let tempImg2 = image.create(scene.screenWidth(), scene.screenHeight())
+        tempImg2.copyFrom(img)
+        tempImg2.drawTransparentImage(this.mapLayer, 0, 0)
+        tempImg2.replace(this.unusedColor, 0)
         img.mapRect(0, 0, scene.screenWidth(), scene.screenHeight(), this.shade)
-        img.drawTransparentImage(tempImg, 0, 0)
+        img.drawTransparentImage(tempImg2, 0, 0)
 
-        tempImg.copyFrom(img)
-        tempImg.drawTransparentImage(this.mapLayer2, 0, 0)
-        tempImg.replace(this.unusedColor2, 0)
+        tempImg2.copyFrom(img)
+        tempImg2.drawTransparentImage(this.mapLayer2, 0, 0)
+        tempImg2.replace(this.unusedColor2, 0)
         img.mapRect(0, 0, scene.screenWidth(), scene.screenHeight(), this.shade2)
-        img.drawTransparentImage(tempImg, 0, 0)
+        img.drawTransparentImage(tempImg2, 0, 0)
 
     }
     protected updateShaderLayer() {
@@ -568,8 +577,8 @@ class LiteShaderX2 extends LiteShader {
             this.shade2.toArray(NumberFormat.Int8LE).indexOf(i) == -1 ? this.unusedColor2 = i : null;
         }
         */
-        for (let i = 1; i < 16; i++) {
-            this.shade2[i] == i ? this.unusedColor2 = i : null;
+        for (let k = 1; k < 16; k++) {
+            this.shade2[k] == k ? this.unusedColor2 = k : null;
         }
         return this.unusedColor2
     }
