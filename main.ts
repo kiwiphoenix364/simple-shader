@@ -157,7 +157,6 @@ class Shader {
 class ShaderAttachSprite {
     public sprite: Sprite
     public image: Image
-    public shader: Shader | LiteShader
     public mapLayer: Image
     public xOffset: number
     public yOffset: number
@@ -170,26 +169,12 @@ class ShaderAttachSprite {
     protected updater: control.FrameCallback
     protected lite = false
     protected l2 = false
-    constructor(shader: Shader | LiteShader, sprite: Sprite, image: Image, xOffset = 0, yOffset = 0, liteShader = false, layer2 = false) {
+    constructor(shaderLayer: Image, sprite: Sprite, image: Image, xOffset = 0, yOffset = 0, liteShader = false, layer2 = false) {
         this.sprite = sprite
         this.xOffset = xOffset
         this.yOffset = yOffset
-        // Yes, a proper example of an assignment if in the wild
-        if (this.lite = liteShader) {
-            this.shader = shader
-            if (this.l2 = layer2)  {
-                this.mapLayer = (shader as LiteShaderX2).mapLayer2
-                image.replace(1, (shader as LiteShaderX2).unusedColor2)
-                this.image = image
-            } else {
-                this.mapLayer = shader.mapLayer
-                image.replace(1, (shader as LiteShader).unusedColor)
-                this.image = image
-            }
-        } else {
-            this.mapLayer = shader.mapLayer
-            this.image = image
-        }
+        this.mapLayer = shaderLayer
+        this.image = image
         this.updateShaderPos()
         this.sprite.onDestroyed(() => {
             this.destroy()
@@ -219,22 +204,6 @@ class ShaderAttachSprite {
     public setImage(img: Image) {
         this.image = img
     }
-    public setImageLite(img: Image) {
-        if (this.l2)
-            img.replace(1, (this.shader as LiteShaderX2).unusedColor2)
-        else
-            img.replace(1, (this.shader as LiteShader).unusedColor)
-        this.image = img
-    }
-    public setImageSafe(img: Image) {
-        if (this.lite) {
-            if (this.l2)
-                img.replace(1, (this.shader as LiteShaderX2).unusedColor2)
-            else
-                img.replace(1, (this.shader as LiteShader).unusedColor)
-        }
-        this.image = img
-    }
     public destroy() {
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
         this.mapLayer = this.sprite = this.image = this.x = this.y = this.left = this.top = this.right = this.bottom = this.xOffset = this.yOffset = this.updater = this.lite = this.l2 = null
@@ -242,7 +211,6 @@ class ShaderAttachSprite {
 }
 class CircleShaderAttachSprite {
     public sprite: Sprite
-    public shader: Shader | LiteShader
     public mapLayer: Image
     public tint: number
     public radius: number
@@ -254,22 +222,12 @@ class CircleShaderAttachSprite {
     protected updater: control.FrameCallback
     protected lite = false
     protected l2 = false
-    constructor(shader: Shader | LiteShader, sprite: Sprite, xOffset = 0, yOffset = 0, tint = 1, radius = 5, flux = 0, smoothness = 1, liteShader = false, layer2 = false) {
+    constructor(shaderLayer: Image, sprite: Sprite, xOffset = 0, yOffset = 0, tint = 1, radius = 5, flux = 0, smoothness = 1, liteShader = false, layer2 = false) {
         this.sprite = sprite
         this.xOffset = xOffset
         this.yOffset = yOffset
-        if (this.lite = liteShader) {
-            this.shader = shader
-            this.tint = 1
-            if (this.l2 = layer2) {
-                this.mapLayer = (shader as LiteShaderX2).mapLayer2
-            } else {
-                this.mapLayer = shader.mapLayer
-            }
-        } else {
-            this.mapLayer = shader.mapLayer
-            this.tint = tint
-        }
+        this.mapLayer = shaderLayer
+        this.tint = tint
         this.radius = radius
         this.currentRad = this.radius
         this.flux = flux
@@ -281,23 +239,6 @@ class CircleShaderAttachSprite {
     }
     public setTint(tint: number) {
         this.tint = tint
-    }
-    public setTintLite() {
-        if (this.l2)
-            this.tint = (this.shader as LiteShaderX2).unusedColor2
-        else
-            this.tint = (this.shader as LiteShader).unusedColor
-    }
-    public setTintSafe(tint: number) {
-        this.tint = tint
-        if (this.lite) {
-            if (this.l2)
-                this.tint = (this.shader as LiteShaderX2).unusedColor2
-            else
-                this.tint = (this.shader as LiteShader).unusedColor
-        } else {
-            this.tint = tint
-        }
     }
     protected updateLightSource() {
         this.updateFunction()
@@ -326,11 +267,10 @@ class CircleShaderAttachSprite {
     }
     public destroy() {
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
-        this.shader = this.sprite = this.tint = this.radius = this.currentRad = this.flux = this.smoothness = this.xOffset = this.yOffset = this.updater = this.lite = this.l2 = this.mapLayer = null
+        this.sprite = this.tint = this.radius = this.currentRad = this.flux = this.smoothness = this.xOffset = this.yOffset = this.updater = this.lite = this.l2 = this.mapLayer = null
     }
 }
 class TileShader {
-    public shader: Shader | LiteShader
     public mapLayer: Image
     public image: Image
     protected x: number
@@ -342,24 +282,11 @@ class TileShader {
     protected updater: control.FrameCallback
     protected lite = false
     protected l2 = false
-    constructor(shader: Shader | LiteShader, image: Image, x: number, y: number, liteShader = false, layer2 = false) {
+    constructor(shaderLayer: Image, image: Image, x: number, y: number, liteShader = false, layer2 = false) {
         this.x = x
         this.y = y
-        if (this.lite = liteShader) {
-            this.shader = shader
-            if (this.l2 = layer2) {
-                this.mapLayer = (shader as LiteShaderX2).mapLayer2
-                image.replace(1, (shader as LiteShaderX2).unusedColor2)
-                this.image = image
-            } else {
-                this.mapLayer = shader.mapLayer
-                image.replace(1, (shader as LiteShader).unusedColor)
-                this.image = image
-            }
-        } else {
-            this.mapLayer = shader.mapLayer
-            this.image = image
-        }
+        this.mapLayer = shaderLayer
+        this.image = image
         this.left = this.x - this.image.width >> 1
         this.top = this.y - this.image.height >> 1
         this.right = this.left + this.image.width
@@ -422,25 +349,9 @@ class TileShader {
     public setImage(img: Image) {
         this.image = img
     }
-    public setImageLite(img: Image) {
-        if (this.l2)
-            img.replace(1, (this.shader as LiteShaderX2).unusedColor2)
-        else
-            img.replace(1, (this.shader as LiteShader).unusedColor)
-        this.image = img
-    }
-    public setImageSafe(img: Image) {
-        if (this.lite) {
-            if (this.l2)
-                img.replace(1, (this.shader as LiteShaderX2).unusedColor2)
-            else
-                img.replace(1, (this.shader as LiteShader).unusedColor)
-        }
-        this.image = img
-    }
     public destroy() {
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
-        this.shader = this.image = this.x = this.y = this.left = this.top = this.right = this.bottom = this.updater = this.lite = this.l2 = this.mapLayer = null
+        this.image = this.x = this.y = this.left = this.top = this.right = this.bottom = this.updater = this.lite = this.l2 = this.mapLayer = null
     }
 }
 class LiteShader {
