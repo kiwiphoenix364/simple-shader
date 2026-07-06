@@ -167,9 +167,7 @@ class ShaderAttachSprite {
     protected right: number
     protected bottom: number
     protected updater: control.FrameCallback
-    protected lite = false
-    protected l2 = false
-    constructor(shaderLayer: Image, sprite: Sprite, image: Image, xOffset = 0, yOffset = 0, liteShader = false, layer2 = false) {
+    constructor(shaderLayer: Image, sprite: Sprite, image: Image, xOffset = 0, yOffset = 0) {
         this.sprite = sprite
         this.xOffset = xOffset
         this.yOffset = yOffset
@@ -192,10 +190,6 @@ class ShaderAttachSprite {
         this.top = this.y - (this.image.height >> 1)
         this.right = this.left + this.image.width
         this.bottom = this.top + this.image.height
-        if (this.mapLayer === null) {
-            this.destroy()
-            return
-        }
         if (Shader.toScreenX(this.left) < scene.screenWidth() && Shader.toScreenX(this.right) > 0 && Shader.toScreenY(this.top) < scene.screenHeight() && Shader.toScreenY(this.bottom) > 0) {
             this.mapLayer.drawTransparentImage(this.image, Shader.toScreenX(this.left), Shader.toScreenY(this.top))
             //helpers.imageBlit(this.shader.mapLayer, Shader.toScreenX(this.left), Shader.toScreenY(this.top), this.image.width, this.image.height, this.image, 0, 0, this.image.width, this.image.height, true, false)
@@ -206,7 +200,7 @@ class ShaderAttachSprite {
     }
     public destroy() {
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
-        this.mapLayer = this.sprite = this.image = this.x = this.y = this.left = this.top = this.right = this.bottom = this.xOffset = this.yOffset = this.updater = this.lite = this.l2 = null
+        this.mapLayer = this.sprite = this.image = this.x = this.y = this.left = this.top = this.right = this.bottom = this.xOffset = this.yOffset = this.updater = null
     }
 }
 class CircleShaderAttachSprite {
@@ -220,9 +214,7 @@ class CircleShaderAttachSprite {
     public xOffset: number
     public yOffset: number
     protected updater: control.FrameCallback
-    protected lite = false
-    protected l2 = false
-    constructor(shaderLayer: Image, sprite: Sprite, xOffset = 0, yOffset = 0, tint = 1, radius = 5, flux = 0, smoothness = 1, liteShader = false, layer2 = false) {
+    constructor(shaderLayer: Image, sprite: Sprite, xOffset = 0, yOffset = 0, tint = 1, radius = 5, flux = 0, smoothness = 1) {
         this.sprite = sprite
         this.xOffset = xOffset
         this.yOffset = yOffset
@@ -245,10 +237,6 @@ class CircleShaderAttachSprite {
     }
     protected updateFunction() {
         this.updater = game.currentScene().eventContext.registerFrameHandler(24, () => {
-            if (this.mapLayer === null) {
-                this.destroy()
-                return
-            }
             if (Shader.toScreenX(this.sprite.x - this.currentRad + this.xOffset) < scene.screenWidth() && Shader.toScreenX(this.sprite.x + this.currentRad + this.xOffset) > 0 && Shader.toScreenY(this.sprite.y - this.currentRad + this.yOffset) < scene.screenHeight() && Shader.toScreenY(this.sprite.y + this.currentRad + this.yOffset) > 0) {
                 if (this.smoothness != 0) {
                     this.updateFlux()
@@ -267,7 +255,7 @@ class CircleShaderAttachSprite {
     }
     public destroy() {
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
-        this.sprite = this.tint = this.radius = this.currentRad = this.flux = this.smoothness = this.xOffset = this.yOffset = this.updater = this.lite = this.l2 = this.mapLayer = null
+        this.sprite = this.tint = this.radius = this.currentRad = this.flux = this.smoothness = this.xOffset = this.yOffset = this.updater = this.mapLayer = null
     }
 }
 class TileShader {
@@ -280,9 +268,7 @@ class TileShader {
     protected right: number
     protected bottom: number
     protected updater: control.FrameCallback
-    protected lite = false
-    protected l2 = false
-    constructor(shaderLayer: Image, image: Image, x: number, y: number, liteShader = false, layer2 = false) {
+    constructor(shaderLayer: Image, image: Image, x: number, y: number) {
         this.x = x
         this.y = y
         this.mapLayer = shaderLayer
@@ -337,10 +323,6 @@ class TileShader {
         })
     }
     protected updateFunction() {
-        if (this.mapLayer === null) {
-            this.destroy()
-            return
-        }
         if (Shader.toScreenX(this.left) < scene.screenWidth() && Shader.toScreenX(this.right) > 0 && Shader.toScreenY(this.top) < scene.screenHeight() && Shader.toScreenY(this.bottom) > 0) {
             this.mapLayer.drawTransparentImage(this.image, Shader.toScreenX(this.left), Shader.toScreenY(this.top))
             //helpers.imageBlit(this.shader.mapLayer, Shader.toScreenX(this.left), Shader.toScreenY(this.top), this.image.width, this.image.height, this.image, 0, 0, this.image.width, this.image.height, true, false)
@@ -351,7 +333,7 @@ class TileShader {
     }
     public destroy() {
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
-        this.image = this.x = this.y = this.left = this.top = this.right = this.bottom = this.updater = this.lite = this.l2 = this.mapLayer = null
+        this.image = this.x = this.y = this.left = this.top = this.right = this.bottom = this.updater = this.mapLayer = null
     }
 }
 class LiteShader {
@@ -403,7 +385,6 @@ class LiteShader {
     }
     public setNewShade(shade: Buffer) {
         this.shade = shade
-        this.setUnusedColor()
     }
     static toScreenX(x: number) {
         return x - scene.cameraProperty(CameraProperty.Left)
@@ -412,21 +393,14 @@ class LiteShader {
         return y - scene.cameraProperty(CameraProperty.Top)
     }
     public setUnusedColor() {
-        this.unusedColor = 15
-        /*
-        for (let i = 1; i < 16; i++) {
-            this.shade.toArray(NumberFormat.Int8LE).indexOf(i) == -1 ? this.unusedColor = i : null;
-        }
-        */
         for (let j = 1; j < 16; j++) {
             this.shade[j] == j ? this.unusedColor = j : null;
         }
-        return this.unusedColor
     }
     public destroy() {
         this.shader.destroy()
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
-        this.refreshShaderLayer = this.mapLayer = this.zValue = this.updater = this.shade = this.unusedColor = null
+        this.refreshShaderLayer = this.mapLayer = this.zValue = this.updater = this.shade = this.unusedColor = this.shader = null
     }
 }
 class LiteShaderX2 extends LiteShader {
@@ -482,20 +456,13 @@ class LiteShaderX2 extends LiteShader {
         this.setUnusedColor2()
     }
     public setUnusedColor2() {
-        this.unusedColor2 = 15
-        /*
-        for (let i = 1; i < 16; i++) {
-            this.shade2.toArray(NumberFormat.Int8LE).indexOf(i) == -1 ? this.unusedColor2 = i : null;
-        }
-        */
         for (let k = 1; k < 16; k++) {
             this.shade2[k] == k ? this.unusedColor2 = k : null;
         }
-        return this.unusedColor2
     }
     public destroy() {
         this.shader.destroy()
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
-        this.refreshShaderLayer = this.refreshShaderLayer2 = this.unusedColor2 = this.mapLayer2 = this.mapLayer = this.zValue = this.updater = this.shade = this.unusedColor = null
+        this.refreshShaderLayer = this.refreshShaderLayer2 = this.unusedColor2 = this.mapLayer2 = this.mapLayer = this.zValue = this.updater = this.shade = this.unusedColor = this.shader = null
     }
 }
