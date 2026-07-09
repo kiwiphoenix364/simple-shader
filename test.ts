@@ -120,7 +120,7 @@ scene.setBackgroundImage(img`
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
 `)
-let shader = new Shader(ShaderPack.get("default"))
+let shader = new SS_Shader(SS_ShaderPack.getShader("default"))
 let mySprite2 = sprites.create(img`
     . . . . . . . . . . b b b . . .
     . . . . . . . . b e e 3 3 b . .
@@ -139,7 +139,7 @@ let mySprite2 = sprites.create(img`
     . . . . . . b b b b 3 d d d b a
     . . . . . . . . . . b b b a a .
 `, SpriteKind.Player)
-let s1 = new CircleShaderAttachSprite(shader.mapLayer, mySprite2, 0, 0, 1 , 20, 3, 1)
+let s1 = new SS_CircleAttachSprite(shader.shaderLayer, mySprite2, 0, 0, 1, 20, 3, 1)
 let mySprite3 = sprites.create(img`
     . . . . . . . . . . b b b . . .
     . . . . . . . . b e e 3 3 b . .
@@ -159,7 +159,7 @@ let mySprite3 = sprites.create(img`
     . . . . . . . . . . b b b a a .
 `, SpriteKind.Player)
 mySprite3.setVelocity(10, 10)
-let s2 = new ShaderAttachSprite(shader.mapLayer, mySprite3, img`
+let s2 = new SS_ImgAttachSprite(shader.shaderLayer, mySprite3, img`
     ..............bbbbbbb...........
     ...........bb66661111baa........
     .........bb1167776111663aa......
@@ -193,7 +193,7 @@ let s2 = new ShaderAttachSprite(shader.mapLayer, mySprite3, img`
     ..........eeeeee................
     ................................
 `)
-let s3 = new TileShader(shader.mapLayer, img`
+let s3 = new SS_ImgAttachMap(shader.shaderLayer, img`
     ..............bbbbbbb...........
     ...........bb66661111baa........
     .........bb1167776111663aa......
@@ -227,3 +227,4 @@ let s3 = new TileShader(shader.mapLayer, img`
     ..........eeeeee................
     ................................
 `, 16, 16)
+let s4 = new SS_CircleAttachMap(shader.shaderLayer, 16, 16, 3, 15, 10, 5)

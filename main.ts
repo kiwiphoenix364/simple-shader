@@ -1,10 +1,119 @@
-class ShaderBlocks {
+namespace SS_ShaderBlocks {
 
+    // Shader Packs
+    export function getDefaultShader(shader: string) {
+        return SS_ShaderPack.getShader(shader)
+    }
+    export function newShader(paletteNames: string[], shaderPalettes: number[][]) {
+        return new SS_ShaderPack(paletteNames, shaderPalettes)
+    }
+    export function unpackShader(shader: SS_ShaderPack) {
+        return shader.unpack()
+    }
+    export function tintLocFromName(shader: SS_ShaderPack, name: string) {
+        return shader.getTintIdx(name)
+    }
+    export function shaderPaletteFromName(shader: SS_ShaderPack, name: string) {
+        return shader.getShaderShade(name)
+    }
+    export function shaderPaletteFromLoc(shader: SS_ShaderPack, loc: number) {
+        return Buffer.fromArray(shader.shaderColorSets[loc])
+    }
+    export function arrayToPalette(array: number[]) {
+        return Buffer.fromArray(array)
+    }
+    export function destroyShaderPack(shader: SS_ShaderPack) {
+        shader.destroy()
+    }
+
+    // Shader Layers
+    export function newShaderLayer(pack: SS_ShaderPack, autoRefreshLayer: boolean, zLayer: number) {
+        return new SS_Shader(pack, autoRefreshLayer, zLayer)
+    }
+    export function getShaderLayer(shader: SS_Shader) {
+        return shader.shaderLayer
+    }
+    export function setRefresh(shader: SS_Shader, active: boolean) {
+        shader.refreshShaderLayer = active
+    }
+    export function setNewPack(shader: SS_Shader, pack: SS_ShaderPack) {
+        shader.setNewShader(pack)
+    }
+    export function directSetNewPack(shader: SS_Shader, pack: Buffer) {
+        shader.directSetUnpackedShader(pack)
+    }
+    export function setShaderLayer(shader: SS_Shader, layer: Image) {
+        shader.shaderLayer = layer
+    }
+    export function mapToScreenX(x: number) {
+        return SS_Shader.toScreenX(x)
+    }
+    export function mapToScreenY(y: number) {
+        return SS_Shader.toScreenY(y)
+    }
+    export function destroyShader(shader: SS_Shader) {
+        shader.destroy()
+    }
+
+    // SS_ImgAttachSprite
+    export function imgAttachSprite(shaderLayer: Image, sprite: Sprite, image: Image, xOffset = 0, yOffset = 0) {
+        return new SS_ImgAttachSprite(shaderLayer, sprite, image, xOffset, yOffset)
+    }
+    export function imgAttachSpriteChangeImg(imgAttachSprite: SS_ImgAttachSprite, image: Image) {
+        imgAttachSprite.image = image
+    }
+    export function imgAttachSpriteChangeSprite(imgAttachSprite: SS_ImgAttachSprite, sprite: Sprite) {
+        imgAttachSprite.sprite = sprite
+    }
+    export function destroyImgAttachSprite(imgAttachSprite: SS_ImgAttachSprite) {
+        imgAttachSprite.destroy()
+    }
+
+    // SS_CircleAttachSprite
+    export function circleAttachSprite(shaderLayer: Image, sprite: Sprite, xOffset = 0, yOffset = 0, tint = 1, radius = 5, flux = 0, smoothness = 1) {
+        return new SS_CircleAttachSprite(shaderLayer, sprite, xOffset, yOffset, tint, radius, flux, smoothness)
+    }
+    export function setCircleAttachSpriteTint(circleAttachSprite: SS_CircleAttachSprite, tint: number) {
+        circleAttachSprite.tint = tint
+    }
+    export function setCircleAttachSpriteRadius(circleAttachSprite: SS_CircleAttachSprite, radius: number) {
+        circleAttachSprite.radius = radius
+    }
+    export function setCircleAttachSpriteFlux(circleAttachSprite: SS_CircleAttachSprite, flux: number) {
+        circleAttachSprite.flux = flux
+    }
+    export function setCircleAttachSpriteSmoothness(circleAttachSprite: SS_CircleAttachSprite, smoothness: number) {
+        circleAttachSprite.smoothness = smoothness
+    }
+    export function destroyCircleAttachSprite(circleAttachSprite: SS_CircleAttachSprite) {
+        circleAttachSprite.destroy()
+    }
+
+    // SS_ImgAttachMap
+    export function imgAttachMap(shaderLayer: Image, image: Image, xOffset = 0, yOffset = 0) {
+        return new SS_ImgAttachMap(shaderLayer, image, xOffset, yOffset)
+    }
+    export function imgAttachMapChangeImg(imgAttachSprite: SS_ImgAttachMap, image: Image) {
+        imgAttachSprite.image = image
+    }
+    export function imgAttachSpriteChangeX(imgAttachSprite: SS_ImgAttachMap, xLoc: number) {
+        imgAttachSprite.setX(xLoc)
+    }
+    export function imgAttachSpriteChangeY(imgAttachSprite: SS_ImgAttachMap, yLoc: number) {
+        imgAttachSprite.setY(yLoc)
+    }
+    export function destroyImgAttachMap(imgAttachMap: SS_ImgAttachSprite) {
+        imgAttachMap.destroy()
+    }
 }
-class ShaderPack {
-    private colorNames: string[]
-    private shaderColorSets: number[][]
-    constructor(colorNames: string[], shaderColorSets: any[]) {
+enum DefaultShaderPackNames {
+    //% block="Default Shader Pack"
+    Default = "default"
+}
+class SS_ShaderPack {
+    public colorNames: string[]
+    public shaderColorSets: number[][]
+    constructor(colorNames: string[], shaderColorSets: number[][]) {
         this.colorNames = colorNames
         this.shaderColorSets = shaderColorSets
     }
@@ -28,13 +137,13 @@ class ShaderPack {
     public destroy() {
         this.colorNames = this.shaderColorSets = null
     }
-    static get(shader: string) {
+    static getShader(shader: string) {
         //reference for shader pack format
         //color sets and color set names are in respective orders in their arrays
         //shader arrays go in order of colors on the screen, so the fifth item in the array ([4]) will be color four
         let packNames = ["default"]
         let packs = [
-            new ShaderPack(
+            new SS_ShaderPack(
                 ["light", "light2", "dark", "dark2", "yellow", "yellow2", "red", "green", "blue", "purple"],
                 [
                     [0, 1, 4, 1, 5, 1, 7, 5, 9, 1, 11, 1, 10, 1, 2, 12],
@@ -60,23 +169,22 @@ class ShaderPack {
         return packs[packNames.indexOf(shader)]
     }
 }
-class Shader {
+class SS_Shader {
     //Declare initial variables
     //lookup table
     //lkupx16: Buffer
     //Shader pack
     public refreshShaderLayer: boolean
-    protected currentPack: ShaderPack
     //Decompiled shader pack
     protected decompShader: Buffer
     //Shader augment image
-    public mapLayer: Image
+    public shaderLayer: Image
     //zValue
     protected zValue: number
     //Renderable for shader
     private shader: scene.Renderable
     protected updater: control.FrameCallback
-    constructor(currentPack: ShaderPack, refreshShaderLayer = true, zValue = 0) {
+    constructor(currentPack: SS_ShaderPack, refreshShaderLayer = true, zValue = 0) {
         /*
         //build lookup table
         this.lkupx16 = Buffer.create(16)
@@ -86,11 +194,10 @@ class Shader {
         */
         this.refreshShaderLayer = refreshShaderLayer
         this.zValue = zValue
-        this.currentPack = currentPack
-        //Unpack Shaderpack
-        this.decompShader = this.currentPack.unpack()
+        //Unpack SS_Shaderpack
+        this.decompShader = currentPack.unpack()
         //create buffer image
-        this.mapLayer = image.create(scene.screenWidth(), scene.screenHeight())
+        this.shaderLayer = image.create(scene.screenWidth(), scene.screenHeight())
         this.runShader()
         this.updateShaderLayer()
     }
@@ -104,7 +211,7 @@ class Shader {
         let renderBuf = Buffer.create(Math.imul(img.width, img.height))
         let decompShader = Buffer.create(0).concat(this.decompShader)
         img.getRows(0, renderBuf)
-        this.mapLayer.getRows(0, shaderBuf)
+        this.shaderLayer.getRows(0, shaderBuf)
         let x = Math.imul(img.width, img.height)
         let y = 0
         while (y < x) {
@@ -123,14 +230,11 @@ class Shader {
     protected updateShaderLayer() {
         this.updater = game.currentScene().eventContext.registerFrameHandler(17, () => {
             if (this.refreshShaderLayer === true) {
-                this.mapLayer.fill(0)
+                this.shaderLayer.fill(0)
             }
         })
     }
-    public setMapLayer(mapLayer: Image) {
-        this.mapLayer = mapLayer
-    }
-    public setNewShader(shader: ShaderPack) {
+    public setNewShader(shader: SS_ShaderPack) {
         this.decompShader = shader.unpack()
     }
     /*
@@ -151,13 +255,13 @@ class Shader {
     public destroy() {
         this.shader.destroy()
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
-        this.refreshShaderLayer = this.currentPack = this.decompShader = this.mapLayer = this.zValue = this.updater = null
+        this.refreshShaderLayer = this.decompShader = this.shaderLayer = this.zValue = this.updater = null
     }
 }
-class ShaderAttachSprite {
+class SS_ImgAttachSprite {
     public sprite: Sprite
     public image: Image
-    public mapLayer: Image
+    public shaderLayer: Image
     public xOffset: number
     public yOffset: number
     protected x: number
@@ -171,7 +275,7 @@ class ShaderAttachSprite {
         this.sprite = sprite
         this.xOffset = xOffset
         this.yOffset = yOffset
-        this.mapLayer = shaderLayer
+        this.shaderLayer = shaderLayer
         this.image = image
         this.updateShaderPos()
         this.sprite.onDestroyed(() => {
@@ -190,22 +294,19 @@ class ShaderAttachSprite {
         this.top = this.y - (this.image.height >> 1)
         this.right = this.left + this.image.width
         this.bottom = this.top + this.image.height
-        if (Shader.toScreenX(this.left) < scene.screenWidth() && Shader.toScreenX(this.right) > 0 && Shader.toScreenY(this.top) < scene.screenHeight() && Shader.toScreenY(this.bottom) > 0) {
-            this.mapLayer.drawTransparentImage(this.image, Shader.toScreenX(this.left), Shader.toScreenY(this.top))
-            //helpers.imageBlit(this.shader.mapLayer, Shader.toScreenX(this.left), Shader.toScreenY(this.top), this.image.width, this.image.height, this.image, 0, 0, this.image.width, this.image.height, true, false)
+        if (SS_Shader.toScreenX(this.left) < scene.screenWidth() && SS_Shader.toScreenX(this.right) > 0 && SS_Shader.toScreenY(this.top) < scene.screenHeight() && SS_Shader.toScreenY(this.bottom) > 0) {
+            this.shaderLayer.drawTransparentImage(this.image, SS_Shader.toScreenX(this.left), SS_Shader.toScreenY(this.top))
+            //helpers.imageBlit(this.shader.shaderLayer, SS_Shader.toScreenX(this.left), SS_Shader.toScreenY(this.top), this.image.width, this.image.height, this.image, 0, 0, this.image.width, this.image.height, true, false)
         }
-    }
-    public setImage(img: Image) {
-        this.image = img
     }
     public destroy() {
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
-        this.mapLayer = this.sprite = this.image = this.x = this.y = this.left = this.top = this.right = this.bottom = this.xOffset = this.yOffset = this.updater = null
+        this.shaderLayer = this.sprite = this.image = this.x = this.y = this.left = this.top = this.right = this.bottom = this.xOffset = this.yOffset = this.updater = null
     }
 }
-class CircleShaderAttachSprite {
+class SS_CircleAttachSprite {
     public sprite: Sprite
-    public mapLayer: Image
+    public shaderLayer: Image
     public tint: number
     public radius: number
     private currentRad: number
@@ -218,7 +319,7 @@ class CircleShaderAttachSprite {
         this.sprite = sprite
         this.xOffset = xOffset
         this.yOffset = yOffset
-        this.mapLayer = shaderLayer
+        this.shaderLayer = shaderLayer
         this.tint = tint
         this.radius = radius
         this.currentRad = this.radius
@@ -229,19 +330,16 @@ class CircleShaderAttachSprite {
             this.destroy()
         })
     }
-    public setTint(tint: number) {
-        this.tint = tint
-    }
     protected updateLightSource() {
         this.updateFunction()
     }
     protected updateFunction() {
         this.updater = game.currentScene().eventContext.registerFrameHandler(24, () => {
-            if (Shader.toScreenX(this.sprite.x - this.currentRad + this.xOffset) < scene.screenWidth() && Shader.toScreenX(this.sprite.x + this.currentRad + this.xOffset) > 0 && Shader.toScreenY(this.sprite.y - this.currentRad + this.yOffset) < scene.screenHeight() && Shader.toScreenY(this.sprite.y + this.currentRad + this.yOffset) > 0) {
+            if (SS_Shader.toScreenX(this.sprite.x - this.currentRad + this.xOffset) < scene.screenWidth() && SS_Shader.toScreenX(this.sprite.x + this.currentRad + this.xOffset) > 0 && SS_Shader.toScreenY(this.sprite.y - this.currentRad + this.yOffset) < scene.screenHeight() && SS_Shader.toScreenY(this.sprite.y + this.currentRad + this.yOffset) > 0) {
                 if (this.smoothness != 0) {
                     this.updateFlux()
                 }
-                this.mapLayer.fillCircle(Shader.toScreenX(this.sprite.x) + this.xOffset, Shader.toScreenY(this.sprite.y) + this.yOffset, Math.round(this.currentRad), this.tint)
+                this.shaderLayer.fillCircle(SS_Shader.toScreenX(this.sprite.x) + this.xOffset, SS_Shader.toScreenY(this.sprite.y) + this.yOffset, Math.round(this.currentRad), this.tint)
             }
         })
     }
@@ -255,11 +353,11 @@ class CircleShaderAttachSprite {
     }
     public destroy() {
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
-        this.sprite = this.tint = this.radius = this.currentRad = this.flux = this.smoothness = this.xOffset = this.yOffset = this.updater = this.mapLayer = null
+        this.sprite = this.tint = this.radius = this.currentRad = this.flux = this.smoothness = this.xOffset = this.yOffset = this.updater = this.shaderLayer = null
     }
 }
-class TileShader {
-    public mapLayer: Image
+class SS_ImgAttachMap {
+    public shaderLayer: Image
     public image: Image
     protected x: number
     protected y: number
@@ -271,7 +369,7 @@ class TileShader {
     constructor(shaderLayer: Image, image: Image, x: number, y: number) {
         this.x = x
         this.y = y
-        this.mapLayer = shaderLayer
+        this.shaderLayer = shaderLayer
         this.image = image
         this.left = this.x - this.image.width >> 1
         this.top = this.y - this.image.height >> 1
@@ -323,25 +421,69 @@ class TileShader {
         })
     }
     protected updateFunction() {
-        if (Shader.toScreenX(this.left) < scene.screenWidth() && Shader.toScreenX(this.right) > 0 && Shader.toScreenY(this.top) < scene.screenHeight() && Shader.toScreenY(this.bottom) > 0) {
-            this.mapLayer.drawTransparentImage(this.image, Shader.toScreenX(this.left), Shader.toScreenY(this.top))
-            //helpers.imageBlit(this.shader.mapLayer, Shader.toScreenX(this.left), Shader.toScreenY(this.top), this.image.width, this.image.height, this.image, 0, 0, this.image.width, this.image.height, true, false)
+        if (SS_Shader.toScreenX(this.left) < scene.screenWidth() && SS_Shader.toScreenX(this.right) > 0 && SS_Shader.toScreenY(this.top) < scene.screenHeight() && SS_Shader.toScreenY(this.bottom) > 0) {
+            this.shaderLayer.drawTransparentImage(this.image, SS_Shader.toScreenX(this.left), SS_Shader.toScreenY(this.top))
+            //helpers.imageBlit(this.shader.shaderLayer, SS_Shader.toScreenX(this.left), SS_Shader.toScreenY(this.top), this.image.width, this.image.height, this.image, 0, 0, this.image.width, this.image.height, true, false)
         }
-    }
-    public setImage(img: Image) {
-        this.image = img
     }
     public destroy() {
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
-        this.image = this.x = this.y = this.left = this.top = this.right = this.bottom = this.updater = this.mapLayer = null
+        this.image = this.x = this.y = this.left = this.top = this.right = this.bottom = this.updater = this.shaderLayer = null
     }
 }
-class LiteShader {
+class SS_CircleAttachMap {
+    public shaderLayer: Image
+    public tint: number
+    public radius: number
+    private currentRad: number
+    public flux: number
+    public smoothness: number
+    public x: number
+    public y: number
+    protected updater: control.FrameCallback
+    constructor(shaderLayer: Image, x: number, y: number, tint = 1, radius = 5, flux = 0, smoothness = 1) {
+        this.x = x
+        this.y = y
+        this.shaderLayer = shaderLayer
+        this.tint = tint
+        this.radius = radius
+        this.currentRad = this.radius
+        this.flux = flux
+        this.smoothness = smoothness
+        this.updateLightSource()
+    }
+    protected updateLightSource() {
+        this.updateFunction()
+    }
+    protected updateFunction() {
+        this.updater = game.currentScene().eventContext.registerFrameHandler(24, () => {
+            if (SS_Shader.toScreenX(this.x - this.currentRad) < scene.screenWidth() && SS_Shader.toScreenX(this.x + this.currentRad) > 0 && SS_Shader.toScreenY(this.y - this.currentRad) < scene.screenHeight() && SS_Shader.toScreenY(this.y + this.currentRad) > 0) {
+                if (this.smoothness != 0) {
+                    this.updateFlux()
+                }
+                this.shaderLayer.fillCircle(SS_Shader.toScreenX(this.x), SS_Shader.toScreenY(this.y), Math.round(this.currentRad), this.tint)
+            }
+        })
+    }
+    protected updateFlux() {
+        this.smoothness = Math.constrain(this.smoothness, Math.abs(this.flux) * -2, Math.abs(this.flux) * 2)
+        this.currentRad += Math.randomRange(0 - this.smoothness, this.smoothness)
+        //this.currentRad = Math.constrain(this.currentRad, this.radius + this.flux, this.radius - this.flux)
+        if (this.currentRad > this.radius + this.flux || this.currentRad < this.radius - this.flux) {
+            this.currentRad -= this.currentRad - (this.radius + this.flux)
+        }
+    }
+    public destroy() {
+        game.currentScene().eventContext.unregisterFrameHandler(this.updater)
+        this.tint = this.radius = this.currentRad = this.flux = this.smoothness = this.x = this.y = this.updater = this.shaderLayer = null
+    }
+}
+class SS_LiteShader {
     //Declare initial variables
     //Shader pack
     public refreshShaderLayer: boolean
     //Shader augment image
-    public mapLayer: Image
+    public shaderLayer: Image
     //zValue
     protected zValue: number
     //Renderable for shader
@@ -354,7 +496,7 @@ class LiteShader {
         this.zValue = zValue
         this.shade = singleShade
         //create buffer image
-        this.mapLayer = image.create(scene.screenWidth(), scene.screenHeight())
+        this.shaderLayer = image.create(scene.screenWidth(), scene.screenHeight())
         this.runShader()
         this.updateShaderLayer()
         this.setUnusedColor()
@@ -367,7 +509,7 @@ class LiteShader {
     protected shadeImg(img: Image) {
         let tempImg = image.create(scene.screenWidth(), scene.screenHeight())
         tempImg.copyFrom(img)
-        tempImg.drawTransparentImage(this.mapLayer, 0, 0)
+        tempImg.drawTransparentImage(this.shaderLayer, 0, 0)
         tempImg.replace(this.unusedColor, 0)
         img.mapRect(0, 0, scene.screenWidth(), scene.screenHeight(), this.shade)
         img.drawTransparentImage(tempImg, 0, 0)
@@ -375,13 +517,13 @@ class LiteShader {
     protected updateShaderLayer() {
         this.updater = game.currentScene().eventContext.registerFrameHandler(17, () => {
             if (this.refreshShaderLayer === true) {
-                this.mapLayer.fill(0)
+                this.shaderLayer.fill(0)
             }
         })
     }
-    public setMapLayer(mapLayer: Image) {
-        this.mapLayer = mapLayer
-        this.mapLayer.replace(1, this.unusedColor)
+    public setshaderLayer(shaderLayer: Image) {
+        this.shaderLayer = shaderLayer
+        this.shaderLayer.replace(1, this.unusedColor)
     }
     public setNewShade(shade: Buffer) {
         this.shade = shade
@@ -400,11 +542,11 @@ class LiteShader {
     public destroy() {
         this.shader.destroy()
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
-        this.refreshShaderLayer = this.mapLayer = this.zValue = this.updater = this.shade = this.unusedColor = this.shader = null
+        this.refreshShaderLayer = this.shaderLayer = this.zValue = this.updater = this.shade = this.unusedColor = this.shader = null
     }
 }
-class LiteShaderX2 extends LiteShader {
-    public mapLayer2: Image
+class SS_LiteShaderX2 extends SS_LiteShader {
+    public shaderLayer2: Image
     public shade2: Buffer
     public unusedColor2: number
     public refreshShaderLayer2: boolean
@@ -413,7 +555,7 @@ class LiteShaderX2 extends LiteShader {
         this.shade2 = secondShade
         this.refreshShaderLayer2 = refreshShaderLayer
         //create buffer image
-        this.mapLayer2 = image.create(scene.screenWidth(), scene.screenHeight())
+        this.shaderLayer2 = image.create(scene.screenWidth(), scene.screenHeight())
         this.setUnusedColor2()
         this.updateShaderLayer()
     }
@@ -425,13 +567,13 @@ class LiteShaderX2 extends LiteShader {
     protected shadeImg(img: Image) {
         let tempImg2 = image.create(scene.screenWidth(), scene.screenHeight())
         tempImg2.copyFrom(img)
-        tempImg2.drawTransparentImage(this.mapLayer, 0, 0)
+        tempImg2.drawTransparentImage(this.shaderLayer, 0, 0)
         tempImg2.replace(this.unusedColor, 0)
         img.mapRect(0, 0, scene.screenWidth(), scene.screenHeight(), this.shade)
         img.drawTransparentImage(tempImg2, 0, 0)
 
         tempImg2.copyFrom(img)
-        tempImg2.drawTransparentImage(this.mapLayer2, 0, 0)
+        tempImg2.drawTransparentImage(this.shaderLayer2, 0, 0)
         tempImg2.replace(this.unusedColor2, 0)
         img.mapRect(0, 0, scene.screenWidth(), scene.screenHeight(), this.shade2)
         img.drawTransparentImage(tempImg2, 0, 0)
@@ -440,16 +582,16 @@ class LiteShaderX2 extends LiteShader {
     protected updateShaderLayer() {
         this.updater = game.currentScene().eventContext.registerFrameHandler(17, () => {
             if (this.refreshShaderLayer === true) {
-                this.mapLayer.fill(0)
+                this.shaderLayer.fill(0)
             }
             if (this.refreshShaderLayer2 === true) {
-                this.mapLayer2.fill(0)
+                this.shaderLayer2.fill(0)
             }
         })
     }
-    public setMapLayer2(mapLayer: Image) {
-        this.mapLayer2 = mapLayer
-        this.mapLayer2.replace(1, this.unusedColor2)
+    public setshaderLayer2(shaderLayer: Image) {
+        this.shaderLayer2 = shaderLayer
+        this.shaderLayer2.replace(1, this.unusedColor2)
     }
     public setNewShade2(shade2: Buffer) {
         this.shade2 = shade2
@@ -463,6 +605,6 @@ class LiteShaderX2 extends LiteShader {
     public destroy() {
         this.shader.destroy()
         game.currentScene().eventContext.unregisterFrameHandler(this.updater)
-        this.refreshShaderLayer = this.refreshShaderLayer2 = this.unusedColor2 = this.mapLayer2 = this.mapLayer = this.zValue = this.updater = this.shade = this.unusedColor = this.shader = null
+        this.refreshShaderLayer = this.refreshShaderLayer2 = this.unusedColor2 = this.shaderLayer2 = this.shaderLayer = this.zValue = this.updater = this.shade = this.unusedColor = this.shader = null
     }
 }
