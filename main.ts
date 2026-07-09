@@ -102,7 +102,7 @@ namespace SS_ShaderBlocks {
     export function imgAttachSpriteChangeY(imgAttachSprite: SS_ImgAttachMap, yLoc: number) {
         imgAttachSprite.setY(yLoc)
     }
-    export function destroyImgAttachMap(imgAttachMap: SS_ImgAttachSprite) {
+    export function destroyImgAttachMap(imgAttachMap: SS_ImgAttachMap) {
         imgAttachMap.destroy()
     }
 }
