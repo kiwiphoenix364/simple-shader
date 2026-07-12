@@ -118,7 +118,7 @@ namespace SS_ShaderBlocks {
     }
 
     // SS_ImgAttachSprite
-    //% block="shader $shaderLayer attached image $image to sprite $sprite || offset x $xOffset offset y $yOffset"
+    //% block="shader $shaderLayer attached image $image to sprite $sprite||offset x $xOffset offset y $yOffset"
     //% weight=111
     //% group="Attached Items"
     //% blockSetVariable=myAttachedItem
@@ -139,7 +139,7 @@ namespace SS_ShaderBlocks {
     */
 
     // SS_CircleAttachSprite
-    //% block="shader $shaderLayer attached circle to sprite $sprite with tint $tint radius $radius || flux $flux smoothness $smoothness | offset x $xOffset offset y $yOffset"
+    //% block="shader $shaderLayer attached circle to sprite $sprite with tint $tint radius $radius||flux $flux smoothness $smoothness|offset x $xOffset offset y $yOffset"
     //% weight=110
     //% group="Attached Items"
     //% blockSetVariable=myAttachedItem
@@ -189,7 +189,7 @@ namespace SS_ShaderBlocks {
     */
 
     // SS_CircleAttachMap
-    //% block="shader $shaderLayer attached circle to map location x $x y $y with tint $tint radius $radius || flux $flux smoothness $smoothness"
+    //% block="shader $shaderLayer attached circle to map location x $x y $y with tint $tint radius $radius||flux $flux smoothness $smoothness"
     //% weight=108
     //% group="Attached Items"
     //% blockSetVariable=myAttachedItem
