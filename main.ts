@@ -248,7 +248,9 @@ namespace SS_ShaderBlocks {
     //% group="Lite Shader"
     //% image.shadow=screen_image_picker
     export function liteReplaceWithUnusedColor(image: Image, color: number, lShader: SS_LiteShader) {
-        return image.replace(color, lShader.unusedColor)
+        let clone = image.clone()
+        clone.replace(color, lShader.unusedColor)
+        return clone
     }
     //% block="lite shader $shader refresh $active"
     //% weight=85
