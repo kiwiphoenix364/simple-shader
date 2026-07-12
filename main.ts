@@ -1,7 +1,7 @@
 //% icon="\uf006"
 //% color="#224a7c"
 //% block="Simple Shader"
-//% groups='["Shader Packs","Shader","Attached Items","Lite Shader","Advanced"]'
+//% groups='["Shader Pack","Shader","Attached Items","Lite Shader","Advanced"]'
 namespace SS_ShaderBlocks {
     // Shader Packs
     /*
@@ -11,13 +11,13 @@ namespace SS_ShaderBlocks {
     */
     //% block="default shader pack"
     //% weight=128
-    //% group="Shader Packs"
+    //% group="Shader Pack"
     export function getDefaultShader() {
         return SS_ShaderPack.getShader("default")
     }
     //% block="default shader palette $palette"
     //% weight=127
-    //% group="Shader Packs"
+    //% group="Shader Pack"
     //% picker=DefaultPalettes
     export function getDefaultPalette(palette: DefaultPalettes) {
         return SS_ShaderPack.getShader("default").shaderColorSets[palette]
@@ -57,7 +57,7 @@ namespace SS_ShaderBlocks {
     }
     //% block="destroy shader pack $shader"
     //% weight=120
-    //% group="Shader Packs"
+    //% group="Shader Pack"
     export function destroyShaderPack(shader: SS_ShaderPack) {
         shader.destroy()
     }
