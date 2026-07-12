@@ -243,11 +243,11 @@ namespace SS_ShaderBlocks {
     export function liteGetUnusedColor(lShader: SS_LiteShader) {
         return lShader.unusedColor
     }
-    //% block="image $image replace color $color with uc of shader $lshader"
+    //% block="image $image replace color $color with uc of shader $lShader"
     //% weight=103
     //% group="Lite Shader"
     //% image.shadow=screen_image_picker
-    export function liteReplaceWithUnusedColor(image: Image, color: number, lShader: SS_LiteShader) {
+    export function liteReplaceWithUnusedColor(image: Image, color = 1, lShader: SS_LiteShader) {
         let clone = image.clone()
         clone.replace(color, lShader.unusedColor)
         return clone
