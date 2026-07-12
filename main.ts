@@ -90,8 +90,8 @@ namespace SS_ShaderBlocks {
     }
 
     // SS_ImgAttachMap
-    export function imgAttachMap(shaderLayer: Image, image: Image, xOffset = 0, yOffset = 0) {
-        return new SS_ImgAttachMap(shaderLayer, image, xOffset, yOffset)
+    export function imgAttachMap(shaderLayer: Image, image: Image, x: number, y: number) {
+        return new SS_ImgAttachMap(shaderLayer, image, x, y)
     }
     export function imgAttachMapChangeImg(imgAttachSprite: SS_ImgAttachMap, image: Image) {
         imgAttachSprite.image = image
@@ -104,6 +104,75 @@ namespace SS_ShaderBlocks {
     }
     export function destroyImgAttachMap(imgAttachMap: SS_ImgAttachMap) {
         imgAttachMap.destroy()
+    }
+
+    // SS_CircleAttachMap
+    export function circleAttachMap(shaderLayer: Image, sprite: Sprite, x: number, y: number, tint = 1, radius = 5, flux = 0, smoothness = 1) {
+        return new SS_CircleAttachMap(shaderLayer, x, y, tint, radius, flux, smoothness)
+    }
+    export function setCircleAttachMapTint(circleAttachMap: SS_CircleAttachMap, tint: number) {
+        circleAttachMap.tint = tint
+    }
+    export function setCircleAttachMapRadius(circleAttachMap: SS_CircleAttachMap, radius: number) {
+        circleAttachMap.radius = radius
+    }
+    export function setCircleAttachMapFlux(circleAttachMap: SS_CircleAttachMap, flux: number) {
+        circleAttachMap.flux = flux
+    }
+    export function setCircleAttachMapSmoothness(circleAttachMap: SS_CircleAttachMap, smoothness: number) {
+        circleAttachMap.smoothness = smoothness
+    }
+    export function destroyCircleAttachMap(circleAttachMap: SS_CircleAttachMap) {
+        circleAttachMap.destroy()
+    }
+
+    // SS_LiteShader
+    export function createLiteShader(singlePalette: Buffer, autoRefreshLayer: boolean, zLayer: number) {
+        return new SS_LiteShader(singlePalette, autoRefreshLayer, zLayer)
+    }
+    export function liteGetShaderLayer(lShader: SS_LiteShader) {
+        return lShader.shaderLayer
+    }
+    export function liteGetUnusedColor(lShader: SS_LiteShader) {
+        return lShader.unusedColor
+    }
+    export function liteSetRefresh(lShader: SS_LiteShader, active: boolean) {
+        lShader.refreshShaderLayer = active
+    }
+    export function liteSetNewSinglePalette(lShader: SS_LiteShader, palette: Buffer) {
+        lShader.setNewShade(palette)
+    }
+    export function liteSetShaderLayer(lShader: SS_LiteShader, layer: Image) {
+        lShader.shaderLayer = layer
+    }
+    export function liteSetUnusedColor(lShader: SS_LiteShader) {
+        lShader.setUnusedColor()
+    }
+    export function liteDestroyShader(lShader: SS_LiteShader) {
+        lShader.destroy()
+    }
+
+    // SS_LiteShaderX2
+    export function createLiteShaderX2(singlePalette: Buffer, singlePalette2: Buffer, autoRefreshLayer: boolean, autoRefreshLayer2: boolean, zLayer: number) {
+        return new SS_LiteShaderX2(singlePalette, singlePalette2, autoRefreshLayer, autoRefreshLayer2, zLayer)
+    }
+    export function liteGetShaderLayer2(lShaderX2: SS_LiteShaderX2) {
+        return lShaderX2.shaderLayer2
+    }
+    export function liteGetUnusedColor2(lShaderX2: SS_LiteShaderX2) {
+        return lShaderX2.unusedColor2
+    }
+    export function liteSetNewSinglePalette2(lShaderX2: SS_LiteShaderX2, palette2: Buffer) {
+        lShaderX2.setNewShade2(palette2)
+    }
+    export function liteSetShaderLayer2(lShaderX2: SS_LiteShaderX2, layer2: Image) {
+        lShaderX2.shaderLayer2 = layer2
+    }
+    export function liteSetUnusedColor2(lShaderX2: SS_LiteShaderX2) {
+        lShaderX2.setUnusedColor2()
+    }
+    export function liteDestroyShaderX2(lShaderX2: SS_LiteShader) {
+        lShaderX2.destroy()
     }
 }
 enum DefaultShaderPackNames {
