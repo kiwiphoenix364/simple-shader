@@ -70,7 +70,7 @@ namespace SS_ShaderBlocks {
     export function newShaderLayer(pack: SS_ShaderPack, autoRefreshLayer = true, zLayer = 0) {
         return new SS_Shader(pack, autoRefreshLayer, zLayer)
     }
-    //% block="shader $shader layer image"
+    //% block="shader $shader shademap"
     //% weight=118
     //% group="Shader"
     export function getShaderLayer(shader: SS_Shader) {
@@ -91,7 +91,7 @@ namespace SS_ShaderBlocks {
     export function directSetNewPack(shader: SS_Shader, pack: Buffer) {
         shader.directSetUnpackedShader(pack)
     }
-    //% block="shader $shader set shader layer image $layer"
+    //% block="shader $shader set shademap $layer"
     //% weight=115
     //% group="Shader"
     //% layer.shadow=screen_image_picker
@@ -230,7 +230,7 @@ namespace SS_ShaderBlocks {
     export function createLiteShader(singlePalette: number[], autoRefreshLayer: boolean, zLayer = 0) {
         return new SS_LiteShader(Buffer.fromArray(singlePalette), autoRefreshLayer, zLayer)
     }
-    //% block="lite shader $shader layer image"
+    //% block="lite shader $shader shademap"
     //% weight=105
     //% group="Lite Shader"
     export function liteGetShaderLayer(lShader: SS_LiteShader) {
@@ -255,7 +255,7 @@ namespace SS_ShaderBlocks {
         lShader.setNewShade(Buffer.fromArray(palette))
         lShader.setUnusedColor()
     }
-    //% block="lite shader $shader set shader layer image $layer"
+    //% block="lite shader $shader set shademap $layer"
     //% weight=101
     //% group="Lite Shader"
     //% layer.shadow=screen_image_picker
