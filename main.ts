@@ -588,8 +588,8 @@ class SS_ImgAttachMap {
         this.y = y
         this.shaderLayer = shaderLayer
         this.image = image
-        this.left = this.x - this.image.width >> 1
-        this.top = this.y - this.image.height >> 1
+        this.left = this.x - (this.image.width >> 1)
+        this.top = this.y - (this.image.height >> 1)
         this.right = this.left + this.image.width
         this.bottom = this.top + this.image.height
         this.updateTile()
