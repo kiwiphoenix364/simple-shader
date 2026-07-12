@@ -228,7 +228,7 @@ namespace SS_ShaderBlocks {
     //% weight=106
     //% group="Lite Shader"
     //% blockSetVariable=myLiteShader
-    export function createLiteShader(singlePalette: number[], autoRefreshLayer: boolean, zLayer = 0) {
+    export function createLiteShader(singlePalette: number[], autoRefreshLayer = true, zLayer = 0) {
         return new SS_LiteShader(Buffer.fromArray(singlePalette), autoRefreshLayer, zLayer)
     }
     //% block="lite shader $shader shademap"
