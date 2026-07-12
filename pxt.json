@@ -11,7 +11,8 @@
         "README.md",
         "assets.json",
         "tilemap.g.jres",
-        "tilemap.g.ts"
+        "tilemap.g.ts",
+        "blocks.ts"
     ],
     "testFiles": [
         "test.ts"
