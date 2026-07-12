@@ -217,8 +217,7 @@ namespace SS_ShaderBlocks {
     // Destroy
     //% block="destroy attached item $itemAttachMap"
     //% weight=107
-    //% group="Shader"
-    //% blockSetVariable=myAttachedImage
+    //% group="Attached Items"
     export function destroyAttachedItem(itemAttachMap: SS_CircleAttachMap | SS_CircleAttachSprite | SS_ImgAttachMap | SS_ImgAttachSprite) {
         itemAttachMap.destroy()
     }
