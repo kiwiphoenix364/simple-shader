@@ -139,7 +139,7 @@ namespace SS_ShaderBlocks {
     */
 
     // SS_CircleAttachSprite
-    //% block="shader $shaderLayer attached circle to sprite $sprite with tint $tint radius $radius|flux $flux smoothness $smoothness||offset x $xOffset offset y $yOffset"
+    //% block="shader $shaderLayer attached circle to sprite $sprite with tint $tint radius $radius||flux $flux smoothness $smoothness||offset x $xOffset offset y $yOffset"
     //% weight=110
     //% group="Attached Items"
     //% blockSetVariable=myAttachedItem
