@@ -243,6 +243,13 @@ namespace SS_ShaderBlocks {
     export function liteGetUnusedColor(lShader: SS_LiteShader) {
         return lShader.unusedColor
     }
+    //% block="image $image replace color $color with uc of shader $lshader"
+    //% weight=103
+    //% group="Lite Shader"
+    //% image.shadow=screen_image_picker
+    export function liteReplaceWithUnusedColor(image: Image, color: number, lShader: SS_LiteShader) {
+        return image.replace(color, lShader.unusedColor)
+    }
     //% block="lite shader $shader refresh $active"
     //% weight=85
     //% group="Advanced"
