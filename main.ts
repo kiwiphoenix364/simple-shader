@@ -1,4 +1,4 @@
-//% icon="\uf006"
+//% icon="\uf185"
 //% color="#224a7c"
 //% block="Simple Shader"
 //% groups='["Shader Pack","Shader","Attached Items","Lite Shader","Advanced"]'
