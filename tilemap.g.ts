@@ -1,7 +1,10 @@
 // Auto-generated code. Do not edit.
 namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
-    export const transparency16 = image.ofBuffer(hex``);
+    try {
+        export const transparency16 = image.ofBuffer(hex``);
+    } finally {
+    }
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
