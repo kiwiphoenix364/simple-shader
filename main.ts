@@ -135,20 +135,10 @@ class SS_Shader {
         this.decompShader = shader
     }
     static toScreenX(x: number) {
-        let l = 0
-        try {
-            l = scene.cameraProperty(CameraProperty.Left)
-        } finally {
-            return x - l
-        }
+        return x - scene.cameraProperty(CameraProperty.Left)
     }
     static toScreenY(y: number) {
-        let t = 0
-        try {
-            t = scene.cameraProperty(CameraProperty.Top)
-        } finally {
-            return y - t
-        }
+        return y - scene.cameraProperty(CameraProperty.Top)
     }
     public destroy() {
         this.shader.destroy()
@@ -425,6 +415,12 @@ class SS_LiteShader {
     }
     public setNewShade(shade: Buffer) {
         this.shade = shade
+    }
+    static toScreenX(x: number) {
+        return x - scene.cameraProperty(CameraProperty.Left)
+    }
+    static toScreenY(y: number) {
+        return y - scene.cameraProperty(CameraProperty.Top)
     }
     public setUnusedColor() {
         for (let j = 1; j < 16; j++) {
