@@ -1,4 +1,4 @@
-// meta={"simUrl":"https://trg-arcade.userpxt.io/v4.0.14/---simulator","cdnUrl":"https://cdn.makecode.com","version":"5.0.2","target":"arcade","targetVersion":"4.0.14","repo":"kiwiphoenix364/simple-shader"}
+// meta={"simUrl":"https://trg-arcade.userpxt.io/v4.0.14/---simulator","cdnUrl":"https://cdn.makecode.com","version":"5.0.3","target":"arcade","targetVersion":"4.0.14","repo":"kiwiphoenix364/simple-shader"}
 // total=1852622 new=7.29% cached=63.96% other=28.75%
 (function (ectx) {
 'use strict';
@@ -500,7 +500,7 @@ const pxsim_pxtrt = pxsim.pxtrt;
 const pxsim_numops = pxsim.numops;
 
 
-function _main___P41022(s) {
+function _main___P41071(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -1036,13 +1036,13 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-_main___P41022.info = {"start":0,"length":0,"line":0,"column":0,"endLine":0,"endColumn":0,"fileName":"main.ts","functionName":"<main>","argumentNames":[]}
-_main___P41022.continuations = [  ]
+_main___P41071.info = {"start":0,"length":0,"line":0,"column":0,"endLine":0,"endColumn":0,"fileName":"main.ts","functionName":"<main>","argumentNames":[]}
+_main___P41071.continuations = [  ]
 
-function _main___P41022_mk(s) {
+function _main___P41071_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: _main___P41022, depth: s.depth + 1,
+        parent: s, fn: _main___P41071, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -47626,5 +47626,5 @@ const sprites_BaseSpriteSayRenderer__C21066_VT = mkVTable({
 
 const breakpoints = setupDebugger(1, ["transparency16___40656","shader___23365","mySprite2___23366","s1___23367","mySprite3___23368","s2___23369","s3___23370","s4___23371"])
 
-return _main___P41022
+return _main___P41071
 })
